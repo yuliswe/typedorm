@@ -11,6 +11,7 @@ const releaseConfig = {
   develop: 'beta',
   alpha: 'alpha',
   next: 'rc',
+  fork: 'fork',
 };
 
 const currentBranch = exec('git rev-parse --abbrev-ref HEAD');

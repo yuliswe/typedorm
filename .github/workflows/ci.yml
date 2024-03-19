@@ -6,6 +6,7 @@ on:
       - 'develop'
       - 'next'
       - 'alpha'
+      - 'fork'
   push:
     # run on all branches except release branches
     branches-ignore:
@@ -13,6 +14,7 @@ on:
       - 'develop'
       - 'next'
       - 'alpha'
+      - 'fork'
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 jobs:
@@ -45,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [14, 16, 18]    
+        node: [14, 16, 18]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -92,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [14, 16, 18]    
+        node: [14, 16, 18]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
