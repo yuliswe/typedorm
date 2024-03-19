@@ -1,4 +1,4 @@
-
+.nodevenv/
 dist
 bazel-out
 node_modules
