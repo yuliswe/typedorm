@@ -6,6 +6,8 @@ branches:
     prerelease: rc
   - name: alpha
     prerelease: alpha
+  - name: fork
+    prerelease: fork
 plugins:
   - '@semantic-release/commit-analyzer'
   - '@semantic-release/release-notes-generator'
@@ -14,4 +16,4 @@ plugins:
   - '@semantic-release/github'
   - - '@semantic-release/git'
     - assets:
-      - docs/CHANGELOG.md
+        - docs/CHANGELOG.md
