@@ -20,7 +20,9 @@ export function parseKey<Entity>(
 
     if (!aliasValue) {
       const error = new Error(
-        `"attribute alias ${key} was found but it's value could not be resolved.`
+        `"attribute alias ${JSON.stringify(
+          key
+        )} was found but it's value could not be resolved.`
       );
 
       if (isSparseIndex) {
