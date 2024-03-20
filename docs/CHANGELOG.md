@@ -1,3 +1,18 @@
+# [1.16.0-fork.1](https://github.com/yuliswe/typedorm/compare/v1.15.3...v1.16.0-fork.1) (2024-03-20)
+
+
+### Bug Fixes
+
+* reset changelog file ([d0c2e40](https://github.com/yuliswe/typedorm/commit/d0c2e4084f0d183dcaa188d76e407b33cc4b49f4))
+
+
+### Features
+
+* add schemaVersionAttribute option to enable schema versioning ([7856e29](https://github.com/yuliswe/typedorm/commit/7856e2937f5d8fcb826173379c2dad2d1d553f88))
+* **core:** remove restriction for using attributes as primary key components ([e2a6c23](https://github.com/yuliswe/typedorm/commit/e2a6c23e6b9ed36ae4ae7b21e458421f631da71b))
+* **core:** support retrieval by connection name in getConnection ([#359](https://github.com/yuliswe/typedorm/issues/359)) ([406b1d7](https://github.com/yuliswe/typedorm/commit/406b1d7d350bb3f5ccd70ca789d168861815d5b5))
+* **document-client:** expose translateConfig options to DocumentClientV3 ([03f4343](https://github.com/yuliswe/typedorm/commit/03f4343cf53abdee2d32b60563d13411f2b296ea))
+
 # [1.16.0-beta.3](https://github.com/typedorm/typedorm/compare/v1.16.0-beta.2...v1.16.0-beta.3) (2023-09-19)
 
 
