@@ -1,5 +1,5 @@
 {
-  "name": "@typedorm/monorepo",
+  "name": "@yuliswe/monorepo",
   "version": "0.0.0-development",
   "description": "TypeDORM - Strongly typed ORM for DynamoDB",
   "private": true,
@@ -58,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/typedorm/typedorm.git"
+    "url": "git+https://github.com/yuliswe/typedorm.git"
   },
   "keywords": [
     "typedorm",
@@ -71,9 +71,9 @@
   "author": "typedorm",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/typedorm/typedorm/issues"
+    "url": "https://github.com/yuliswe/typedorm/issues"
   },
-  "homepage": "https://github.com/typedorm/typedorm#readme",
+  "homepage": "https://github.com/yuliswe/typedorm#readme",
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",

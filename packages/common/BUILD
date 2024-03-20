@@ -21,7 +21,7 @@ setup_ts_build(
 
 typedorm_package(
     name = "common",
-    package_name = "@typedorm/common",
+    package_name = "@yuliswe/common",
     readme_md = "README.md",
     deps = [
         ":library",

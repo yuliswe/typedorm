@@ -13,7 +13,7 @@ env:
 jobs:
   build_release:
     env:
-      GITHUB_TOKEN: ${{ secrets.TYPEDORM_BOT_PAT }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,5 +40,5 @@ jobs:
         if: steps.semantic_release.outputs.new_release_published == 'true'
         uses: benc-uk/workflow-dispatch@v1
         with:
-          token: ${{secrets.TYPEDORM_BOT_PAT}}
+          token: ${{secrets.GITHUB_TOKEN}}
           workflow: NPM Publish

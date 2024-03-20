@@ -19,7 +19,7 @@ setup_ts_build(
 
 typedorm_package(
     name = "document-client",
-    package_name = "@typedorm/document-client",
+    package_name = "@yuliswe/document-client",
     readme_md = "README.md",
     deps = [
         ":library",

@@ -18,7 +18,7 @@ setup_ts_build(
 
 typedorm_package(
     name = "testing",
-    package_name = "@typedorm/testing",
+    package_name = "@yuliswe/testing",
     readme_md = "README.md",
     deps = [
         ":library",

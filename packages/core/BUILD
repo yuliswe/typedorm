@@ -23,7 +23,7 @@ setup_ts_build(
 
 typedorm_package(
     name = "core",
-    package_name = "@typedorm/core",
+    package_name = "@yuliswe/core",
     readme_md = "README.md",
     deps = [
         ":library",
