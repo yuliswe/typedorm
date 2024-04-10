@@ -27,7 +27,7 @@ export interface AttributeOptions<Entity> {
   /**
    * Assign default value to attribute
    */
-  default?: ScalarType | ((entity: Entity) => ScalarType);
+  default?: any | ((entity: Entity) => any);
   /**
    * Defines whether the attribute should be hidden from response returned to client
    * @default false
