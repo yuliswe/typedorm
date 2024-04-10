@@ -1,21 +1,21 @@
-import {isScalarTypeProvider} from './../../helpers/is-scalar-type';
 import {
   AttributeOptionsUniqueType,
   CompositePrimaryKey,
   DYNAMO_ATTRIBUTE_PREFIX,
   EntityTarget,
+  IsPrimaryKey,
   PrimaryKey,
+  ScalarType,
   SimplePrimaryKey,
   Table,
-  IsPrimaryKey,
-  ScalarType,
 } from '@typedorm/common';
 import {buildPrimaryKeySchema} from '../../helpers/build-primary-key-schema';
-import {DynamoEntitySchemaPrimaryKey} from './entity-metadata';
+import {isScalarTypeProvider} from './../../helpers/is-scalar-type';
 import {
-  BaseAttributeMetadataOptions,
   BaseAttributeMetadata,
+  BaseAttributeMetadataOptions,
 } from './base-attribute-metadata';
+import {DynamoEntitySchemaPrimaryKey} from './entity-metadata';
 
 export interface AttributeMetadataOptions extends BaseAttributeMetadataOptions {
   table: Table;
@@ -26,6 +26,7 @@ export interface AttributeMetadataOptions extends BaseAttributeMetadataOptions {
 
 export class AttributeMetadata extends BaseAttributeMetadata {
   readonly unique?: DynamoEntitySchemaPrimaryKey;
+  readonly autoUpdate?: () => any;
   readonly default?: (entity: any) => ScalarType;
   readonly table: Table;
   readonly entityClass: EntityTarget<any>;

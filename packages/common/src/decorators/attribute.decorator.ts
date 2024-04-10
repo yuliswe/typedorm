@@ -1,11 +1,10 @@
 import 'reflect-metadata';
-import {ScalarType} from '../helpers/scalar-type';
+import {MissingReflectMetadataError} from '../error';
 import {MetadataManager} from '../metadata/metadata-manager';
 import {
   AttributeRawMetadataOptions,
   PrimaryKey,
 } from '../metadata/metadata-storage';
-import {MissingReflectMetadataError} from '../error';
 
 export type AttributeOptionsUniqueType<Entity = any> =
   | boolean
@@ -34,6 +33,10 @@ export interface AttributeOptions<Entity> {
    * @default false
    */
   hidden?: boolean;
+  /**
+   * Defines a function to generate value for attribute whenever the entity is updated
+   */
+  autoUpdate?: (entity: Entity) => any;
 }
 
 export function Attribute<Entity = any>(

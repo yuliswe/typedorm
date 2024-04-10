@@ -1,35 +1,35 @@
 import {
   EntityTarget,
   INDEX_TYPE,
+  IndexOptions,
+  InvalidDynamicUpdateAttributeValueError,
+  InvalidFilterInputError,
+  InvalidSelectInputError,
+  InvalidUniqueAttributeUpdateError,
+  isEmptyObject,
+  isObject,
+  NoSuchIndexFoundError,
   QUERY_ORDER,
+  QUERY_SELECT_TYPE,
   Replace,
   RETURN_VALUES,
   Table,
   TRANSFORM_TYPE,
-  IndexOptions,
-  QUERY_SELECT_TYPE,
-  NoSuchIndexFoundError,
-  InvalidFilterInputError,
-  InvalidSelectInputError,
-  InvalidUniqueAttributeUpdateError,
-  InvalidDynamicUpdateAttributeValueError,
-  isEmptyObject,
-  isObject,
 } from '@typedorm/common';
+import {DocumentClientTypes} from '@typedorm/document-client';
+import {autoGenerateValue} from '../../helpers/auto-generate-attribute-value';
 import {dropProp} from '../../helpers/drop-prop';
 import {getConstructorForInstance} from '../../helpers/get-constructor-for-instance';
 import {parseKey} from '../../helpers/parse-key';
-import {KeyCondition} from '../expression/key-condition';
 import {Connection} from '../connection/connection';
 import {ExpressionBuilder} from '../expression/expression-builder';
+import {KeyCondition} from '../expression/key-condition';
+import {KeyConditionOptions} from '../expression/key-condition-options-type';
+import {UpdateBody} from '../expression/update-body-type';
 import {AttributeMetadata} from '../metadata/attribute-metadata';
 import {DynamoEntitySchemaPrimaryKey} from '../metadata/entity-metadata';
 import {BaseTransformer, MetadataOptions} from './base-transformer';
 import {LazyTransactionWriteItemListLoader} from './is-lazy-transaction-write-item-list-loader';
-import {KeyConditionOptions} from '../expression/key-condition-options-type';
-import {UpdateBody} from '../expression/update-body-type';
-import {DocumentClientTypes} from '@typedorm/document-client';
-import {autoGenerateValue} from '../../helpers/auto-generate-attribute-value';
 
 export interface ManagerToDynamoPutItemOptions {
   /**
@@ -396,7 +396,11 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     // check if auto update attributes are not referenced by primary key
     const formattedAutoUpdateAttributes = autoUpdateAttributes.reduce(
       (acc, attr) => {
+        if ('strategy' in attr) {
         acc[attr.name] = autoGenerateValue(attr.strategy);
+        } else if (typeof attr.autoUpdate === 'function') {
+          acc[attr.name] = attr.autoUpdate();
+        }
         return acc;
       },
       {} as {[key: string]: any}
