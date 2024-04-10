@@ -19,7 +19,7 @@ export const EventPrefix = 'EVT';
 })
 export class ProductEntity {
   @Attribute({
-    default: entity => entity.id,
+    default: (entity: ProductEntity) => entity.id,
   })
   id: string;
 
