@@ -18,12 +18,13 @@ setup_ts_build(
         "@npm//ksuid",
         "@npm//p-limit",
         "@npm//uuid",
+        "@npm//typescript-transform-paths",
     ],
 )
 
 typedorm_package(
     name = "core",
-    package_name = "@yuliswe/core",
+    package_name = "@yuliswe-typedorm/core",
     readme_md = "README.md",
     deps = [
         ":library",

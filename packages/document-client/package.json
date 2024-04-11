@@ -1,5 +1,5 @@
 {
-  "name": "@yuliswe/document-client",
+  "name": "@yuliswe-typedorm/document-client",
   "version": "0.0.0-PLACEHOLDER",
   "type": "commonjs",
   "main": "cjs/index.js",

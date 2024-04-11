@@ -32,6 +32,7 @@
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
     "baseUrl": ".",
+    "outDir": "build",
     "paths": {
       "@typedorm/*": [
         "packages/*",
@@ -61,6 +62,11 @@
         "bazel-out/darwin-dbg/bin/packages/*/esm"
       ]
     },
+    // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
+    "plugins": [
+      {"transform": "typescript-transform-paths"},
+      {"transform": "typescript-transform-paths", "afterDeclarations": true}
+    ],
     "rootDirs": [
       ".",
       "bazel-out/x64_windows-fastbuild/bin/*",
@@ -73,9 +79,5 @@
       "bazel-out/darwin-dbg/bin/*"
     ]
   },
-  "exclude": [
-    "dist",
-    "node_modules",
-    "tools"
-  ]
+  "exclude": ["dist", "node_modules", "tools", "build"]
 }

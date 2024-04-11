@@ -1,5 +1,5 @@
 {
-  "name": "@yuliswe/testing",
+  "name": "@yuliswe-typedorm/testing",
   "version": "0.0.0-PLACEHOLDER",
   "description": "TypeDORM - testing utilities",
   "keywords": [
@@ -9,8 +9,8 @@
     "orm"
   ],
   "peerDependencies": {
-    "@yuliswe/common": "0.0.0-PLACEHOLDER",
-    "@yuliswe/core": "0.0.0-PLACEHOLDER",
+    "@yuliswe-typedorm/common": "0.0.0-PLACEHOLDER",
+    "@yuliswe-typedorm/core": "0.0.0-PLACEHOLDER",
     "reflect-metadata": "^0.1.13",
     "aws-sdk": "^2.799.0"
   },

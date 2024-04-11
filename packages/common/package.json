@@ -1,5 +1,5 @@
 {
-  "name": "@yuliswe/common",
+  "name": "@yuliswe-typedorm/common",
   "version": "0.0.0-PLACEHOLDER",
   "type": "commonjs",
   "main": "cjs/index.js",

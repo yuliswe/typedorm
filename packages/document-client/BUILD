@@ -14,12 +14,13 @@ setup_ts_build(
         "@npm//@aws-sdk/lib-dynamodb",
         "@npm//@types/jest",
         "@npm//aws-sdk",
+        "@npm//typescript-transform-paths",
     ],
 )
 
 typedorm_package(
     name = "document-client",
-    package_name = "@yuliswe/document-client",
+    package_name = "@yuliswe-typedorm/document-client",
     readme_md = "README.md",
     deps = [
         ":library",

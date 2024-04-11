@@ -13,12 +13,13 @@ setup_ts_build(
         "//packages/core:library",
         "@npm//@types/jest",
         "@npm//aws-sdk",
+        "@npm//typescript-transform-paths",
     ],
 )
 
 typedorm_package(
     name = "testing",
-    package_name = "@yuliswe/testing",
+    package_name = "@yuliswe-typedorm/testing",
     readme_md = "README.md",
     deps = [
         ":library",

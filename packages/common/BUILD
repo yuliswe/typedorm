@@ -16,12 +16,13 @@ setup_ts_build(
         "@npm//debug",
         "@npm//reflect-metadata",
         "@npm//uuid",
+        "@npm//typescript-transform-paths",
     ],
 )
 
 typedorm_package(
     name = "common",
-    package_name = "@yuliswe/common",
+    package_name = "@yuliswe-typedorm/common",
     readme_md = "README.md",
     deps = [
         ":library",
