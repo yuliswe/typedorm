@@ -1,5 +1,5 @@
-import { MissingRequiredDependencyError } from '../error/missing-required-dep';
-import { loadPackage } from './load-package';
+import { MissingRequiredDependencyError } from 'packages/common/src/error/missing-required-dep';
+import { loadPackage } from 'packages/common/src/helpers/load-package';
 
 export function tryLoadPackage(packageName: string) {
   try {

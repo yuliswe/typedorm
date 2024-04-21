@@ -1,4 +1,4 @@
-import { unParseKey } from '../unparse-key';
+import { unParseKey } from 'packages/core/src/helpers/unparse-key';
 
 test('un parses simple parsed key', () => {
   const attributes = unParseKey('USER#{{id}}', 'USER#1123', ['id']);

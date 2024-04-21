@@ -1,4 +1,4 @@
-import { Condition } from '../condition';
+import { Condition } from 'packages/core/src/classes/expression/condition';
 
 test('create condition expression with given condition', () => {
   const condition = new Condition().attributeNotExist('PK');

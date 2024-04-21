@@ -1,5 +1,5 @@
 import { Attribute, Entity } from '@typedorm/common';
-import { table } from './table';
+import { table } from 'packages/core/__mocks__/table';
 
 export interface UserPrimaryKey {
   id: string;

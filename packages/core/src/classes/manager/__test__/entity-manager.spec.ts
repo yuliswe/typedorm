@@ -1,17 +1,17 @@
 jest.useFakeTimers().setSystemTime(new Date(1606896235000));
 
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { EntityManager } from '../entity-manager';
-import { User, UserPrimaryKey } from '../../../../__mocks__/user';
+import { EntityManager } from 'packages/core/src/classes/manager/entity-manager';
+import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
-} from '../../../../__mocks__/user-unique-email';
+} from 'packages/core/__mocks__/user-unique-email';
 import {
   UserAutoGenerateAttributesPrimaryKey,
   UserAutoGenerateAttributes,
-} from '../../../../__mocks__/user-auto-generate-attributes';
-import { Connection } from '../../connection/connection';
+} from 'packages/core/__mocks__/user-auto-generate-attributes';
+import { Connection } from 'packages/core/src/classes/connection/connection';
 import {
   CONSUMED_CAPACITY_TYPE,
   EntityInstance,

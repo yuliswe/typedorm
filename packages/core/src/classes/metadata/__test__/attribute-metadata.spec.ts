@@ -1,6 +1,6 @@
-import { User } from './../../../../__mocks__/user';
-import { table } from './../../../../__mocks__/table';
-import { AttributeMetadata } from '../attribute-metadata';
+import { User } from 'packages/core/__mocks__/user';
+import { table } from 'packages/core/__mocks__/table';
+import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
 
 test('attribute has required metadata', () => {
   const attMetadata = new AttributeMetadata({

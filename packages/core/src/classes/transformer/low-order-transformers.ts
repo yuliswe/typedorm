@@ -1,10 +1,10 @@
-import { applyMixins } from '../../helpers/apply-mixins';
-import { Connection } from '../connection/connection';
-import { ExpressionBuilder } from '../expression/expression-builder';
-import { ExpressionInputParser } from '../expression/expression-input-parser';
-import { BaseTransformer } from './base-transformer';
-import { DocumentClientRequestTransformer } from './document-client-request-transformer';
-import { EntityTransformer } from './entity-transformer';
+import { applyMixins } from 'packages/core/src/helpers/apply-mixins';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { ExpressionBuilder } from 'packages/core/src/classes/expression/expression-builder';
+import { ExpressionInputParser } from 'packages/core/src/classes/expression/expression-input-parser';
+import { BaseTransformer } from 'packages/core/src/classes/transformer/base-transformer';
+import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
+import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
 
 export interface LowOrderTransformers
   extends DocumentClientRequestTransformer,

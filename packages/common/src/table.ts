@@ -1,5 +1,5 @@
-import { IndexOptions } from './index-options';
-import { CompositePrimaryKey } from './metadata/metadata-storage';
+import { IndexOptions } from 'packages/common/src/index-options';
+import { CompositePrimaryKey } from 'packages/common/src/metadata/metadata-storage';
 
 export const IsCompositePrimaryKey = (
   key: unknown

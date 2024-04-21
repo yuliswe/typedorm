@@ -1,5 +1,5 @@
-import { MetadataManager } from '../metadata/metadata-manager';
-import { EntityRawMetadataOptions } from '../metadata/metadata-storage';
+import { MetadataManager } from 'packages/common/src/metadata/metadata-manager';
+import { EntityRawMetadataOptions } from 'packages/common/src/metadata/metadata-storage';
 
 type Constructor = { new (...args: any[]): {} };
 

@@ -1,5 +1,5 @@
 import { UpdateType } from '@typedorm/common';
-import { Update } from './update';
+import { Update } from 'packages/core/src/classes/expression/update/update';
 
 export class RemoveUpdate extends Update {
   protected prefix: UpdateType.Action = 'REMOVE';

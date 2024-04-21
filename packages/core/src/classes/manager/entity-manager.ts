@@ -9,21 +9,21 @@ import {
   STATS_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import { getDynamoQueryItemsLimit } from '../../helpers/get-dynamo-query-items-limit';
-import { Connection } from '../connection/connection';
-import { DocumentClientRequestTransformer } from '../transformer/document-client-request-transformer';
-import { EntityTransformer } from '../transformer/entity-transformer';
-import { getConstructorForInstance } from '../../helpers/get-constructor-for-instance';
-import { isUsedForPrimaryKey } from '../../helpers/is-used-for-primary-key';
-import { isWriteTransactionItemList } from '../transaction/type-guards';
-import { isLazyTransactionWriteItemListLoader } from '../transformer/is-lazy-transaction-write-item-list-loader';
-import { FilterOptions } from '../expression/filter-options-type';
-import { ConditionOptions } from '../expression/condition-options-type';
-import { MetadataOptions } from '../transformer/base-transformer';
-import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
-import { ProjectionKeys } from '../expression/projection-keys-options-type';
-import { KeyConditionOptions } from '../expression/key-condition-options-type';
-import { UpdateBody } from '../expression/update-body-type';
+import { getDynamoQueryItemsLimit } from 'packages/core/src/helpers/get-dynamo-query-items-limit';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
+import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
+import { getConstructorForInstance } from 'packages/core/src/helpers/get-constructor-for-instance';
+import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
+import { isWriteTransactionItemList } from 'packages/core/src/classes/transaction/type-guards';
+import { isLazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
+import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
+import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
+import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
+import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
+import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
 import { DocumentClientTypes } from '@typedorm/document-client';
 
 export interface EntityManagerCreateOptions<Entity> {
@@ -220,7 +220,7 @@ export class EntityManager {
         await this.connection.documentClient.put(dynamoPutItemInput);
 
       // log stats
-      if (response?.ConsumedCapacity) {
+      if (response.ConsumedCapacity) {
         this.connection.logger.logStats({
           requestId,
           scope: MANAGER_NAME.ENTITY_MANAGER,
@@ -287,7 +287,7 @@ export class EntityManager {
 
     const response = await this.connection.documentClient.get(dynamoGetItem);
     // stats
-    if (response?.ConsumedCapacity) {
+    if (response.ConsumedCapacity) {
       this.connection.logger.logStats({
         requestId,
         scope: MANAGER_NAME.ENTITY_MANAGER,
@@ -415,7 +415,7 @@ export class EntityManager {
           options?.requestId ?? metadataOptions?.returnConsumedCapacity,
       });
       // stats
-      if (response?.ConsumedCapacity) {
+      if (response.ConsumedCapacity) {
         this.connection.logger.logStats({
           requestId,
           scope: MANAGER_NAME.ENTITY_MANAGER,

@@ -1,5 +1,5 @@
 import { User, UserPrimaryKey } from '@typedorm/core/__mocks__/user';
-import { WriteBatch } from '../batch/write-batch';
+import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
 
 test('creates a write batch', () => {
   const user = new User();

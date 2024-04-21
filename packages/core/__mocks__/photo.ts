@@ -7,7 +7,7 @@ import {
   TransformFromDynamo,
   TransformToDynamo,
 } from '@typedorm/common';
-import { table } from './table';
+import { table } from 'packages/core/__mocks__/table';
 
 // Moment is only being used here to display the usage of @transform utility
 // eslint-disable-next-line node/no-extraneous-import

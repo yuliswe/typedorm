@@ -1,4 +1,4 @@
-import { getInterpolatedKeys } from '../get-interpolated-keys';
+import { getInterpolatedKeys } from 'packages/core/src/helpers/get-interpolated-keys';
 
 test('returns all interpolated keys', () => {
   const keys = getInterpolatedKeys('USER#{{id}}#other@5{{name}}');

@@ -2,12 +2,12 @@ import { CONSUMED_CAPACITY_TYPE, Replace } from '@typedorm/common';
 import { User } from '@typedorm/core/__mocks__/user';
 import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { WriteBatch } from '../../batch/write-batch';
-import { Connection } from '../../connection/connection';
-import { BatchManager } from '../batch-manager';
-import { EntityManager } from '../entity-manager';
-import { TransactionManager } from '../transaction-manager';
-import { ReadBatch } from '../../batch/read-batch';
+import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { BatchManager } from 'packages/core/src/classes/manager/batch-manager';
+import { EntityManager } from 'packages/core/src/classes/manager/entity-manager';
+import { TransactionManager } from 'packages/core/src/classes/manager/transaction-manager';
+import { ReadBatch } from 'packages/core/src/classes/batch/read-batch';
 
 let connection: Connection;
 let manager: BatchManager;

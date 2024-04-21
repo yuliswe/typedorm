@@ -1,4 +1,4 @@
-import { isUsedForPrimaryKey } from '../is-used-for-primary-key';
+import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
 
 test('checks if given attribute is referenced in raw primary key', () => {
   const isNotUsed = isUsedForPrimaryKey(

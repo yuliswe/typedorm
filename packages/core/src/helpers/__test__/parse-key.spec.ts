@@ -1,4 +1,4 @@
-import { parseKey } from '../parse-key';
+import { parseKey } from 'packages/core/src/helpers/parse-key';
 import { SparseIndexParseError } from '@typedorm/common';
 
 describe('parseKey()', () => {

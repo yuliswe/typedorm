@@ -4,8 +4,8 @@ import { User } from '@typedorm/core/__mocks__/user';
 import { UserAutoGenerateAttributes } from '@typedorm/core/__mocks__/user-auto-generate-attributes';
 import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { Connection } from '../../connection/connection';
-import { ScanManager } from '../scan-manager';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { ScanManager } from 'packages/core/src/classes/manager/scan-manager';
 
 let manager: ScanManager;
 let connection: Connection;

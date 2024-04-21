@@ -37,9 +37,9 @@ import {
   UpdateCommand,
 } from '@aws-sdk/lib-dynamodb';
 import { isEmptyObject } from '@typedorm/common';
-import { DEFAULT_TRANSLATE_CONFIG_V3 } from '../constants/translate-config';
-import { TransactionCancelledException } from '../exceptions';
-import { DocumentClient } from './base-document-client';
+import { DEFAULT_TRANSLATE_CONFIG_V3 } from 'packages/document-client/src/constants/translate-config';
+import { TransactionCancelledException } from 'packages/document-client/src/exceptions';
+import { DocumentClient } from 'packages/document-client/src/classes/base-document-client';
 
 export class DocumentClientV3<
   DynamoDBDocumentClientType extends

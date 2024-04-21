@@ -1,20 +1,20 @@
-import { LazyTransactionWriteItemListLoader } from './../is-lazy-transaction-write-item-list-loader';
+import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 import {
   Attribute,
   Entity,
   InvalidUniqueAttributeUpdateError,
   QUERY_ORDER,
 } from '@typedorm/common';
-import { Customer } from '../../../../__mocks__/inherited-customer';
-import { table } from '../../../../__mocks__/table';
-import { User, UserGSI1 } from '../../../../__mocks__/user';
+import { Customer } from 'packages/core/__mocks__/inherited-customer';
+import { table } from 'packages/core/__mocks__/table';
+import { User, UserGSI1 } from 'packages/core/__mocks__/user';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { UserPrimaryKey } from '../../../../__mocks__/user';
-import { DocumentClientRequestTransformer } from '../document-client-request-transformer';
+import { UserPrimaryKey } from 'packages/core/__mocks__/user';
+import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
-} from '../../../../__mocks__/user-unique-email';
+} from 'packages/core/__mocks__/user-unique-email';
 import {
   CATEGORY,
   Photo,

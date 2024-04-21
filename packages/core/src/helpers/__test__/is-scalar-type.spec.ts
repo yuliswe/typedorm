@@ -1,4 +1,4 @@
-import { isScalarType } from '../is-scalar-type';
+import { isScalarType } from 'packages/core/src/helpers/is-scalar-type';
 
 test('checks if isScalarType return true for scalar values', () => {
   const scalarValues = ['string', 1, true, Buffer.from([0])];

@@ -1,5 +1,5 @@
-import { INDEX_TYPE } from './enums';
-import { Replace } from './helpers/replace-type';
+import { INDEX_TYPE } from 'packages/common/src/enums';
+import { Replace } from 'packages/common/src/helpers/replace-type';
 
 export interface GSIIndexOptions {
   type: INDEX_TYPE.GSI;

@@ -1,4 +1,4 @@
-import { ObjectType } from './object-type';
+import { ObjectType } from 'packages/common/src/helpers/object-type';
 
 export type EntityTarget<Entity> = ObjectType<Entity>;
 

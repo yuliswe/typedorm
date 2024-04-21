@@ -1,6 +1,6 @@
 import { EntityTarget } from '@typedorm/common';
-import { ProjectionKeys } from '../expression/projection-keys-options-type';
-import { Transaction } from './transaction';
+import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
+import { Transaction } from 'packages/core/src/classes/transaction/transaction';
 
 interface ReadTransactionGetItemOptions<Entity> {
   /**

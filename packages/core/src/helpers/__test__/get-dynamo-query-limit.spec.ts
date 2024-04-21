@@ -1,4 +1,4 @@
-import { getDynamoQueryItemsLimit } from '../get-dynamo-query-items-limit';
+import { getDynamoQueryItemsLimit } from 'packages/core/src/helpers/get-dynamo-query-items-limit';
 
 test('returns default dynamo query items limit', () => {
   const limit = getDynamoQueryItemsLimit();

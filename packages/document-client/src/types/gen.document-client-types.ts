@@ -1,4 +1,4 @@
-import { DocumentClientV2 } from '../classes/document-client-v2';
+import { DocumentClientV2 } from 'packages/document-client/src/classes/document-client-v2';
 import AWS, { DynamoDB } from 'aws-sdk';
 import DynamoDBClientV3 from '@aws-sdk/client-dynamodb';
 

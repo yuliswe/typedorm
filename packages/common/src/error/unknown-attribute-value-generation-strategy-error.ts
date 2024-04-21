@@ -1,4 +1,4 @@
-import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from '../enums';
+import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from 'packages/common/src/enums';
 
 export class UnknownAttributeValueGenerationStrategyError extends Error {
   name = 'UnknownAttributeValueGenerationStrategyError';

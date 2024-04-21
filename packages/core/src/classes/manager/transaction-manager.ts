@@ -1,7 +1,7 @@
 import { DocumentClientTypes } from '@typedorm/document-client';
-import { WriteTransaction } from './../transaction/write-transaction';
-import { Connection } from '../connection/connection';
-import { DocumentClientTransactionTransformer } from '../transformer/document-client-transaction-transformer';
+import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { DocumentClientTransactionTransformer } from 'packages/core/src/classes/transformer/document-client-transaction-transformer';
 import {
   MANAGER_NAME,
   ReadTransactionItemLimitExceededError,
@@ -10,9 +10,9 @@ import {
   TRANSACTION_WRITE_ITEMS_LIMIT,
   WriteTransactionItemLimitExceededError,
 } from '@typedorm/common';
-import { ReadTransaction } from '../transaction/read-transaction';
-import { MetadataOptions } from '../transformer/base-transformer';
-import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
+import { ReadTransaction } from 'packages/core/src/classes/transaction/read-transaction';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
 
 export class TransactionManager {
   private _dcTransactionTransformer: DocumentClientTransactionTransformer;
@@ -125,7 +125,7 @@ export class TransactionManager {
       await this.connection.documentClient.transactGet(transactionInput);
 
     // log stats
-    if (response?.ConsumedCapacity) {
+    if (response.ConsumedCapacity) {
       this.connection.logger.logStats({
         requestId,
         scope: MANAGER_NAME.TRANSACTION_MANAGER,
@@ -137,7 +137,7 @@ export class TransactionManager {
     // Items are always returned in the same as they were requested.
     // An ordered array of up to 25 ItemResponse objects, each of which corresponds to the
     // TransactGetItem object in the same position in the TransactItems array
-    return (response.Responses as DocumentClientTypes.ItemResponseList)?.map(
+    return (response.Responses as DocumentClientTypes.ItemResponseList).map(
       (response, index) => {
         if (!response.Item) {
           // If a requested item could not be retrieved, the corresponding ItemResponse object is Null,
@@ -168,11 +168,11 @@ export class TransactionManager {
   ) {
     const transactionInput: DocumentClientTypes.TransactWriteItemInput = {
       TransactItems: transactItems,
-      ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
+      ReturnConsumedCapacity: metadataOptions.returnConsumedCapacity,
     };
 
     this.connection.logger.logInfo({
-      requestId: metadataOptions?.requestId,
+      requestId: metadataOptions.requestId,
       scope: MANAGER_NAME.TRANSACTION_MANAGER,
       log: `Running a transaction write request for ${transactItems.length} items.`,
     });
@@ -181,9 +181,9 @@ export class TransactionManager {
       await this.connection.documentClient.transactWrite(transactionInput);
 
     // log stats
-    if (response?.ConsumedCapacity) {
+    if (response.ConsumedCapacity) {
       this.connection.logger.logStats({
-        requestId: metadataOptions?.requestId,
+        requestId: metadataOptions.requestId,
         scope: MANAGER_NAME.TRANSACTION_MANAGER,
         statsType: STATS_TYPE.CONSUMED_CAPACITY,
         consumedCapacityData: response.ConsumedCapacity,

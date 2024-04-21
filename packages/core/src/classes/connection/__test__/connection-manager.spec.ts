@@ -1,9 +1,9 @@
 import { Attribute, Entity, Table } from '@typedorm/common';
 import { getConnection } from '@typedorm/core';
-import { User } from '../../../../__mocks__/user';
+import { User } from 'packages/core/__mocks__/user';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import path from 'path';
-import { ConnectionManager } from '../connection-manager';
+import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
 jest.useFakeTimers().setSystemTime(new Date('2020-01-01'));
 
 beforeEach(() => {

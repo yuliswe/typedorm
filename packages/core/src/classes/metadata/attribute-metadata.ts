@@ -9,13 +9,13 @@ import {
   SimplePrimaryKey,
   Table,
 } from '@typedorm/common';
-import { buildPrimaryKeySchema } from '../../helpers/build-primary-key-schema';
-import { isScalarTypeProvider } from './../../helpers/is-scalar-type';
+import { buildPrimaryKeySchema } from 'packages/core/src/helpers/build-primary-key-schema';
+import { isScalarTypeProvider } from 'packages/core/src/helpers/is-scalar-type';
 import {
   BaseAttributeMetadata,
   BaseAttributeMetadataOptions,
-} from './base-attribute-metadata';
-import { DynamoEntitySchemaPrimaryKey } from './entity-metadata';
+} from 'packages/core/src/classes/metadata/base-attribute-metadata';
+import { DynamoEntitySchemaPrimaryKey } from 'packages/core/src/classes/metadata/entity-metadata';
 
 export interface AttributeMetadataOptions extends BaseAttributeMetadataOptions {
   table: Table;

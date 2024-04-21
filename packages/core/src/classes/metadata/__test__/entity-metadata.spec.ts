@@ -1,8 +1,8 @@
 import { Attribute, Entity, INDEX_TYPE, Table } from '@typedorm/common';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { Connection } from '../../connection/connection';
-import { AttributeMetadata } from '../attribute-metadata';
-import { EntityMetadata } from '../entity-metadata';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
+import { EntityMetadata } from 'packages/core/src/classes/metadata/entity-metadata';
 
 let connection: Connection;
 const table = new Table({

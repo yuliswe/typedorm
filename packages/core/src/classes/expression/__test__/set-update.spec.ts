@@ -1,4 +1,4 @@
-import { SetUpdate } from '../update/set-update';
+import { SetUpdate } from 'packages/core/src/classes/expression/update/set-update';
 
 /**
  * @group setTo

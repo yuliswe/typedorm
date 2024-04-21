@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { HeadType } from '../helpers/head-type';
+import { HeadType } from 'packages/common/src/helpers/head-type';
 
 /**
  * Simple @Transform Wrapper to only run when transforming items from DynamoDB

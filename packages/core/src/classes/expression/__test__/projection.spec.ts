@@ -1,4 +1,4 @@
-import { Projection } from '../projection';
+import { Projection } from 'packages/core/src/classes/expression/projection';
 
 /**
  * @group addProjectionAttributes

@@ -8,12 +8,12 @@ import {
   STATS_TYPE,
 } from '@typedorm/common';
 import pLimit from 'p-limit';
-import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
-import { Connection } from '../connection/connection';
-import { FilterOptions } from '../expression/filter-options-type';
-import { ProjectionKeys } from '../expression/projection-keys-options-type';
-import { MetadataOptions } from '../transformer/base-transformer';
-import { DocumentClientScanTransformer } from '../transformer/document-client-scan-transformer';
+import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
+import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { DocumentClientScanTransformer } from 'packages/core/src/classes/transformer/document-client-scan-transformer';
 
 interface ScanManageBaseOptions<Entity, PartitionKey> {
   /**
@@ -308,13 +308,13 @@ export class ScanManager {
     const parallelScanOptions: ScanManagerScanOptions[] = [];
 
     if (
-      scanOptions?.limit &&
-      scanOptions?.limitPerSegment &&
-      scanOptions?.limit < scanOptions?.limitPerSegment
+      scanOptions.limit &&
+      scanOptions.limitPerSegment &&
+      scanOptions.limit < scanOptions.limitPerSegment
     ) {
       throw new InvalidParallelScanLimitOptionError(
-        scanOptions?.limit,
-        scanOptions?.limitPerSegment
+        scanOptions.limit,
+        scanOptions.limitPerSegment
       );
     }
 
@@ -420,7 +420,7 @@ export class ScanManager {
         ...scanOptions,
         // if requested segmented scan, then apply segment limit or default to limit operator
         limit: scanOptions?.totalSegments
-          ? scanOptions?.limitPerSegment
+          ? scanOptions.limitPerSegment
           : scanOptions?.limit,
       },
       {
@@ -449,15 +449,15 @@ export class ScanManager {
         requestId,
         scope: MANAGER_NAME.SCAN_MANAGER,
         log: `
-        There were some items that looked like ${scanOptions?.entity.name} but TypeDORM was unable to convert it back to entity type,
+        There were some items that looked like ${scanOptions.entity.name} but TypeDORM was unable to convert it back to entity type,
         This can happen when there are items in the table with "${INTERNAL_ENTITY_ATTRIBUTE.ENTITY_NAME} but was not created by TypeDORM.
         You should remove them or update it to something different."`,
       });
     }
 
     return {
-      items: entities.items?.length ? entities.items : undefined,
-      unknownItems: entities.unknownItems?.length
+      items: entities.items.length ? entities.items : undefined,
+      unknownItems: entities.unknownItems.length
         ? entities.unknownItems
         : undefined,
       cursor: response.cursor,

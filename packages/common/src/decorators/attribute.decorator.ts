@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { MissingReflectMetadataError } from '../error';
-import { MetadataManager } from '../metadata/metadata-manager';
+import { MissingReflectMetadataError } from 'packages/common/src/error';
+import { MetadataManager } from 'packages/common/src/metadata/metadata-manager';
 import {
   AttributeRawMetadataOptions,
   PrimaryKey,
-} from '../metadata/metadata-storage';
+} from 'packages/common/src/metadata/metadata-storage';
 
 export type AttributeOptionsUniqueType<Entity = any> =
   | boolean

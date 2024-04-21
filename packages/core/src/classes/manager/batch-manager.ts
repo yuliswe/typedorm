@@ -1,7 +1,7 @@
 import { DocumentClientTypes } from '@typedorm/document-client';
-import { WriteBatch } from '../batch/write-batch';
-import { Connection } from '../connection/connection';
-import { DocumentClientBatchTransformer } from '../transformer/document-client-batch-transformer';
+import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { DocumentClientBatchTransformer } from 'packages/core/src/classes/transformer/document-client-batch-transformer';
 import pLimit from 'p-limit';
 import {
   BATCH_READ_MAX_ALLOWED_ATTEMPTS,
@@ -12,9 +12,9 @@ import {
   STATS_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import { ReadBatch } from '../batch/read-batch';
-import { MetadataOptions } from '../transformer/base-transformer';
-import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
+import { ReadBatch } from 'packages/core/src/classes/batch/read-batch';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
 
 export enum REQUEST_TYPE {
   TRANSACT_WRITE = 'TRANSACT_WRITE',
@@ -80,7 +80,7 @@ export class BatchManager {
     const requestId = getUniqueRequestId(metadataOptions?.requestId);
 
     if (options?.requestsConcurrencyLimit) {
-      this.limit = pLimit(options?.requestsConcurrencyLimit);
+      this.limit = pLimit(options.requestsConcurrencyLimit);
     }
 
     this.connection.logger.logInfo({
@@ -250,7 +250,7 @@ export class BatchManager {
     const requestId = getUniqueRequestId(metadataOptions?.requestId);
 
     if (options?.requestsConcurrencyLimit) {
-      this.limit = pLimit(options?.requestsConcurrencyLimit);
+      this.limit = pLimit(options.requestsConcurrencyLimit);
     }
 
     this.connection.logger.logInfo({
@@ -401,7 +401,7 @@ export class BatchManager {
     // organize unprocessed items into single "tableName-item" map
     const sortedUnprocessedItems = unProcessedListItems.reduce(
       (acc, unprocessedItems) => {
-        Object.entries(unprocessedItems!).forEach(
+        Object.entries(unprocessedItems).forEach(
           ([tableName, unprocessedRequests]) => {
             if (!acc[tableName]) {
               acc[tableName] = [];

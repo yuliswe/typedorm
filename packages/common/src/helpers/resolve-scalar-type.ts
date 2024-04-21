@@ -1,5 +1,5 @@
-import { InvalidType } from './invalid-type';
-import { ScalarType } from './scalar-type';
+import { InvalidType } from 'packages/common/src/helpers/invalid-type';
+import { ScalarType } from 'packages/common/src/helpers/scalar-type';
 
 export type ResolveScalarType<T> = T extends ScalarType
   ? T

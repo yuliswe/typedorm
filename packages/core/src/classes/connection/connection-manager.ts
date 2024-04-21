@@ -1,5 +1,5 @@
-import { ConnectionOptions } from './connection-options';
-import { Connection } from './connection';
+import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
+import { Connection } from 'packages/core/src/classes/connection/connection';
 
 export class ConnectionManager {
   private connections: Map<string, Connection>;

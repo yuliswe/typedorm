@@ -1,4 +1,4 @@
-import { BaseExpressionInput } from './base-expression-input';
+import { BaseExpressionInput } from 'packages/core/src/classes/expression/base-expression-input';
 
 export class KeyCondition extends BaseExpressionInput {
   constructor() {

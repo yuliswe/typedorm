@@ -1,4 +1,4 @@
-import { buildRegexForKeyMatch } from './build-regex-for-key-match';
+import { buildRegexForKeyMatch } from 'packages/core/src/helpers/build-regex-for-key-match';
 
 export function keyMatchesSchema(
   pattern: string,

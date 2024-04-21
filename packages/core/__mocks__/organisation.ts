@@ -1,5 +1,5 @@
 import { Attribute, Entity, INDEX_TYPE } from '@typedorm/common';
-import { table } from './table';
+import { table } from 'packages/core/__mocks__/table';
 
 export interface OrganisationPrimaryKey {
   id: string;

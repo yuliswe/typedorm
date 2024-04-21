@@ -1,6 +1,6 @@
 import { AWSError, DynamoDB, Request } from 'aws-sdk';
-import { TransactionCancelledException } from '../exceptions';
-import { DocumentClient } from './base-document-client';
+import { TransactionCancelledException } from 'packages/document-client/src/exceptions';
+import { DocumentClient } from 'packages/document-client/src/classes/base-document-client';
 export class DocumentClientV2<
   DocumentClientType extends DynamoDB.DocumentClient = DynamoDB.DocumentClient,
 > extends DocumentClient {
@@ -122,6 +122,6 @@ export class DocumentClientV2<
 
         return resolve(response);
       });
-    }) as Promise<T>;
+    });
   }
 }

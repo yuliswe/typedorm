@@ -1,6 +1,6 @@
-import { ConnectionOptions } from './src/classes/connection/connection-options';
-import { Container } from './src/classes/container';
-import { ConnectionManager } from './src/classes/connection/connection-manager';
+import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
+import { Container } from 'packages/core/src/classes/container';
+import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
 
 // options
 export * from './src/classes/connection/connection-options';

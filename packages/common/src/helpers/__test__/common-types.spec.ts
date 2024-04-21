@@ -1,4 +1,4 @@
-import { IsEntityInstance } from '../common-types';
+import { IsEntityInstance } from 'packages/common/src/helpers/common-types';
 
 describe('IsEntityInstance', () => {
   test('should return true when input is an instance of a class', () => {

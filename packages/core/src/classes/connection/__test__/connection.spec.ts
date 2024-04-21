@@ -1,6 +1,6 @@
 import { DocumentClientV2, DocumentClientV3 } from '@typedorm/document-client';
 import { DynamoDB } from 'aws-sdk';
-import { Connection } from './../connection';
+import { Connection } from 'packages/core/src/classes/connection/connection';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 test('correctly instantiates documentClient when default document client is passed in for v2', () => {

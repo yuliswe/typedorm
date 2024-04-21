@@ -1,5 +1,5 @@
 import { User } from '@typedorm/core/__mocks__/user';
-import { ReadTransaction } from '../read-transaction';
+import { ReadTransaction } from 'packages/core/src/classes/transaction/read-transaction';
 
 test('creates a read transaction', () => {
   const readTransaction = new ReadTransaction()

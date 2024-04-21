@@ -1,8 +1,8 @@
 import { EntityTarget } from '@typedorm/common';
-import { Connection } from '../connection/connection';
-import { ConditionOptions } from '../expression/condition-options-type';
-import { UpdateBody } from '../expression/update-body-type';
-import { Transaction } from './transaction';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
+import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
+import { Transaction } from 'packages/core/src/classes/transaction/transaction';
 
 interface WriteTransactionCreateOptions<Entity> {
   /**

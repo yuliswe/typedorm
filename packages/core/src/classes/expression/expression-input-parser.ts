@@ -7,24 +7,24 @@ import {
   isEmptyObject,
   isObject,
 } from '@typedorm/common';
-import { KeyCondition } from './key-condition';
-import { Filter } from './filter';
-import { BaseExpressionInput, MERGE_STRATEGY } from './base-expression-input';
-import { isScalarType } from '../../helpers/is-scalar-type';
-import { FilterOptions } from './filter-options-type';
-import { ConditionOptions } from './condition-options-type';
-import { Condition } from './condition';
-import { Projection } from './projection';
-import { KeyConditionOptions } from './key-condition-options-type';
-import { ProjectionKeys } from './projection-keys-options-type';
-import { isSetOperatorComplexValueType, UpdateBody } from './update-body-type';
-import { SetUpdate } from './update/set-update';
-import { AddUpdate } from './update/add-update';
-import { Update } from './update/update';
+import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
+import { Filter } from 'packages/core/src/classes/expression/filter';
+import { BaseExpressionInput, MERGE_STRATEGY } from 'packages/core/src/classes/expression/base-expression-input';
+import { isScalarType } from 'packages/core/src/helpers/is-scalar-type';
+import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
+import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
+import { Condition } from 'packages/core/src/classes/expression/condition';
+import { Projection } from 'packages/core/src/classes/expression/projection';
+import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
+import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
+import { isSetOperatorComplexValueType, UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
+import { SetUpdate } from 'packages/core/src/classes/expression/update/set-update';
+import { AddUpdate } from 'packages/core/src/classes/expression/update/add-update';
+import { Update } from 'packages/core/src/classes/expression/update/update';
 
-import { DeleteUpdate } from './update/delete-update';
-import { RemoveUpdate } from './update/remove-update';
-import { nestedKeyAccessRegex } from '../../helpers/constants';
+import { DeleteUpdate } from 'packages/core/src/classes/expression/update/delete-update';
+import { RemoveUpdate } from 'packages/core/src/classes/expression/update/remove-update';
+import { nestedKeyAccessRegex } from 'packages/core/src/helpers/constants';
 
 /**
  * Parses expression input to expression instances
@@ -66,7 +66,7 @@ export class ExpressionInputParser {
     value: any
   ): { value: any; type: 'static' | 'dynamic' } {
     if (isObject(value) && !isEmptyObject(value)) {
-      const [operator, operatorValue] = Object.entries(value as any)[0];
+      const [operator, operatorValue] = Object.entries(value)[0];
 
       const parsedUpdate = this.parseValueToUpdateExp(
         attr,
@@ -132,20 +132,20 @@ export class ExpressionInputParser {
         }
         switch (operatorOrAttr) {
           case 'AND': {
-            if (!parsedExpList?.length) {
+            if (!parsedExpList.length) {
               return base;
             }
-            return base.mergeMany(parsedExpList as T[], MERGE_STRATEGY.AND);
+            return base.mergeMany(parsedExpList, MERGE_STRATEGY.AND);
           }
           case 'OR': {
-            if (!parsedExpList?.length) {
+            if (!parsedExpList.length) {
               return base;
             }
-            return base.mergeMany(parsedExpList as T[], MERGE_STRATEGY.OR);
+            return base.mergeMany(parsedExpList, MERGE_STRATEGY.OR);
           }
           case 'NOT': {
             // not can not contain more than one items
-            if (parsedExpList?.length) {
+            if (parsedExpList.length) {
               throw new Error(
                 `Value for operator "${operatorOrAttr}" can not contain more than 1 attributes.`
               );

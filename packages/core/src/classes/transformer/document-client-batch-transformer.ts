@@ -6,21 +6,21 @@ import {
   TRANSFORM_BATCH_TYPE,
 } from '@typedorm/common';
 import { v4 } from 'uuid';
-import { getHashedIdForInput } from '../../helpers/get-hashed-id-for-input';
-import { ReadBatch, ReadBatchItem } from '../batch/read-batch';
+import { getHashedIdForInput } from 'packages/core/src/helpers/get-hashed-id-for-input';
+import { ReadBatch, ReadBatchItem } from 'packages/core/src/classes/batch/read-batch';
 import {
   isBatchAddCreateItem,
   isBatchAddDeleteItem,
-} from '../batch/type-guards';
-import { WriteBatchItem, WriteBatch } from '../batch/write-batch';
-import { Connection } from '../connection/connection';
-import { isWriteTransactionItemList } from '../transaction/type-guards';
-import { MetadataOptions } from './base-transformer';
+} from 'packages/core/src/classes/batch/type-guards';
+import { WriteBatchItem, WriteBatch } from 'packages/core/src/classes/batch/write-batch';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { isWriteTransactionItemList } from 'packages/core/src/classes/transaction/type-guards';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
 import {
   isLazyTransactionWriteItemListLoader,
   LazyTransactionWriteItemListLoader,
-} from './is-lazy-transaction-write-item-list-loader';
-import { LowOrderTransformers } from './low-order-transformers';
+} from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
+import { LowOrderTransformers } from 'packages/core/src/classes/transformer/low-order-transformers';
 
 export type WriteRequestWithMeta = {
   tableName: string;
@@ -161,7 +161,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
             acc[currentFillingIndex][tableName] = [];
           }
 
-          acc[currentFillingIndex][tableName].push(perTableItems.shift()!);
+          acc[currentFillingIndex][tableName].push(perTableItems.shift());
           ++totalItemsAtCurrentFillingIndex;
 
           // batch write request has limit of 25 items per batch so once we hit that limit,
@@ -198,7 +198,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
           }
 
           acc[currentFillingIndex][tableName].Keys?.push(
-            perTableItems.Keys.shift()!
+            perTableItems.Keys.shift()
           );
           ++totalItemsAtCurrentFillingIndex;
 

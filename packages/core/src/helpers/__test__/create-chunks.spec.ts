@@ -1,4 +1,4 @@
-import { createChunks } from '../create-chunks';
+import { createChunks } from 'packages/core/src/helpers/create-chunks';
 
 test('creates chunks of specified sizes', () => {
   const originalArray = [1, 2, 3, 4, 5, 6, 7];

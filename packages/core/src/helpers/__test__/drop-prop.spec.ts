@@ -1,4 +1,4 @@
-import { dropProp } from '../drop-prop';
+import { dropProp } from 'packages/core/src/helpers/drop-prop';
 
 test('drops given prop from object', () => {
   const obj = {

@@ -1,4 +1,4 @@
-import { deepSortObject } from '../deep-sort-object';
+import { deepSortObject } from 'packages/core/src/helpers/deep-sort-object';
 
 test('sorts simple object', () => {
   const unsorted = {

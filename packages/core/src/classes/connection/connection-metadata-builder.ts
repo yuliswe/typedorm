@@ -5,10 +5,10 @@ import {
   EntityTarget,
   MissingRequiredEntityPhysicalNameError,
 } from '@typedorm/common';
-import { Connection } from './connection';
-import { EntityMetadataBuilder } from './entity-metadata-builder';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { EntityMetadataBuilder } from 'packages/core/src/classes/connection/entity-metadata-builder';
 import { MetadataManager } from '@typedorm/common';
-import { EntityMetadata } from '../metadata/entity-metadata';
+import { EntityMetadata } from 'packages/core/src/classes/metadata/entity-metadata';
 
 export class ConnectionMetadataBuilder {
   constructor(private connection: Connection) {}

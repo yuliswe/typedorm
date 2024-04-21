@@ -4,8 +4,8 @@ import {
   IsCompositePrimaryKey,
   EntityAliasOrString,
 } from '@typedorm/common';
-import { getInterpolatedKeys } from './get-interpolated-keys';
-import { validateKey } from './validate-key';
+import { getInterpolatedKeys } from 'packages/core/src/helpers/get-interpolated-keys';
+import { validateKey } from 'packages/core/src/helpers/validate-key';
 
 export function buildPrimaryKeySchema({
   table,

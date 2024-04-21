@@ -10,11 +10,11 @@ import {
   TRANSFORM_SCAN_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import { Connection } from '../connection/connection';
-import { MERGE_STRATEGY } from '../expression/base-expression-input';
-import { Filter } from '../expression/filter';
-import { MetadataOptions } from './base-transformer';
-import { LowOrderTransformers } from './low-order-transformers';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { MERGE_STRATEGY } from 'packages/core/src/classes/expression/base-expression-input';
+import { Filter } from 'packages/core/src/classes/expression/filter';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { LowOrderTransformers } from 'packages/core/src/classes/transformer/low-order-transformers';
 
 interface ScanTransformerToDynamoScanOptions {
   entity?: EntityTarget<any>;
@@ -48,19 +48,19 @@ export class DocumentClientScanTransformer extends LowOrderTransformers {
     });
 
     const tableToScan = scanOptions?.entity
-      ? this.connection.getEntityByTarget(scanOptions?.entity)?.table
+      ? this.connection.getEntityByTarget(scanOptions.entity).table
       : this.connection.table;
 
     let verifiedIndexToScan: string | undefined;
     // validate if index requested to scan belongs to current resolved table
     if (scanOptions?.scanIndex) {
       const scanIndexOptions = tableToScan.getIndexByKey(
-        scanOptions?.scanIndex
+        scanOptions.scanIndex
       );
       if (!scanIndexOptions) {
         throw new NoSuchIndexFoundError(
           tableToScan.name,
-          scanOptions?.scanIndex
+          scanOptions.scanIndex
         );
       }
     }
@@ -174,23 +174,23 @@ export class DocumentClientScanTransformer extends LowOrderTransformers {
     // validate value for segment and totalSegment before appending
     if (
       scanOptions?.totalSegments !== undefined &&
-      scanOptions?.totalSegments !== null
+      scanOptions.totalSegments !== null
     ) {
-      if (scanOptions?.totalSegments === 0) {
-        throw new Error(`Invalid scan option totalSegment: ${scanOptions?.totalSegments}.
+      if (scanOptions.totalSegments === 0) {
+        throw new Error(`Invalid scan option totalSegment: ${scanOptions.totalSegments}.
         totalSegments is optional, but when provided it's value must be greater than 0.`);
       }
-      if (scanOptions?.segment === undefined || scanOptions?.segment === null) {
-        throw new Error(`Invalid scan option segment: ${scanOptions?.segment}.
+      if (scanOptions.segment === undefined || scanOptions.segment === null) {
+        throw new Error(`Invalid scan option segment: ${scanOptions.segment}.
         When totalSegments value is defined, value for option 'segment' must also be defined.`);
       }
-      if (scanOptions?.segment >= scanOptions?.totalSegments) {
-        throw new Error(`Invalid scan option segment: ${scanOptions?.segment}.
+      if (scanOptions.segment >= scanOptions.totalSegments) {
+        throw new Error(`Invalid scan option segment: ${scanOptions.segment}.
         When totalSegments value is defined, value for option 'segment' must be one less than totalSegment size.`);
       }
 
-      transformedScanInput.TotalSegments = scanOptions?.totalSegments;
-      transformedScanInput.Segment = scanOptions?.segment;
+      transformedScanInput.TotalSegments = scanOptions.totalSegments;
+      transformedScanInput.Segment = scanOptions.segment;
     }
 
     this.connection.logger.logTransformScan({

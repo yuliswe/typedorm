@@ -1,4 +1,4 @@
-import { MetadataManager } from '../metadata/metadata-manager';
+import { MetadataManager } from 'packages/common/src/metadata/metadata-manager';
 
 export function getEntityDefinition<Entity>(input: string | Entity) {
   if (typeof input === 'string') {

@@ -1,11 +1,11 @@
 import { ATTRIBUTE_TYPE } from '@typedorm/common';
 import { User, UserPrimaryKey } from '@typedorm/core/__mocks__/user';
-import { Condition } from '../condition';
-import { ExpressionInputParser } from '../expression-input-parser';
-import { Filter } from '../filter';
-import { KeyCondition } from '../key-condition';
-import { Projection } from '../projection';
-import { Update } from '../update/update';
+import { Condition } from 'packages/core/src/classes/expression/condition';
+import { ExpressionInputParser } from 'packages/core/src/classes/expression/expression-input-parser';
+import { Filter } from 'packages/core/src/classes/expression/filter';
+import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
+import { Projection } from 'packages/core/src/classes/expression/projection';
+import { Update } from 'packages/core/src/classes/expression/update/update';
 
 let expInputParser: ExpressionInputParser;
 beforeEach(() => {

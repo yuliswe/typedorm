@@ -1,6 +1,6 @@
-import { TransactionCancelledException } from './../../exceptions/transaction-cancelled-exception';
+import { TransactionCancelledException } from 'packages/document-client/src/exceptions/transaction-cancelled-exception';
 import { DynamoDB, Response } from 'aws-sdk';
-import { DocumentClientV2 } from '../document-client-v2';
+import { DocumentClientV2 } from 'packages/document-client/src/classes/document-client-v2';
 
 let dc: DocumentClientV2;
 

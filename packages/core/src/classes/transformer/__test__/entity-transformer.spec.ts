@@ -1,4 +1,4 @@
-import { UserAutoGenerateAttributes } from '../../../../__mocks__/user-auto-generate-attributes';
+import { UserAutoGenerateAttributes } from 'packages/core/__mocks__/user-auto-generate-attributes';
 import {
   Attribute,
   AutoGenerateAttribute,
@@ -7,11 +7,11 @@ import {
   INDEX_TYPE,
   Table,
 } from '@typedorm/common';
-import { Organisation } from '../../../../__mocks__/organisation';
-import { User } from '../../../../__mocks__/user';
+import { Organisation } from 'packages/core/__mocks__/organisation';
+import { User } from 'packages/core/__mocks__/user';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { EntityTransformer } from '../entity-transformer';
-import { UserSparseIndexes } from '../../../../__mocks__/user-sparse-indexes';
+import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
+import { UserSparseIndexes } from 'packages/core/__mocks__/user-sparse-indexes';
 import { table } from '@typedorm/core/__mocks__/table';
 import { UserAttrAlias } from '@typedorm/core/__mocks__/user-with-attribute-alias';
 import { CATEGORY, Photo } from '@typedorm/core/__mocks__/photo';

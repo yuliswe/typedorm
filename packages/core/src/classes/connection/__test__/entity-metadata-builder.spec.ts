@@ -1,6 +1,6 @@
-import { User } from '../../../../__mocks__/user';
-import { UserSparseIndexes } from '../../../../__mocks__/user-sparse-indexes';
-import { EntityMetadataBuilder } from '../entity-metadata-builder';
+import { User } from 'packages/core/__mocks__/user';
+import { UserSparseIndexes } from 'packages/core/__mocks__/user-sparse-indexes';
+import { EntityMetadataBuilder } from 'packages/core/src/classes/connection/entity-metadata-builder';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import {
   Attribute,
@@ -10,7 +10,7 @@ import {
   MissingRequiredTableConfig,
   Table,
 } from '@typedorm/common';
-import { table } from '../../../../__mocks__/table';
+import { table } from 'packages/core/__mocks__/table';
 import { UserAttrAlias } from '@typedorm/core/__mocks__/user-with-attribute-alias';
 
 jest.mock('uuid', () => ({

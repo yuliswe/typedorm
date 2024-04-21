@@ -13,18 +13,18 @@ import {
   DocumentClientV2,
   DocumentClientV3,
 } from '@typedorm/document-client';
-import { isUsedForPrimaryKey } from '../../helpers/is-used-for-primary-key';
-import { BatchManager } from '../manager/batch-manager';
-import { EntityManager } from '../manager/entity-manager';
-import { ScanManager } from '../manager/scan-manager';
-import { TransactionManager } from '../manager/transaction-manager';
-import { AttributeMetadata } from '../metadata/attribute-metadata';
+import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
+import { BatchManager } from 'packages/core/src/classes/manager/batch-manager';
+import { EntityManager } from 'packages/core/src/classes/manager/entity-manager';
+import { ScanManager } from 'packages/core/src/classes/manager/scan-manager';
+import { TransactionManager } from 'packages/core/src/classes/manager/transaction-manager';
+import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
 import {
   DynamoEntitySchemaPrimaryKey,
   EntityMetadata,
-} from '../metadata/entity-metadata';
-import { ConnectionMetadataBuilder } from './connection-metadata-builder';
-import { ConnectionOptions } from './connection-options';
+} from 'packages/core/src/classes/metadata/entity-metadata';
+import { ConnectionMetadataBuilder } from 'packages/core/src/classes/connection/connection-metadata-builder';
+import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
 
 export class Connection {
   readonly name: string;
@@ -127,7 +127,7 @@ export class Connection {
     return this.getAttributesForEntity<Entity>(entityClass).filter(attr => {
       // only attributes that are not part of primary key should be included
       return (
-        (attr as AttributeMetadata)?.unique &&
+        (attr as AttributeMetadata).unique &&
         !isUsedForPrimaryKey(entityMetadata.schema.primaryKey, attr.name)
       );
     }) as Replace<
@@ -176,7 +176,7 @@ export class Connection {
 
   getAutoUpdateAttributes<Entity>(entityClass: EntityTarget<Entity>) {
     return this.getAttributesForEntity(entityClass).filter(
-      attr => attr?.autoUpdate
+      attr => attr.autoUpdate
     );
   }
 

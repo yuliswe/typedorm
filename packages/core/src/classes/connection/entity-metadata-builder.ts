@@ -6,9 +6,9 @@ import {
 import {
   AttributeMetadataType,
   EntityMetadata,
-} from '../metadata/entity-metadata';
-import { AttributesMetadataBuilder } from './attribute-metadata-builder';
-import { Connection } from './connection';
+} from 'packages/core/src/classes/metadata/entity-metadata';
+import { AttributesMetadataBuilder } from 'packages/core/src/classes/connection/attribute-metadata-builder';
+import { Connection } from 'packages/core/src/classes/connection/connection';
 
 export class EntityMetadataBuilder {
   table: Table;

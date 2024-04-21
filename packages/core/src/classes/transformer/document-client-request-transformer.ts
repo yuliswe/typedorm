@@ -17,19 +17,19 @@ import {
   TRANSFORM_TYPE,
 } from '@typedorm/common';
 import { DocumentClientTypes } from '@typedorm/document-client';
-import { autoGenerateValue } from '../../helpers/auto-generate-attribute-value';
-import { dropProp } from '../../helpers/drop-prop';
-import { getConstructorForInstance } from '../../helpers/get-constructor-for-instance';
-import { parseKey } from '../../helpers/parse-key';
-import { Connection } from '../connection/connection';
-import { ExpressionBuilder } from '../expression/expression-builder';
-import { KeyCondition } from '../expression/key-condition';
-import { KeyConditionOptions } from '../expression/key-condition-options-type';
-import { UpdateBody } from '../expression/update-body-type';
-import { AttributeMetadata } from '../metadata/attribute-metadata';
-import { DynamoEntitySchemaPrimaryKey } from '../metadata/entity-metadata';
-import { BaseTransformer, MetadataOptions } from './base-transformer';
-import { LazyTransactionWriteItemListLoader } from './is-lazy-transaction-write-item-list-loader';
+import { autoGenerateValue } from 'packages/core/src/helpers/auto-generate-attribute-value';
+import { dropProp } from 'packages/core/src/helpers/drop-prop';
+import { getConstructorForInstance } from 'packages/core/src/helpers/get-constructor-for-instance';
+import { parseKey } from 'packages/core/src/helpers/parse-key';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { ExpressionBuilder } from 'packages/core/src/classes/expression/expression-builder';
+import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
+import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
+import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
+import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
+import { DynamoEntitySchemaPrimaryKey } from 'packages/core/src/classes/metadata/entity-metadata';
+import { BaseTransformer, MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 
 export interface ManagerToDynamoPutItemOptions {
   /**
@@ -162,15 +162,15 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     }
 
     // if there is `where` condition options exists, build condition expression
-    if (options?.where && !isEmptyObject(options?.where)) {
+    if (options?.where && !isEmptyObject(options.where)) {
       const condition = this.expressionInputParser.parseToCondition(
-        options?.where
+        options.where
       );
 
       if (!condition) {
         throw new Error(
           `Failed to build condition expression for input: ${JSON.stringify(
-            options?.where
+            options.where
           )}`
         );
       }
@@ -731,13 +731,13 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
 
     if (options?.where && !isEmptyObject(options.where)) {
       const condition = this.expressionInputParser.parseToCondition(
-        options?.where
+        options.where
       );
 
       if (!condition) {
         throw new Error(
           `Failed to build condition expression for input: ${JSON.stringify(
-            options?.where
+            options.where
           )}`
         );
       }
@@ -760,7 +760,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
       };
     }
 
-    if (!uniqueAttributesToRemove?.length) {
+    if (!uniqueAttributesToRemove.length) {
       // if item does not have any unique attributes return it as is
       this.connection.logger.logTransform({
         requestId: metadataOptions?.requestId,
@@ -829,7 +829,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     if (
       !queryIndexName ||
       !indexToQuery ||
-      indexToQuery?.type === INDEX_TYPE.LSI
+      indexToQuery.type === INDEX_TYPE.LSI
     ) {
       parsedPartitionKey.name = table.partitionKey;
       parsedPartitionKey.value =

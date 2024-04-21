@@ -1,13 +1,13 @@
 import {
   LazyTransactionWriteItemListLoader,
   isLazyTransactionWriteItemListLoader,
-} from './is-lazy-transaction-write-item-list-loader';
+} from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 import {
   isTransactionAddDeleteItem,
   isTransactionAddGetItem,
   isTransactionAddUpdateItem,
   isWriteTransactionItemList,
-} from './../transaction/type-guards';
+} from 'packages/core/src/classes/transaction/type-guards';
 import {
   InvalidTransactionReadItemError,
   InvalidTransactionWriteItemError,
@@ -16,16 +16,16 @@ import {
 import {
   WriteTransaction,
   WriteTransactionItem,
-} from './../transaction/write-transaction';
-import { Connection } from '../connection/connection';
-import { LowOrderTransformers } from './low-order-transformers';
-import { isTransactionAddCreateItem } from '../transaction/type-guards';
-import { dropProp } from '../../helpers/drop-prop';
+} from 'packages/core/src/classes/transaction/write-transaction';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { LowOrderTransformers } from 'packages/core/src/classes/transformer/low-order-transformers';
+import { isTransactionAddCreateItem } from 'packages/core/src/classes/transaction/type-guards';
+import { dropProp } from 'packages/core/src/helpers/drop-prop';
 import {
   ReadTransaction,
   ReadTransactionItem,
-} from '../transaction/read-transaction';
-import { MetadataOptions } from './base-transformer';
+} from 'packages/core/src/classes/transaction/read-transaction';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
 import { DocumentClientTypes } from '@typedorm/document-client';
 
 export class DocumentClientTransactionTransformer extends LowOrderTransformers {

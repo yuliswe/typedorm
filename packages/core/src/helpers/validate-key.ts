@@ -3,8 +3,8 @@ import {
   InvalidAttributeAliasSchemaError,
   NoSuchAttributeExistsError,
 } from '@typedorm/common';
-import { regexInterpolatedWord } from './constants';
-import { isKeyOfTypeAliasSchema } from './is-key-of-type-alias-schema';
+import { regexInterpolatedWord } from 'packages/core/src/helpers/constants';
+import { isKeyOfTypeAliasSchema } from 'packages/core/src/helpers/is-key-of-type-alias-schema';
 
 /**
  *

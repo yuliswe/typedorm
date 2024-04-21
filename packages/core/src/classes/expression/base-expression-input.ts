@@ -1,5 +1,5 @@
 import { ATTRIBUTE_TYPE, ScalarType, SimpleOperator } from '@typedorm/common';
-import { nestedKeyAccessRegex } from '../../helpers/constants';
+import { nestedKeyAccessRegex } from 'packages/core/src/helpers/constants';
 
 const lastCharSpaceMatcher = /\s$/;
 export enum MERGE_STRATEGY {

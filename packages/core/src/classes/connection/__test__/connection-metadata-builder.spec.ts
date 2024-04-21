@@ -1,9 +1,9 @@
-import { UserUniqueEmail } from '../../../../__mocks__/user-unique-email';
-import { Organisation } from '../../../../__mocks__/organisation';
-import { User } from '../../../../__mocks__/user';
+import { UserUniqueEmail } from 'packages/core/__mocks__/user-unique-email';
+import { Organisation } from 'packages/core/__mocks__/organisation';
+import { User } from 'packages/core/__mocks__/user';
 import path from 'path';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { ConnectionMetadataBuilder } from '../connection-metadata-builder';
+import { ConnectionMetadataBuilder } from 'packages/core/src/classes/connection/connection-metadata-builder';
 import {
   Attribute,
   DuplicateEntityPhysicalNameError,

@@ -1,4 +1,4 @@
-import { RemoveUpdate } from '../update/remove-update';
+import { RemoveUpdate } from 'packages/core/src/classes/expression/update/remove-update';
 
 test('creates a update expression for removing attributes from item', () => {
   const update = new RemoveUpdate().remove('age').and().remove('items[2]');

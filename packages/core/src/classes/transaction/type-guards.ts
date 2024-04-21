@@ -3,8 +3,8 @@ import {
   WriteTransactionCreate,
   WriteTransactionDelete,
   WriteTransactionUpdate,
-} from './write-transaction';
-import { ReadTransactionGet } from './read-transaction';
+} from 'packages/core/src/classes/transaction/write-transaction';
+import { ReadTransactionGet } from 'packages/core/src/classes/transaction/read-transaction';
 
 export function isTransactionAddCreateItem<Entity>(
   item: any

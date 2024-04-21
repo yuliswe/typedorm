@@ -8,8 +8,8 @@ import { table } from '@typedorm/core/__mocks__/table';
 import { User } from '@typedorm/core/__mocks__/user';
 import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { Connection } from '../../connection/connection';
-import { DocumentClientScanTransformer } from '../document-client-scan-transformer';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { DocumentClientScanTransformer } from 'packages/core/src/classes/transformer/document-client-scan-transformer';
 
 jest.mock('uuid', () => ({
   v4: jest.fn().mockReturnValue('66a7b3d6-323a-49b0-a12d-c99afff5005a'),

@@ -1,5 +1,5 @@
 import { EntityAliasOrString, SparseIndexParseError } from '@typedorm/common';
-import { isKeyOfTypeAliasSchema } from './is-key-of-type-alias-schema';
+import { isKeyOfTypeAliasSchema } from 'packages/core/src/helpers/is-key-of-type-alias-schema';
 
 const regexExp = {
   interpolation: /\{{.+?\}}/g,

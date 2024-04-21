@@ -1,5 +1,5 @@
-import { Container } from '../container';
-import { ConnectionManager } from '../connection/connection-manager';
+import { Container } from 'packages/core/src/classes/container';
+import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
 
 test('returns default connection', () => {
   const connectionInstance = Container.get(ConnectionManager);

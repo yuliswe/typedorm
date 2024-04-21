@@ -1,5 +1,5 @@
-import { AddUpdate } from '../update/add-update';
-import { SetUpdate } from '../update/set-update';
+import { AddUpdate } from 'packages/core/src/classes/expression/update/add-update';
+import { SetUpdate } from 'packages/core/src/classes/expression/update/set-update';
 
 test('merges multiple update expressions with diff action', () => {
   const updateSet = new SetUpdate().setTo('name', 'user');
