@@ -31,6 +31,7 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
+    "allowJs": true,
     "baseUrl": ".",
     "outDir": "build",
     "paths": {
@@ -79,5 +80,6 @@
       "bazel-out/darwin-dbg/bin/*"
     ]
   },
-  "exclude": ["dist", "node_modules", "tools", "build"]
+  "exclude": ["dist", "node_modules", "tools", "build"],
+  "include": ["packages/**/*", "bazel-out/**/*"]
 }
