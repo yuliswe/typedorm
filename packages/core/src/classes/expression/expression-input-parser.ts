@@ -7,24 +7,24 @@ import {
   isEmptyObject,
   isObject,
 } from '@typedorm/common';
-import {KeyCondition} from './key-condition';
-import {Filter} from './filter';
-import {BaseExpressionInput, MERGE_STRATEGY} from './base-expression-input';
-import {isScalarType} from '../../helpers/is-scalar-type';
-import {FilterOptions} from './filter-options-type';
-import {ConditionOptions} from './condition-options-type';
-import {Condition} from './condition';
-import {Projection} from './projection';
-import {KeyConditionOptions} from './key-condition-options-type';
-import {ProjectionKeys} from './projection-keys-options-type';
-import {isSetOperatorComplexValueType, UpdateBody} from './update-body-type';
-import {SetUpdate} from './update/set-update';
-import {AddUpdate} from './update/add-update';
-import {Update} from './update/update';
+import { KeyCondition } from './key-condition';
+import { Filter } from './filter';
+import { BaseExpressionInput, MERGE_STRATEGY } from './base-expression-input';
+import { isScalarType } from '../../helpers/is-scalar-type';
+import { FilterOptions } from './filter-options-type';
+import { ConditionOptions } from './condition-options-type';
+import { Condition } from './condition';
+import { Projection } from './projection';
+import { KeyConditionOptions } from './key-condition-options-type';
+import { ProjectionKeys } from './projection-keys-options-type';
+import { isSetOperatorComplexValueType, UpdateBody } from './update-body-type';
+import { SetUpdate } from './update/set-update';
+import { AddUpdate } from './update/add-update';
+import { Update } from './update/update';
 
-import {DeleteUpdate} from './update/delete-update';
-import {RemoveUpdate} from './update/remove-update';
-import {nestedKeyAccessRegex} from '../../helpers/constants';
+import { DeleteUpdate } from './update/delete-update';
+import { RemoveUpdate } from './update/remove-update';
+import { nestedKeyAccessRegex } from '../../helpers/constants';
 
 /**
  * Parses expression input to expression instances
@@ -64,7 +64,7 @@ export class ExpressionInputParser {
   parseAttributeToUpdateValue(
     attr: string,
     value: any
-  ): {value: any; type: 'static' | 'dynamic'} {
+  ): { value: any; type: 'static' | 'dynamic' } {
     if (isObject(value) && !isEmptyObject(value)) {
       const [operator, operatorValue] = Object.entries(value as any)[0];
 
@@ -104,7 +104,7 @@ export class ExpressionInputParser {
         };
       }
       // return value as a default value
-      return {type: 'static', value};
+      return { type: 'static', value };
     }
   }
 
@@ -187,7 +187,7 @@ export class ExpressionInputParser {
                 | UpdateType.SetUpdateOperator
                 | UpdateType.Action
               ),
-              any
+              any,
             ];
 
             return this.parseValueToUpdateExp(
@@ -282,7 +282,7 @@ export class ExpressionInputParser {
             operatorValue
           )[0] as [
             UpdateType.ArithmeticOperator | UpdateType.SetUpdateOperator,
-            any
+            any,
           ];
 
           return this.parseValueToUpdateExp(

@@ -9,7 +9,7 @@ export class BaseAttributeMetadata {
   readonly type: string;
   readonly hidden?: boolean;
 
-  constructor({name, type, hidden}: BaseAttributeMetadataOptions) {
+  constructor({ name, type, hidden }: BaseAttributeMetadataOptions) {
     this.name = name;
     this.type = type;
     this.hidden = hidden;

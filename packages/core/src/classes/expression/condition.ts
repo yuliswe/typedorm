@@ -1,4 +1,4 @@
-import {BaseExpressionInput} from './base-expression-input';
+import { BaseExpressionInput } from './base-expression-input';
 
 export class Condition extends BaseExpressionInput {
   constructor(prefix?: string) {

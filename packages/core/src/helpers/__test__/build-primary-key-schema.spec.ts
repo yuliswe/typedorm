@@ -1,6 +1,6 @@
-import {table} from './../../../__mocks__/table';
-import {buildPrimaryKeySchema} from '../build-primary-key-schema';
-import {Table} from '@typedorm/common';
+import { table } from './../../../__mocks__/table';
+import { buildPrimaryKeySchema } from '../build-primary-key-schema';
+import { Table } from '@typedorm/common';
 
 test('builds primary key schema for composite table', () => {
   const table = new Table({

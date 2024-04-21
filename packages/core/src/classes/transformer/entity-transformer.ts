@@ -1,9 +1,9 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
-import {DynamoEntity, EntityTarget, TRANSFORM_TYPE} from '@typedorm/common';
-import {plainToClassFromExist} from 'class-transformer';
-import {unParseKey} from '../../helpers/unparse-key';
-import {Connection} from '../connection/connection';
-import {BaseTransformer, MetadataOptions} from './base-transformer';
+import { DocumentClientTypes } from '@typedorm/document-client';
+import { DynamoEntity, EntityTarget, TRANSFORM_TYPE } from '@typedorm/common';
+import { plainToClassFromExist } from 'class-transformer';
+import { unParseKey } from '../../helpers/unparse-key';
+import { Connection } from '../connection/connection';
+import { BaseTransformer, MetadataOptions } from './base-transformer';
 
 /**
  * Note: To use any of the base transformer methods, this default entity transformer should be used
@@ -95,7 +95,7 @@ export class EntityTransformer extends BaseTransformer {
     const transformedEntity: any = plainToClassFromExist(
       reflectedConstructor,
       deserializedEntityAttributes,
-      {version: schemaVersion}
+      { version: schemaVersion }
     );
 
     this.connection.logger.logTransform({
@@ -126,7 +126,7 @@ export class EntityTransformer extends BaseTransformer {
           dynamoKey[keyName],
           interpolations[keyName] ?? []
         );
-        acc = {...acc, ...unParsed};
+        acc = { ...acc, ...unParsed };
         return acc;
       },
       {}

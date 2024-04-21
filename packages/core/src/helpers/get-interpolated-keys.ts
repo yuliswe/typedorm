@@ -1,6 +1,6 @@
-import {EntityAliasOrString} from '@typedorm/common';
-import {regexInterpolatedWord} from './constants';
-import {isKeyOfTypeAliasSchema} from './is-key-of-type-alias-schema';
+import { EntityAliasOrString } from '@typedorm/common';
+import { regexInterpolatedWord } from './constants';
+import { isKeyOfTypeAliasSchema } from './is-key-of-type-alias-schema';
 
 export function getInterpolatedKeys(key: EntityAliasOrString<any>) {
   // early return when referenced key is of type alias schema

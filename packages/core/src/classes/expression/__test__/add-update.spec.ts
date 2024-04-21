@@ -1,4 +1,4 @@
-import {AddUpdate} from '../update/add-update';
+import { AddUpdate } from '../update/add-update';
 
 /**
  * @group addTo

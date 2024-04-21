@@ -1,8 +1,11 @@
-import {AUTO_GENERATE_ATTRIBUTE_STRATEGY, EntityTarget} from '@typedorm/common';
-import {Table} from '../table';
-import {AttributeOptionsUniqueType} from '../decorators/attribute.decorator';
-import {ScalarType} from '../helpers/scalar-type';
-import {EntityAliasOrString, IndexOptionsWithAlias} from '../index-options';
+import {
+  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
+  EntityTarget,
+} from '@typedorm/common';
+import { Table } from '../table';
+import { AttributeOptionsUniqueType } from '../decorators/attribute.decorator';
+import { ScalarType } from '../helpers/scalar-type';
+import { EntityAliasOrString, IndexOptionsWithAlias } from '../index-options';
 
 export const IsAutoGenerateAttributeRawMetadataOptions = (
   attr: any

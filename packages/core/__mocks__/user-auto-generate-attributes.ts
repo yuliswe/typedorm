@@ -5,7 +5,7 @@ import {
   Entity,
   INDEX_TYPE,
 } from '@typedorm/common';
-import {table} from './table';
+import { table } from './table';
 
 export interface UserAutoGenerateAttributesPrimaryKey {
   id: string;

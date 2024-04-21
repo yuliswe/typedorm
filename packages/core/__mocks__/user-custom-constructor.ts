@@ -1,5 +1,5 @@
-import {Attribute, Entity} from '@typedorm/common';
-import {table} from './table';
+import { Attribute, Entity } from '@typedorm/common';
+import { table } from './table';
 
 export interface UserPrimaryKey {
   id: string;
@@ -20,7 +20,7 @@ export class UserCustomConstructor implements UserPrimaryKey {
   @Attribute()
   name: string;
 
-  constructor({name}: Partial<UserCustomConstructor>) {
+  constructor({ name }: Partial<UserCustomConstructor>) {
     this.name = name!;
   }
 }

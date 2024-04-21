@@ -1,4 +1,4 @@
-import {TRANSACTION_WRITE_ITEMS_LIMIT} from '../constants';
+import { TRANSACTION_WRITE_ITEMS_LIMIT } from '../constants';
 
 export class WriteTransactionItemLimitExceededError extends Error {
   name = 'WriteTransactionItemLimitExceededError';

@@ -1,5 +1,5 @@
-import {UpdateType, ScalarType} from '@typedorm/common';
-import {Update} from './update';
+import { UpdateType, ScalarType } from '@typedorm/common';
+import { Update } from './update';
 
 export class SetUpdate extends Update {
   protected prefix: UpdateType.Action = 'SET';

@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityManager} from '@typedorm/core';
-import {TestEntity} from './test-entity';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from '@typedorm/core';
+import { TestEntity } from './test-entity';
 
 let entityManager: EntityManager;
 
@@ -24,7 +24,7 @@ afterEach(() => {
 });
 
 test('allows updating non-key attributes', async () => {
-  dcMock.update.mockReturnValue({promise: () => ({})});
+  dcMock.update.mockReturnValue({ promise: () => ({}) });
 
   const updateResponse = await entityManager.update(
     TestEntity,
@@ -56,8 +56,8 @@ test('allows updating non-key attributes', async () => {
 });
 
 test('allows updating key only attributes', async () => {
-  dcMock.update.mockReturnValue({promise: () => ({})});
-  dcMock.get.mockReturnValue({promise: () => ({})});
+  dcMock.update.mockReturnValue({ promise: () => ({}) });
+  dcMock.get.mockReturnValue({ promise: () => ({}) });
   dcMock.transactWrite.mockReturnValue({
     on: jest.fn(),
     send: jest.fn().mockImplementation(cb => {

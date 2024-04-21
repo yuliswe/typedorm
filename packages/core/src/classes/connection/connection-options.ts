@@ -1,5 +1,5 @@
-import {DocumentClient} from '@typedorm/document-client';
-import {EntityTarget, Table} from '@typedorm/common';
+import { DocumentClient } from '@typedorm/document-client';
+import { EntityTarget, Table } from '@typedorm/common';
 
 /**
  * @param table - Global table to use for all entities, entity scoped table takes precedence over this

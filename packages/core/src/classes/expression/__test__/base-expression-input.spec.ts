@@ -1,5 +1,5 @@
-import {BaseExpressionInput, MERGE_STRATEGY} from '../base-expression-input';
-import {Condition} from '../condition';
+import { BaseExpressionInput, MERGE_STRATEGY } from '../base-expression-input';
+import { Condition } from '../condition';
 
 class TestCondition extends BaseExpressionInput {
   protected getExpNameKey(key: string): string {

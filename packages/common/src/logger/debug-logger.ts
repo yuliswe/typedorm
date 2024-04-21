@@ -1,6 +1,6 @@
 import debug from 'debug';
 import chalk from 'chalk';
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
 
 export enum TRANSFORM_TYPE {
   GET = 'GET',

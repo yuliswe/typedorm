@@ -1,5 +1,5 @@
-import {User} from '@typedorm/core/__mocks__/user';
-import {WriteTransaction} from '../write-transaction';
+import { User } from '@typedorm/core/__mocks__/user';
+import { WriteTransaction } from '../write-transaction';
 
 test('create a write transaction', () => {
   const user = new User();
@@ -12,23 +12,23 @@ test('create a write transaction', () => {
       {
         id: 1,
       },
-      {name: 'updated name'}
+      { name: 'updated name' }
     )
     .addDeleteItem(User, {
       id: 11,
     });
 
   expect(writeTransaction.items).toEqual([
-    {create: {item: user}},
+    { create: { item: user } },
     {
       update: {
-        body: {name: 'updated name'},
+        body: { name: 'updated name' },
         item: User,
         options: undefined,
-        primaryKey: {id: 1},
+        primaryKey: { id: 1 },
       },
     },
-    {delete: {item: User, primaryKey: {id: 11}}},
+    { delete: { item: User, primaryKey: { id: 11 } } },
   ]);
 });
 

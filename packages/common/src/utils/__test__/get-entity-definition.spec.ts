@@ -1,6 +1,6 @@
-import {Entity} from '@typedorm/common';
-import {Attribute} from '../../decorators/attribute.decorator';
-import {getEntityDefinition} from '../get-entity-definition';
+import { Entity } from '@typedorm/common';
+import { Attribute } from '../../decorators/attribute.decorator';
+import { getEntityDefinition } from '../get-entity-definition';
 
 @Entity({
   name: 'user',

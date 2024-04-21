@@ -1,4 +1,4 @@
-import {TRANSACTION_READ_ITEMS_LIMIT} from '../constants';
+import { TRANSACTION_READ_ITEMS_LIMIT } from '../constants';
 
 export class ReadTransactionItemLimitExceededError extends Error {
   name = 'ReadTransactionItemLimitExceededError';

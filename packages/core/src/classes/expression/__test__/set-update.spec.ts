@@ -1,4 +1,4 @@
-import {SetUpdate} from '../update/set-update';
+import { SetUpdate } from '../update/set-update';
 
 /**
  * @group setTo

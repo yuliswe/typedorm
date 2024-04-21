@@ -1,13 +1,13 @@
-import {Attribute, Entity, Table} from '@typedorm/common';
-import {Organisation} from '@typedorm/core/__mocks__/organisation';
-import {table} from '@typedorm/core/__mocks__/table';
-import {User} from '@typedorm/core/__mocks__/user';
-import {UserUniqueEmail} from '@typedorm/core/__mocks__/user-unique-email';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {ReadBatch} from '../../batch/read-batch';
-import {WriteBatch} from '../../batch/write-batch';
-import {Connection} from '../../connection/connection';
-import {DocumentClientBatchTransformer} from '../document-client-batch-transformer';
+import { Attribute, Entity, Table } from '@typedorm/common';
+import { Organisation } from '@typedorm/core/__mocks__/organisation';
+import { table } from '@typedorm/core/__mocks__/table';
+import { User } from '@typedorm/core/__mocks__/user';
+import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { ReadBatch } from '../../batch/read-batch';
+import { WriteBatch } from '../../batch/write-batch';
+import { Connection } from '../../connection/connection';
+import { DocumentClientBatchTransformer } from '../document-client-batch-transformer';
 
 jest.mock('uuid', () => ({
   v4: jest.fn().mockReturnValue('66a7b3d6-323a-49b0-a12d-c99afff5005a'),
@@ -268,7 +268,7 @@ test('transforms requests of items with multiple tables', () => {
 
   const writeBatch = new WriteBatch().add(largeBatchOfMixedUsers);
 
-  const {batchWriteRequestMapItems} =
+  const { batchWriteRequestMapItems } =
     dcBatchTransformer.toDynamoWriteBatchItems(writeBatch);
   expect(batchWriteRequestMapItems.length).toEqual(2);
   expect(batchWriteRequestMapItems[0][table.name].length).toEqual(16);
@@ -300,7 +300,7 @@ test('reverse transforms batch item input in initial input', () => {
       },
     },
   ]);
-  const {metadata} = dcBatchTransformer.toDynamoWriteBatchItems(writeBatch);
+  const { metadata } = dcBatchTransformer.toDynamoWriteBatchItems(writeBatch);
 
   const original = dcBatchTransformer.toWriteBatchInputList(
     {
@@ -504,7 +504,7 @@ test('reverse transforms read batch item request', () => {
     },
   ];
   const readBatch = new ReadBatch().add(originalInput);
-  const {metadata} = dcBatchTransformer.toDynamoReadBatchItems(readBatch);
+  const { metadata } = dcBatchTransformer.toDynamoReadBatchItems(readBatch);
 
   const transformedOriginal = dcBatchTransformer.toReadBatchInputList(
     {

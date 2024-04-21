@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import {MissingReflectMetadataError} from '../error';
-import {MetadataManager} from '../metadata/metadata-manager';
+import { MissingReflectMetadataError } from '../error';
+import { MetadataManager } from '../metadata/metadata-manager';
 import {
   AttributeRawMetadataOptions,
   PrimaryKey,

@@ -1,11 +1,11 @@
-import {ATTRIBUTE_TYPE} from '@typedorm/common';
-import {User, UserPrimaryKey} from '@typedorm/core/__mocks__/user';
-import {Condition} from '../condition';
-import {ExpressionInputParser} from '../expression-input-parser';
-import {Filter} from '../filter';
-import {KeyCondition} from '../key-condition';
-import {Projection} from '../projection';
-import {Update} from '../update/update';
+import { ATTRIBUTE_TYPE } from '@typedorm/common';
+import { User, UserPrimaryKey } from '@typedorm/core/__mocks__/user';
+import { Condition } from '../condition';
+import { ExpressionInputParser } from '../expression-input-parser';
+import { Filter } from '../filter';
+import { KeyCondition } from '../key-condition';
+import { Projection } from '../projection';
+import { Update } from '../update/update';
 
 let expInputParser: ExpressionInputParser;
 beforeEach(() => {
@@ -102,7 +102,7 @@ test('parses filter with attribute type operator', () => {
   expect(parsedFilter?.expression).toEqual(
     'attribute_type(#FE_status, :FE_status)'
   );
-  expect(parsedFilter?.values).toEqual({':FE_status': 'BOOL'});
+  expect(parsedFilter?.values).toEqual({ ':FE_status': 'BOOL' });
 });
 
 test('parses filter with size operator', () => {
@@ -134,7 +134,7 @@ test('parses filter with single logical operator', () => {
   expect(parsedFilter?.expression).toEqual(
     '(#FE_age BETWEEN :FE_age_start AND :FE_age_end) AND (contains(#FE_name, :FE_name))'
   );
-  expect(parsedFilter?.names).toEqual({'#FE_age': 'age', '#FE_name': 'name'});
+  expect(parsedFilter?.names).toEqual({ '#FE_age': 'age', '#FE_name': 'name' });
   expect(parsedFilter?.values).toEqual({
     ':FE_age_end': 3,
     ':FE_age_start': 1,
@@ -195,7 +195,7 @@ test('parses filter with `NOT` logical operator', () => {
 
 test('parses nester object property', () => {
   const parsedFilter = expInputParser.parseToFilter<
-    User & {'profile.name.firstName': string},
+    User & { 'profile.name.firstName': string },
     UserPrimaryKey
   >({
     'profile.name.firstName': {
@@ -339,7 +339,7 @@ test('parses options to valid projection', () => {
 test('parses update body to update expression', () => {
   const update = expInputParser.parseToUpdate<
     User,
-    {'user.newAddresses': Array<string>}
+    { 'user.newAddresses': Array<string> }
   >({
     id: '2',
     name: {
@@ -393,7 +393,7 @@ test('parses update body to update expression', () => {
 test('parses update body to update expression with custom transform overrides ', () => {
   const update = expInputParser.parseToUpdate<
     User,
-    {'user.newAddresses': Array<string>}
+    { 'user.newAddresses': Array<string> }
   >(
     {
       id: '2',
@@ -429,7 +429,7 @@ test('parses update body to update expression with custom transform overrides ',
 test('parses dynamic body to update expression with custom transform overrides', () => {
   const update = expInputParser.parseToUpdate<
     User,
-    {'user.newAddresses': Array<string>}
+    { 'user.newAddresses': Array<string> }
   >(
     {
       id: '2',
@@ -508,7 +508,7 @@ test('parses explicit set update body', () => {
 test('parses explicit "ADD" update body', () => {
   const update = expInputParser.parseToUpdate<
     User,
-    {newAddresses: Array<number>}
+    { newAddresses: Array<number> }
   >({
     age: {
       ADD: 1,
@@ -541,7 +541,7 @@ test('parses explicit "ADD" update body', () => {
 test('parses explicit "REMOVE" update body', () => {
   const update = expInputParser.parseToUpdate<
     User,
-    {newAddresses: Array<Buffer>}
+    { newAddresses: Array<Buffer> }
   >({
     age: {
       REMOVE: true,
@@ -569,7 +569,7 @@ test('parses explicit "REMOVE" update body', () => {
 test('parses explicit "DELETE" update body', () => {
   const update = expInputParser.parseToUpdate<
     User,
-    {newAddresses: Array<Buffer>}
+    { newAddresses: Array<Buffer> }
   >({
     addresses: {
       DELETE: ['123'],
@@ -646,7 +646,7 @@ test('correctly parses ADD and returns update values', () => {
   const value = expInputParser.parseAttributeToUpdateValue('age', {
     ADD: 1,
   });
-  expect(value).toEqual({type: 'dynamic', value: 1});
+  expect(value).toEqual({ type: 'dynamic', value: 1 });
 });
 
 test('skips parsing and returns update values', () => {

@@ -1,10 +1,10 @@
-import {InvalidType} from './invalid-type';
-import {ScalarType} from './scalar-type';
+import { InvalidType } from './invalid-type';
+import { ScalarType } from './scalar-type';
 
 export type ResolveScalarType<T> = T extends ScalarType
   ? T
   : T extends any[]
-  ? T[0] extends ScalarType
-    ? T[0]
-    : InvalidType<[T[0], 'can not be resolved to a scalar type']>
-  : InvalidType<[T, 'can not be resolved to a scalar type']>;
+    ? T[0] extends ScalarType
+      ? T[0]
+      : InvalidType<[T[0], 'can not be resolved to a scalar type']>
+    : InvalidType<[T, 'can not be resolved to a scalar type']>;

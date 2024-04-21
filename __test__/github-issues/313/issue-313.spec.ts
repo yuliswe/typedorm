@@ -1,6 +1,6 @@
-import {createTestConnection} from '@typedorm/testing';
-import {EntityManager} from '@typedorm/core';
-import {TestEntity} from './test-entity';
+import { createTestConnection } from '@typedorm/testing';
+import { EntityManager } from '@typedorm/core';
+import { TestEntity } from './test-entity';
 
 it('validates entity and creates successful connection', async () => {
   const connection = createTestConnection({

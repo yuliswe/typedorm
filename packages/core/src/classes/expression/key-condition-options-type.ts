@@ -1,4 +1,4 @@
-import {KeyConditionType, RequireOnlyOne, ScalarType} from '@typedorm/common';
+import { KeyConditionType, RequireOnlyOne, ScalarType } from '@typedorm/common';
 
 export type KeyConditionOptions = RequireOnlyOne<
   {

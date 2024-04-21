@@ -1,6 +1,6 @@
-import {Attribute, Entity} from '@typedorm/common';
-import {testTable} from './test-table';
-import {Expose} from 'class-transformer';
+import { Attribute, Entity } from '@typedorm/common';
+import { testTable } from './test-table';
+import { Expose } from 'class-transformer';
 
 @Entity({
   table: testTable,
@@ -17,11 +17,11 @@ export class TestEntity {
   @Attribute()
   unversionedAttribute: string;
 
-  @Expose({since: 2, until: 3})
+  @Expose({ since: 2, until: 3 })
   @Attribute()
   attributeInVersion2And3: string;
 
-  @Expose({since: 3})
+  @Expose({ since: 3 })
   @Attribute()
   attributeSinceVersion3: string;
 

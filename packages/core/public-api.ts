@@ -1,6 +1,6 @@
-import {ConnectionOptions} from './src/classes/connection/connection-options';
-import {Container} from './src/classes/container';
-import {ConnectionManager} from './src/classes/connection/connection-manager';
+import { ConnectionOptions } from './src/classes/connection/connection-options';
+import { Container } from './src/classes/container';
+import { ConnectionManager } from './src/classes/connection/connection-manager';
 
 // options
 export * from './src/classes/connection/connection-options';
@@ -20,10 +20,10 @@ export * from './src/classes/manager/transaction-manager';
 export * from './src/classes/manager/scan-manager';
 
 // classes
-export {Connection} from './src/classes/connection/connection';
+export { Connection } from './src/classes/connection/connection';
 
 // helpers
-export {AutoGenerateAttributeValue} from './src/helpers/auto-generate-attribute-value';
+export { AutoGenerateAttributeValue } from './src/helpers/auto-generate-attribute-value';
 
 // public method exports
 

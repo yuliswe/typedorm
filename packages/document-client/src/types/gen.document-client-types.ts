@@ -1,5 +1,5 @@
-import {DocumentClientV2} from '../classes/document-client-v2';
-import AWS, {DynamoDB} from 'aws-sdk';
+import { DocumentClientV2 } from '../classes/document-client-v2';
+import AWS, { DynamoDB } from 'aws-sdk';
 import DynamoDBClientV3 from '@aws-sdk/client-dynamodb';
 
 /**
@@ -14,7 +14,7 @@ export namespace DocumentClientTypes {
     [key: string]: any;
   };
 
-  export type AttributeMap = {[key: string]: any};
+  export type AttributeMap = { [key: string]: any };
 
   export type ItemList = AttributeMap[];
 
@@ -140,7 +140,7 @@ export namespace DocumentClientTypes {
   export type BatchGetResponseMap<T = DocumentClientV2> =
     T extends DocumentClientV2
       ? DynamoDB.DocumentClient.BatchGetResponseMap
-      : {[key: string]: ItemList};
+      : { [key: string]: ItemList };
 
   /**
    * TransactWrite

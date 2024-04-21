@@ -2,8 +2,8 @@ import {
   Organisation,
   OrganisationPrimaryKey,
 } from '@typedorm/core/__mocks__/organisation';
-import {User, UserPrimaryKey} from '@typedorm/core/__mocks__/user';
-import {ReadBatch} from '../batch/read-batch';
+import { User, UserPrimaryKey } from '@typedorm/core/__mocks__/user';
+import { ReadBatch } from '../batch/read-batch';
 
 test('creates a read batch', () => {
   const readBatch = new ReadBatch()

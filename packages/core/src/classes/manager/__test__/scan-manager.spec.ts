@@ -1,11 +1,11 @@
-import {InvalidParallelScanLimitOptionError} from '@typedorm/common';
-import {table} from '@typedorm/core/__mocks__/table';
-import {User} from '@typedorm/core/__mocks__/user';
-import {UserAutoGenerateAttributes} from '@typedorm/core/__mocks__/user-auto-generate-attributes';
-import {UserUniqueEmail} from '@typedorm/core/__mocks__/user-unique-email';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {Connection} from '../../connection/connection';
-import {ScanManager} from '../scan-manager';
+import { InvalidParallelScanLimitOptionError } from '@typedorm/common';
+import { table } from '@typedorm/core/__mocks__/table';
+import { User } from '@typedorm/core/__mocks__/user';
+import { UserAutoGenerateAttributes } from '@typedorm/core/__mocks__/user-auto-generate-attributes';
+import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Connection } from '../../connection/connection';
+import { ScanManager } from '../scan-manager';
 
 let manager: ScanManager;
 let connection: Connection;
@@ -241,7 +241,7 @@ test('runs parallel scan requests for each segment', async () => {
     0: 0,
     1: 1,
   };
-  dcMock.scan.mockImplementation(({Segment}: {Segment: 0 | 1}) => {
+  dcMock.scan.mockImplementation(({ Segment }: { Segment: 0 | 1 }) => {
     callIndex[Segment] = callIndex[Segment] + 1;
     return {
       promise: () => ({
@@ -296,7 +296,7 @@ test('runs parallel scan requests for each segment', async () => {
     [
       {
         // request was rerun for that segment with pk
-        ExclusiveStartKey: {PK: 1},
+        ExclusiveStartKey: { PK: 1 },
         Limit: 10,
         Segment: 0,
         TableName: 'test-table',
@@ -415,7 +415,7 @@ test('finds items from table with over the scan api with given options', async (
 });
 
 test('finds items from table with using parallel scan', async () => {
-  dcMock.scan.mockImplementation(({Segment}) => ({
+  dcMock.scan.mockImplementation(({ Segment }) => ({
     promise: () => ({
       Items: [
         {
@@ -471,7 +471,7 @@ test('finds items from table with using parallel scan', async () => {
     ],
   ]);
   expect(response).toEqual({
-    items: [{id: 0}, {id: 1}],
+    items: [{ id: 0 }, { id: 1 }],
   });
 });
 

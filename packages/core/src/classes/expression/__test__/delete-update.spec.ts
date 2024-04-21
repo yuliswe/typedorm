@@ -1,4 +1,4 @@
-import {DeleteUpdate} from '../update/delete-update';
+import { DeleteUpdate } from '../update/delete-update';
 
 test('creates a update expression for deleting attributes from list', () => {
   const update = new DeleteUpdate().delete('items', ['book 1']);

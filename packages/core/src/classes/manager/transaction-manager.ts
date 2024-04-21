@@ -1,7 +1,7 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
-import {WriteTransaction} from './../transaction/write-transaction';
-import {Connection} from '../connection/connection';
-import {DocumentClientTransactionTransformer} from '../transformer/document-client-transaction-transformer';
+import { DocumentClientTypes } from '@typedorm/document-client';
+import { WriteTransaction } from './../transaction/write-transaction';
+import { Connection } from '../connection/connection';
+import { DocumentClientTransactionTransformer } from '../transformer/document-client-transaction-transformer';
 import {
   MANAGER_NAME,
   ReadTransactionItemLimitExceededError,
@@ -10,9 +10,9 @@ import {
   TRANSACTION_WRITE_ITEMS_LIMIT,
   WriteTransactionItemLimitExceededError,
 } from '@typedorm/common';
-import {ReadTransaction} from '../transaction/read-transaction';
-import {MetadataOptions} from '../transformer/base-transformer';
-import {getUniqueRequestId} from '../../helpers/get-unique-request-id';
+import { ReadTransaction } from '../transaction/read-transaction';
+import { MetadataOptions } from '../transformer/base-transformer';
+import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
 
 export class TransactionManager {
   private _dcTransactionTransformer: DocumentClientTransactionTransformer;
@@ -32,7 +32,7 @@ export class TransactionManager {
     metadataOptions?: MetadataOptions
   ) {
     const requestId = getUniqueRequestId(metadataOptions?.requestId);
-    const {transactionItemList, lazyTransactionWriteItemListLoader} =
+    const { transactionItemList, lazyTransactionWriteItemListLoader } =
       this._dcTransactionTransformer.toDynamoWriteTransactionItems(
         transaction,
         {
@@ -99,7 +99,7 @@ export class TransactionManager {
   async read(transaction: ReadTransaction, metadataOptions?: MetadataOptions) {
     const requestId = getUniqueRequestId(metadataOptions?.requestId);
 
-    const {transactionItemList} =
+    const { transactionItemList } =
       this._dcTransactionTransformer.toDynamoReadTransactionItems(transaction, {
         requestId,
       });
@@ -121,9 +121,8 @@ export class TransactionManager {
       ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
     };
 
-    const response = await this.connection.documentClient.transactGet(
-      transactionInput
-    );
+    const response =
+      await this.connection.documentClient.transactGet(transactionInput);
 
     // log stats
     if (response?.ConsumedCapacity) {
@@ -178,9 +177,8 @@ export class TransactionManager {
       log: `Running a transaction write request for ${transactItems.length} items.`,
     });
 
-    const response = await this.connection.documentClient.transactWrite(
-      transactionInput
-    );
+    const response =
+      await this.connection.documentClient.transactWrite(transactionInput);
 
     // log stats
     if (response?.ConsumedCapacity) {
@@ -193,6 +191,6 @@ export class TransactionManager {
     }
 
     // return success when successfully processed all items in a transaction
-    return {success: true};
+    return { success: true };
   }
 }

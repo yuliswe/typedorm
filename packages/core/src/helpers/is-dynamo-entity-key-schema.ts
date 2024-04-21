@@ -1,4 +1,4 @@
-import {DynamoEntitySchemaPrimaryKey} from '../classes/metadata/entity-metadata';
+import { DynamoEntitySchemaPrimaryKey } from '../classes/metadata/entity-metadata';
 export const isDynamoEntityKeySchema = (
   item: any
 ): item is DynamoEntitySchemaPrimaryKey =>

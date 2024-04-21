@@ -1,6 +1,6 @@
-import {EntityTarget} from '@typedorm/common';
-import {ProjectionKeys} from '../expression/projection-keys-options-type';
-import {Transaction} from './transaction';
+import { EntityTarget } from '@typedorm/common';
+import { ProjectionKeys } from '../expression/projection-keys-options-type';
+import { Transaction } from './transaction';
 
 interface ReadTransactionGetItemOptions<Entity> {
   /**
@@ -12,7 +12,7 @@ interface ReadTransactionGetItemOptions<Entity> {
 
 export interface ReadTransactionGet<
   Entity,
-  PrimaryKeyAttributes = Partial<Entity>
+  PrimaryKeyAttributes = Partial<Entity>,
 > {
   get: {
     item: EntityTarget<Entity>;

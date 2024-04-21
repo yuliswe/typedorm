@@ -64,8 +64,8 @@
     },
     // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
     "plugins": [
-      {"transform": "typescript-transform-paths"},
-      {"transform": "typescript-transform-paths", "afterDeclarations": true}
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ],
     "rootDirs": [
       ".",

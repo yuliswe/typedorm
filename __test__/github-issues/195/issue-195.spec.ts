@@ -1,8 +1,8 @@
-import {Article, IArticlePrimaryKey} from './specific-event-entity';
+import { Article, IArticlePrimaryKey } from './specific-event-entity';
 import 'reflect-metadata';
 
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityManager} from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from '@typedorm/core';
 
 jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
 

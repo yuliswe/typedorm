@@ -1,5 +1,5 @@
-import {ATTRIBUTE_TYPE, ScalarType, SimpleOperator} from '@typedorm/common';
-import {nestedKeyAccessRegex} from '../../helpers/constants';
+import { ATTRIBUTE_TYPE, ScalarType, SimpleOperator } from '@typedorm/common';
+import { nestedKeyAccessRegex } from '../../helpers/constants';
 
 const lastCharSpaceMatcher = /\s$/;
 export enum MERGE_STRATEGY {
@@ -9,8 +9,8 @@ export enum MERGE_STRATEGY {
 
 export abstract class BaseExpressionInput {
   expression: string;
-  protected _names?: {[key: string]: any};
-  protected _values?: {[key: string]: any};
+  protected _names?: { [key: string]: any };
+  protected _values?: { [key: string]: any };
 
   constructor() {
     this.expression = '';
@@ -71,7 +71,7 @@ export abstract class BaseExpressionInput {
     const topLevelPropKey = this.innerAddExpressionName(topKey);
     return nestedKeys.reduce(
       (acc, keySeg) => {
-        let {prefix} = acc;
+        let { prefix } = acc;
         // make sure that prefix does not contain any nested value reference
         prefix = prefix.replace(nestedKeyAccessRegex, '');
 
@@ -84,7 +84,7 @@ export abstract class BaseExpressionInput {
         acc.encoded += `.${currentSegPropKey}`;
         return acc;
       },
-      {prefix: topKey, encoded: topLevelPropKey}
+      { prefix: topKey, encoded: topLevelPropKey }
     ).encoded;
   }
 
@@ -139,7 +139,7 @@ export abstract class BaseExpressionInput {
     condition: BaseExpressionInput,
     strategy: MERGE_STRATEGY = MERGE_STRATEGY.AND
   ): this {
-    const {expression, names, values} = condition;
+    const { expression, names, values } = condition;
 
     // if merging condition does not have anything to merge return
     if (!expression) {
@@ -174,8 +174,8 @@ export abstract class BaseExpressionInput {
         );
       }
     });
-    this.names = {...this.names, ...names};
-    this.values = {...this.values, ...values};
+    this.names = { ...this.names, ...names };
+    this.values = { ...this.values, ...values };
 
     return this;
   }
@@ -212,8 +212,8 @@ export abstract class BaseExpressionInput {
         }
       });
 
-      this.names = {...this.names, ...input.names};
-      this.values = {...this.values, ...input.values};
+      this.names = { ...this.names, ...input.names };
+      this.values = { ...this.values, ...input.values };
     });
 
     return this;

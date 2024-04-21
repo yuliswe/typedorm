@@ -1,4 +1,4 @@
-import {keyMatchesSchema} from '../key-matches-schema';
+import { keyMatchesSchema } from '../key-matches-schema';
 
 test('verifies if given key matches schema', () => {
   const match = keyMatchesSchema('USER#{{id}}', 'USER#123', ['id']);

@@ -1,4 +1,4 @@
-const {exec} = require('./util');
+const { exec } = require('./util');
 
 const argsWithoutNode = process.argv.slice(1);
 process.on('uncaughtException', () => {

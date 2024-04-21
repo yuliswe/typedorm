@@ -1,12 +1,12 @@
-import {UpdateType, RequireOnlyOne, InvalidType} from '@typedorm/common';
-import {isEmptyObject} from '@typedorm/common';
+import { UpdateType, RequireOnlyOne, InvalidType } from '@typedorm/common';
+import { isEmptyObject } from '@typedorm/common';
 
 /**
  * Type Guards
  */
 export const isSetOperatorComplexValueType = (
   value: any
-): value is {$PATH: string; $VALUE: any} => {
+): value is { $PATH: string; $VALUE: any } => {
   return !!(!isEmptyObject(value) && value['$PATH']);
 };
 
@@ -16,17 +16,17 @@ export const isSetOperatorComplexValueType = (
  */
 type AbstractSetValueType<
   Entity,
-  enKey extends keyof Entity
+  enKey extends keyof Entity,
 > = (Entity[enKey] extends number
   ? {
       [key in UpdateType.ArithmeticOperator]?: number;
     }
   : Entity[enKey] extends any[]
-  ? {
-      LIST_APPEND?: Entity[enKey] | {$VALUE: Entity[enKey]; $PATH: string};
-    }
-  : {}) & {
-  IF_NOT_EXISTS?: Entity[enKey] | {$VALUE: Entity[enKey]; $PATH: string};
+    ? {
+        LIST_APPEND?: Entity[enKey] | { $VALUE: Entity[enKey]; $PATH: string };
+      }
+    : {}) & {
+  IF_NOT_EXISTS?: Entity[enKey] | { $VALUE: Entity[enKey]; $PATH: string };
 };
 
 type SetImplicitValueType<Entity, enKey extends keyof Entity> =
@@ -62,7 +62,7 @@ type AddValueType<Entity, enKey extends keyof Entity> = RequireOnlyOne<{
         [
           'number | any[]',
           "Update action 'ADD' can not be used for attribute",
-          enKey
+          enKey,
         ]
       >;
 }>;
@@ -74,7 +74,7 @@ type AddValueType<Entity, enKey extends keyof Entity> = RequireOnlyOne<{
  */
 type RemoveValueType<Entity, enKey extends keyof Entity> = RequireOnlyOne<{
   REMOVE?: Entity[enKey] extends any[]
-    ? {$AT_INDEX: number[]} | boolean
+    ? { $AT_INDEX: number[] } | boolean
     : boolean;
 }>;
 // **************************************

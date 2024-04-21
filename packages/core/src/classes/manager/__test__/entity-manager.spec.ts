@@ -1,8 +1,8 @@
 jest.useFakeTimers().setSystemTime(new Date(1606896235000));
 
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityManager} from '../entity-manager';
-import {User, UserPrimaryKey} from '../../../../__mocks__/user';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from '../entity-manager';
+import { User, UserPrimaryKey } from '../../../../__mocks__/user';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
@@ -11,7 +11,7 @@ import {
   UserAutoGenerateAttributesPrimaryKey,
   UserAutoGenerateAttributes,
 } from '../../../../__mocks__/user-auto-generate-attributes';
-import {Connection} from '../../connection/connection';
+import { Connection } from '../../connection/connection';
 import {
   CONSUMED_CAPACITY_TYPE,
   EntityInstance,
@@ -445,7 +445,7 @@ test('updates item and return all new attributes', async () => {
   });
   const updatedItem = await manager.update<User, UserPrimaryKey>(
     User,
-    {id: '1'},
+    { id: '1' },
     {
       name: 'user',
       status: 'active',
@@ -474,7 +474,7 @@ test('updates item and return all new attributes', async () => {
     UpdateExpression:
       'SET #UE_name = :UE_name, #UE_status = :UE_status, #UE_GSI1SK = :UE_GSI1SK, #UE_GSI1PK = :UE_GSI1PK',
   });
-  expect(updatedItem).toEqual({id: '1', name: 'user', status: 'active'});
+  expect(updatedItem).toEqual({ id: '1', name: 'user', status: 'active' });
 });
 
 test('updates item with multiple body actions', async () => {
@@ -493,7 +493,7 @@ test('updates item with multiple body actions', async () => {
   });
   const updatedItem = await manager.update<User, UserPrimaryKey>(
     User,
-    {id: '1'},
+    { id: '1' },
     {
       name: 'user',
       status: {
@@ -528,7 +528,7 @@ test('updates item with multiple body actions', async () => {
     UpdateExpression:
       'SET #UE_name = :UE_name, #UE_status = if_not_exists(#UE_id, :UE_status), #UE_GSI1SK = :UE_GSI1SK, #UE_GSI1PK = :UE_GSI1PK',
   });
-  expect(updatedItem).toEqual({id: '1', name: 'user', status: 'active'});
+  expect(updatedItem).toEqual({ id: '1', name: 'user', status: 'active' });
 });
 
 test('updates item when trying to update attribute with dynamic value that is not referenced in any index', async () => {
@@ -538,7 +538,7 @@ test('updates item when trying to update attribute with dynamic value that is no
 
   await manager.update<User, UserPrimaryKey>(
     User,
-    {id: '1'},
+    { id: '1' },
     {
       age: {
         INCREMENT_BY: 3,
@@ -567,7 +567,7 @@ test('fails to transform when trying to use dynamic update expression for attrib
   const updatedItem = async () =>
     manager.update<UserAttrAlias, UserAttrAliasPrimaryKey>(
       UserAttrAlias,
-      {id: '1'},
+      { id: '1' },
       {
         age: {
           INCREMENT_BY: 3,
@@ -602,7 +602,7 @@ test('updates item and attributes marked to be autoUpdated', async () => {
     UserAutoGenerateAttributesPrimaryKey
   >(
     UserAutoGenerateAttributes,
-    {id: '1'},
+    { id: '1' },
     {},
     {
       nestedKeySeparator: '.',
@@ -627,7 +627,7 @@ test('updates item and attributes marked to be autoUpdated', async () => {
     UpdateExpression:
       'SET #UE_updatedAt = :UE_updatedAt, #UE_GSI1PK = :UE_GSI1PK',
   });
-  expect(updatedItem).toEqual({id: '1', name: 'Me', status: 'active'});
+  expect(updatedItem).toEqual({ id: '1', name: 'Me', status: 'active' });
 });
 
 test('updates item with unique attributes and returns all updated attributes', async () => {
@@ -747,7 +747,7 @@ test('updates item and return all new attributes with given condition', async ()
   });
   const updatedItem = await manager.update<User, UserPrimaryKey>(
     User,
-    {id: '1'},
+    { id: '1' },
     {
       name: 'user',
       status: 'active',
@@ -1378,7 +1378,7 @@ test('queries items until limit is met', async () => {
           partitionKey: 'USER#1000',
           sortKey: 'USER#1000',
         },
-        ExpressionAttributeNames: {'#KY_CE_PK': 'PK', '#KY_CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#KY_CE_PK': 'PK', '#KY_CE_SK': 'SK' },
         ExpressionAttributeValues: {
           ':KY_CE_PK': 'USER#1',
           ':KY_CE_SK': 'USER#',

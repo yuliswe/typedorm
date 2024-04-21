@@ -1,6 +1,6 @@
-import {IsCompositePrimaryKey, PrimaryKey} from '@typedorm/common';
-import {DynamoEntitySchemaPrimaryKey} from '../classes/metadata/entity-metadata';
-import {getInterpolatedKeys} from './get-interpolated-keys';
+import { IsCompositePrimaryKey, PrimaryKey } from '@typedorm/common';
+import { DynamoEntitySchemaPrimaryKey } from '../classes/metadata/entity-metadata';
+import { getInterpolatedKeys } from './get-interpolated-keys';
 
 const IsRawPrimaryKey = (key: unknown): key is PrimaryKey => {
   return !!(key as PrimaryKey).partitionKey;

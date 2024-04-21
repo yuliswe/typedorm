@@ -1,12 +1,12 @@
-import {Condition} from '../condition';
-import {ExpressionBuilder} from '../expression-builder';
-import {Filter} from '../filter';
-import {Projection} from '../projection';
-import {AddUpdate} from '../update/add-update';
-import {DeleteUpdate} from '../update/delete-update';
-import {RemoveUpdate} from '../update/remove-update';
-import {SetUpdate} from '../update/set-update';
-import {Update} from '../update/update';
+import { Condition } from '../condition';
+import { ExpressionBuilder } from '../expression-builder';
+import { Filter } from '../filter';
+import { Projection } from '../projection';
+import { AddUpdate } from '../update/add-update';
+import { DeleteUpdate } from '../update/delete-update';
+import { RemoveUpdate } from '../update/remove-update';
+import { SetUpdate } from '../update/set-update';
+import { Update } from '../update/update';
 
 const expressionBuilder = new ExpressionBuilder();
 

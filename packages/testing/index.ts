@@ -1,11 +1,11 @@
-import {Replace} from '@typedorm/common';
+import { Replace } from '@typedorm/common';
 import {
   createConnection,
   ConnectionOptions,
   Container,
   ConnectionManager,
 } from '@typedorm/core';
-import {DocumentClient} from '@typedorm/document-client';
+import { DocumentClient } from '@typedorm/document-client';
 
 export function createTestConnection<T = any>(
   connectionOptions: Replace<

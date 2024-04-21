@@ -9,7 +9,5 @@
       }
     ]
   },
-  "plugins": [
-    "jest"
-  ]
+  "plugins": ["jest"]
 }

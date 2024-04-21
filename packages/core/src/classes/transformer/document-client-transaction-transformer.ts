@@ -17,16 +17,16 @@ import {
   WriteTransaction,
   WriteTransactionItem,
 } from './../transaction/write-transaction';
-import {Connection} from '../connection/connection';
-import {LowOrderTransformers} from './low-order-transformers';
-import {isTransactionAddCreateItem} from '../transaction/type-guards';
-import {dropProp} from '../../helpers/drop-prop';
+import { Connection } from '../connection/connection';
+import { LowOrderTransformers } from './low-order-transformers';
+import { isTransactionAddCreateItem } from '../transaction/type-guards';
+import { dropProp } from '../../helpers/drop-prop';
 import {
   ReadTransaction,
   ReadTransactionItem,
 } from '../transaction/read-transaction';
-import {MetadataOptions} from './base-transformer';
-import {DocumentClientTypes} from '@typedorm/document-client';
+import { MetadataOptions } from './base-transformer';
+import { DocumentClientTypes } from '@typedorm/document-client';
 
 export class DocumentClientTransactionTransformer extends LowOrderTransformers {
   constructor(connection: Connection) {
@@ -37,7 +37,7 @@ export class DocumentClientTransactionTransformer extends LowOrderTransformers {
     writeTransaction: WriteTransaction,
     metadataOptions?: MetadataOptions
   ) {
-    const {items} = writeTransaction;
+    const { items } = writeTransaction;
 
     this.connection.logger.logTransformTransaction({
       requestId: metadataOptions?.requestId,
@@ -61,7 +61,7 @@ export class DocumentClientTransactionTransformer extends LowOrderTransformers {
     readTransaction: ReadTransaction,
     metadataOptions?: MetadataOptions
   ) {
-    const {items} = readTransaction;
+    const { items } = readTransaction;
 
     this.connection.logger.logTransformTransaction({
       requestId: metadataOptions?.requestId,
@@ -94,7 +94,7 @@ export class DocumentClientTransactionTransformer extends LowOrderTransformers {
       (acc, transactionItem) => {
         if (isTransactionAddGetItem(transactionItem)) {
           const {
-            get: {item, primaryKey, options},
+            get: { item, primaryKey, options },
           } = transactionItem;
 
           const dynamoGetItemInput = this.toDynamoGetItem(
@@ -131,7 +131,7 @@ export class DocumentClientTransactionTransformer extends LowOrderTransformers {
       (acc, transactionItem) => {
         if (isTransactionAddCreateItem(transactionItem)) {
           const {
-            create: {item, options},
+            create: { item, options },
           } = transactionItem;
 
           const dynamoPutItemInput = this.toDynamoPutItem(
@@ -149,7 +149,7 @@ export class DocumentClientTransactionTransformer extends LowOrderTransformers {
           }
         } else if (isTransactionAddUpdateItem(transactionItem)) {
           const {
-            update: {item, primaryKey, body, options},
+            update: { item, primaryKey, body, options },
           } = transactionItem;
 
           const dynamoUpdateItemInput = this.toDynamoUpdateItem(
@@ -171,7 +171,7 @@ export class DocumentClientTransactionTransformer extends LowOrderTransformers {
           }
         } else if (isTransactionAddDeleteItem(transactionItem)) {
           const {
-            delete: {item, primaryKey, options},
+            delete: { item, primaryKey, options },
           } = transactionItem;
 
           const dynamoDeleteItemInput = this.toDynamoDeleteItem(

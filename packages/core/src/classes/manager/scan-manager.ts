@@ -1,4 +1,4 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
+import { DocumentClientTypes } from '@typedorm/document-client';
 import {
   EntityTarget,
   INTERNAL_ENTITY_ATTRIBUTE,
@@ -8,12 +8,12 @@ import {
   STATS_TYPE,
 } from '@typedorm/common';
 import pLimit from 'p-limit';
-import {getUniqueRequestId} from '../../helpers/get-unique-request-id';
-import {Connection} from '../connection/connection';
-import {FilterOptions} from '../expression/filter-options-type';
-import {ProjectionKeys} from '../expression/projection-keys-options-type';
-import {MetadataOptions} from '../transformer/base-transformer';
-import {DocumentClientScanTransformer} from '../transformer/document-client-scan-transformer';
+import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
+import { Connection } from '../connection/connection';
+import { FilterOptions } from '../expression/filter-options-type';
+import { ProjectionKeys } from '../expression/projection-keys-options-type';
+import { MetadataOptions } from '../transformer/base-transformer';
+import { DocumentClientScanTransformer } from '../transformer/document-client-scan-transformer';
 
 interface ScanManageBaseOptions<Entity, PartitionKey> {
   /**
@@ -220,7 +220,7 @@ export class ScanManager {
         };
     } else {
       response = await this.scan<Entity>(
-        {...findOptions, entity: entityClass} as ScanManagerScanOptions,
+        { ...findOptions, entity: entityClass } as ScanManagerScanOptions,
         {
           requestId,
           returnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
@@ -258,7 +258,12 @@ export class ScanManager {
     const requestId = getUniqueRequestId(metadataOptions?.requestId);
 
     const dynamoScanInput = this._dcScanTransformer.toDynamoScanItem(
-      {...scanOptions, entity: entityClass, onlyCount: true, select: undefined}, // select projection and count can not be used together
+      {
+        ...scanOptions,
+        entity: entityClass,
+        onlyCount: true,
+        select: undefined,
+      }, // select projection and count can not be used together
       {
         requestId,
         returnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
@@ -546,7 +551,7 @@ export class ScanManager {
     currentCount?: number;
     metadataOptions?: MetadataOptions;
   }): Promise<number> {
-    const {Count, LastEvaluatedKey, ConsumedCapacity} =
+    const { Count, LastEvaluatedKey, ConsumedCapacity } =
       await this.connection.documentClient.scan({
         ...scanInput,
         ExclusiveStartKey: cursor,

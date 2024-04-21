@@ -1,5 +1,5 @@
-import {MetadataStorage} from '@typedorm/common';
-import {Table} from '@typedorm/common';
+import { MetadataStorage } from '@typedorm/common';
+import { Table } from '@typedorm/common';
 
 let storage: MetadataStorage;
 class User {}
@@ -30,8 +30,8 @@ test('stores entity decorator', () => {
   expect(storage.entities).toEqual([
     {
       name: 'user',
-      primaryKey: {partitionKey: 'USER#1'},
-      table: {options: {name: 'test', partitionKey: 'PK'}},
+      primaryKey: { partitionKey: 'USER#1' },
+      table: { options: { name: 'test', partitionKey: 'PK' } },
       target: User,
     },
   ]);

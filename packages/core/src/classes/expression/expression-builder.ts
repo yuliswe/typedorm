@@ -1,10 +1,10 @@
-import {Table, isEmptyObject} from '@typedorm/common';
-import {MERGE_STRATEGY} from './base-expression-input';
-import {Condition} from './condition';
-import {Filter} from './filter';
-import {KeyCondition} from './key-condition';
-import {Projection} from './projection';
-import {Update} from './update/update';
+import { Table, isEmptyObject } from '@typedorm/common';
+import { MERGE_STRATEGY } from './base-expression-input';
+import { Condition } from './condition';
+import { Filter } from './filter';
+import { KeyCondition } from './key-condition';
+import { Projection } from './projection';
+import { Update } from './update/update';
 
 export class ExpressionBuilder {
   andMergeConditionExpressions(

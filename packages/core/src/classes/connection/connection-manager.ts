@@ -1,5 +1,5 @@
-import {ConnectionOptions} from './connection-options';
-import {Connection} from './connection';
+import { ConnectionOptions } from './connection-options';
+import { Connection } from './connection';
 
 export class ConnectionManager {
   private connections: Map<string, Connection>;
@@ -17,7 +17,7 @@ export class ConnectionManager {
   }
 
   create(options: ConnectionOptions) {
-    const {name = 'default'} = options;
+    const { name = 'default' } = options;
     if (this.connections.has(name)) {
       throw new Error(
         `There is already an existing connection with name "${name}".`

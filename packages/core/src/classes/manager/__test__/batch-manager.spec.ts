@@ -1,20 +1,20 @@
-import {CONSUMED_CAPACITY_TYPE, Replace} from '@typedorm/common';
-import {User} from '@typedorm/core/__mocks__/user';
-import {UserUniqueEmail} from '@typedorm/core/__mocks__/user-unique-email';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {WriteBatch} from '../../batch/write-batch';
-import {Connection} from '../../connection/connection';
-import {BatchManager} from '../batch-manager';
-import {EntityManager} from '../entity-manager';
-import {TransactionManager} from '../transaction-manager';
-import {ReadBatch} from '../../batch/read-batch';
+import { CONSUMED_CAPACITY_TYPE, Replace } from '@typedorm/common';
+import { User } from '@typedorm/core/__mocks__/user';
+import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { WriteBatch } from '../../batch/write-batch';
+import { Connection } from '../../connection/connection';
+import { BatchManager } from '../batch-manager';
+import { EntityManager } from '../entity-manager';
+import { TransactionManager } from '../transaction-manager';
+import { ReadBatch } from '../../batch/read-batch';
 
 let connection: Connection;
 let manager: BatchManager;
 let entityManager: Replace<
   EntityManager,
   'findOne',
-  {findOne: jest.SpyInstance}
+  { findOne: jest.SpyInstance }
 >;
 let transactionManager: Replace<
   TransactionManager,
@@ -66,7 +66,7 @@ test('processes empty batch write request', async () => {
 test('processes batch write request with simple request items', async () => {
   // mock document client with data
   documentClientMock.batchWrite.mockReturnValue({
-    promise: () => ({UnprocessedItems: {}}),
+    promise: () => ({ UnprocessedItems: {} }),
   });
 
   const largeBatchOfUsers = mockSimpleBatchWriteData(60);
@@ -92,7 +92,7 @@ test('processes batch write request with simple request items', async () => {
 test('processes batch write request and retries as needed', async () => {
   // mock document client with data
   let counter = 0;
-  documentClientMock.batchWrite.mockImplementation(({RequestItems}) => ({
+  documentClientMock.batchWrite.mockImplementation(({ RequestItems }) => ({
     promise: () => {
       counter++;
       if (counter % 2 === 0) {
@@ -103,7 +103,7 @@ test('processes batch write request and retries as needed', async () => {
         const tableName = Object.keys(RequestItems)[0];
 
         return {
-          UnprocessedItems: {[tableName]: RequestItems[tableName]},
+          UnprocessedItems: { [tableName]: RequestItems[tableName] },
         };
       }
     },
@@ -157,7 +157,7 @@ test('processes batch write requests that contains mix of unique and lazy load i
 
 test('processes batch write requests where some of the items failed to put', async () => {
   documentClientMock.batchWrite
-    .mockImplementationOnce(({RequestItems}) => ({
+    .mockImplementationOnce(({ RequestItems }) => ({
       promise: () => {
         const tableName = Object.keys(RequestItems)[0];
         return {
@@ -167,7 +167,7 @@ test('processes batch write requests where some of the items failed to put', asy
         };
       },
     }))
-    .mockImplementationOnce(({RequestItems}) => ({
+    .mockImplementationOnce(({ RequestItems }) => ({
       promise: () => {
         const tableName = Object.keys(RequestItems)[0];
         return {
@@ -226,7 +226,7 @@ test('processes batch write requests where some of the items failed to put', asy
 
 test('processes batch write requests where some of the items could not be processed properly', async () => {
   let counter = 0;
-  documentClientMock.batchWrite.mockImplementation(({RequestItems}) => ({
+  documentClientMock.batchWrite.mockImplementation(({ RequestItems }) => ({
     promise: () => {
       ++counter;
       const tableName = Object.keys(RequestItems)[0];
@@ -296,7 +296,7 @@ test('processes batch write requests where some of the items could not be proces
 }, 20000);
 
 test('uses user defined retry attempts for write batch requests', async () => {
-  documentClientMock.batchWrite.mockImplementation(({RequestItems}) => ({
+  documentClientMock.batchWrite.mockImplementation(({ RequestItems }) => ({
     promise: () => {
       const tableName = Object.keys(RequestItems)[0];
       return {
@@ -332,7 +332,7 @@ test('processes empty batch read request', async () => {
   expect(originalPromiseAll).toHaveBeenCalledWith([]);
   expect(documentClientMock.batchGet).toHaveBeenCalledTimes(0);
 
-  expect(result).toEqual({failedItems: [], items: [], unprocessedItems: []});
+  expect(result).toEqual({ failedItems: [], items: [], unprocessedItems: [] });
 });
 
 test('processes simple batch read request', async () => {
@@ -455,7 +455,7 @@ test('processes batch read request with multiple calls', async () => {
           ],
         },
         UnprocessedKeys: {
-          'simple-table': {Keys: [{PK: 'USER#3', SK: 'USER#3'}]},
+          'simple-table': { Keys: [{ PK: 'USER#3', SK: 'USER#3' }] },
         },
       };
     },
@@ -508,7 +508,7 @@ test('processes batch read request when some items failed to get', async () => {
   // mock document client to return error for some items,
 
   documentClientMock.batchGet
-    .mockImplementationOnce(({RequestItems}) => ({
+    .mockImplementationOnce(({ RequestItems }) => ({
       promise: () => {
         const tableName = Object.keys(RequestItems)[0];
         const itemForCurrTable = RequestItems[tableName];
@@ -524,12 +524,12 @@ test('processes batch read request when some items failed to get', async () => {
             },
           },
           UnprocessedKeys: {
-            [tableName]: {Keys: itemForCurrTable.Keys.slice(1)},
+            [tableName]: { Keys: itemForCurrTable.Keys.slice(1) },
           },
         };
       },
     }))
-    .mockImplementationOnce(({RequestItems}) => ({
+    .mockImplementationOnce(({ RequestItems }) => ({
       promise: () => {
         const tableName = Object.keys(RequestItems)[0];
         const itemForCurrTable = RequestItems[tableName];
@@ -556,7 +556,7 @@ test('processes batch read request when some items failed to get', async () => {
             ],
           },
           UnprocessedKeys: {
-            [tableName]: {Keys: itemForCurrTable.Keys.slice(2)},
+            [tableName]: { Keys: itemForCurrTable.Keys.slice(2) },
           },
         };
       },
@@ -619,7 +619,7 @@ test('processes batch read request when some items failed to get', async () => {
 test('processes batch read request and returns unprocessed items back to user', async () => {
   // mock document client to behave like one with very low read throughput,
   let index = -1;
-  documentClientMock.batchGet.mockImplementation(({RequestItems}) => ({
+  documentClientMock.batchGet.mockImplementation(({ RequestItems }) => ({
     promise: () => {
       const tableName = Object.keys(RequestItems)[0];
       const itemForCurrTable = RequestItems[tableName];
@@ -637,7 +637,7 @@ test('processes batch read request and returns unprocessed items back to user', 
         },
         UnprocessedKeys: {
           // only process one item return others back
-          [tableName]: {Keys: itemForCurrTable.Keys.slice(1)},
+          [tableName]: { Keys: itemForCurrTable.Keys.slice(1) },
         },
       };
     },
@@ -673,7 +673,7 @@ test('processes batch read request and returns unprocessed items back to user', 
 test('uses user defined retry attempts for read batch request', async () => {
   // mock document client to behave like one with very low read throughput,
 
-  documentClientMock.batchGet.mockImplementation(({RequestItems}) => ({
+  documentClientMock.batchGet.mockImplementation(({ RequestItems }) => ({
     promise: () => {
       const tableName = Object.keys(RequestItems)[0];
       const itemForCurrTable = RequestItems[tableName];
@@ -796,7 +796,7 @@ function mockTransactionAndBatchData(items: number) {
 
 function randomlyRejectDataMock() {
   let counter = 0;
-  documentClientMock.batchWrite.mockImplementation(({RequestItems}) => ({
+  documentClientMock.batchWrite.mockImplementation(({ RequestItems }) => ({
     promise: () => {
       counter++;
       if (counter % 3 === 0) {
@@ -806,7 +806,7 @@ function randomlyRejectDataMock() {
       } else {
         const tableName = Object.keys(RequestItems)[0];
         return {
-          UnprocessedItems: {[tableName]: RequestItems[tableName]},
+          UnprocessedItems: { [tableName]: RequestItems[tableName] },
         };
       }
     },

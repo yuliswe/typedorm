@@ -3,7 +3,7 @@ import {
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   UnknownAttributeValueGenerationStrategyError,
 } from '@typedorm/common';
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
 
 export class AutoGenerateAttributeValue {
   static get UUID4() {

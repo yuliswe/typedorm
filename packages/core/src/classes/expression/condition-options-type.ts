@@ -21,7 +21,7 @@ type AttributeConditionOptions<Entity> =
           // if between operator, value must be an array of two items
           [key in Extract<ConditionType.RangeOperator, 'BETWEEN'>]: [
             ResolveScalarType<Entity[enKey]>,
-            ResolveScalarType<Entity[enKey]>
+            ResolveScalarType<Entity[enKey]>,
           ];
         } & {
           // for 'IN' operator value must be a list of scalar type

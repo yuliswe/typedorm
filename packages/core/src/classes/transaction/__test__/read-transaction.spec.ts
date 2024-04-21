@@ -1,5 +1,5 @@
-import {User} from '@typedorm/core/__mocks__/user';
-import {ReadTransaction} from '../read-transaction';
+import { User } from '@typedorm/core/__mocks__/user';
+import { ReadTransaction } from '../read-transaction';
 
 test('creates a read transaction', () => {
   const readTransaction = new ReadTransaction()
@@ -35,13 +35,13 @@ test('creates a read transaction from bulk input', () => {
     {
       get: {
         item: User,
-        primaryKey: {id: 1},
+        primaryKey: { id: 1 },
       },
     },
     {
       get: {
         item: User,
-        primaryKey: {id: 2},
+        primaryKey: { id: 2 },
       },
     },
   ]);

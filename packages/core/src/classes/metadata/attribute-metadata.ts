@@ -9,13 +9,13 @@ import {
   SimplePrimaryKey,
   Table,
 } from '@typedorm/common';
-import {buildPrimaryKeySchema} from '../../helpers/build-primary-key-schema';
-import {isScalarTypeProvider} from './../../helpers/is-scalar-type';
+import { buildPrimaryKeySchema } from '../../helpers/build-primary-key-schema';
+import { isScalarTypeProvider } from './../../helpers/is-scalar-type';
 import {
   BaseAttributeMetadata,
   BaseAttributeMetadataOptions,
 } from './base-attribute-metadata';
-import {DynamoEntitySchemaPrimaryKey} from './entity-metadata';
+import { DynamoEntitySchemaPrimaryKey } from './entity-metadata';
 
 export interface AttributeMetadataOptions extends BaseAttributeMetadataOptions {
   table: Table;
@@ -31,7 +31,7 @@ export class AttributeMetadata extends BaseAttributeMetadata {
   readonly table: Table;
   readonly entityClass: EntityTarget<any>;
   constructor(options: AttributeMetadataOptions) {
-    const {name, entityClass, unique, table} = options;
+    const { name, entityClass, unique, table } = options;
     super(options);
     this.entityClass = entityClass;
     this.table = table;

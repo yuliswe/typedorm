@@ -8,16 +8,10 @@
       "name": "Current TS File",
       "type": "node",
       "request": "launch",
-      "args": [
-        "${relativeFile}"
-      ],
-      "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register"
-      ],
+      "args": ["${relativeFile}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "sourceMaps": true,
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceRoot}"
     },
     {
       "type": "node",
@@ -25,9 +19,7 @@
       "request": "attach",
       "name": "Attach",
       "port": 9229,
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
-    },
+      "skipFiles": ["<node_internals>/**"]
+    }
   ]
 }

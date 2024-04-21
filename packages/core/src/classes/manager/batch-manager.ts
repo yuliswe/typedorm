@@ -1,7 +1,7 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
-import {WriteBatch} from '../batch/write-batch';
-import {Connection} from '../connection/connection';
-import {DocumentClientBatchTransformer} from '../transformer/document-client-batch-transformer';
+import { DocumentClientTypes } from '@typedorm/document-client';
+import { WriteBatch } from '../batch/write-batch';
+import { Connection } from '../connection/connection';
+import { DocumentClientBatchTransformer } from '../transformer/document-client-batch-transformer';
 import pLimit from 'p-limit';
 import {
   BATCH_READ_MAX_ALLOWED_ATTEMPTS,
@@ -12,9 +12,9 @@ import {
   STATS_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import {ReadBatch} from '../batch/read-batch';
-import {MetadataOptions} from '../transformer/base-transformer';
-import {getUniqueRequestId} from '../../helpers/get-unique-request-id';
+import { ReadBatch } from '../batch/read-batch';
+import { MetadataOptions } from '../transformer/base-transformer';
+import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
 
 export enum REQUEST_TYPE {
   TRANSACT_WRITE = 'TRANSACT_WRITE',
@@ -101,7 +101,7 @@ export class BatchManager {
 
     // 1.1. get transaction write items limits
     const transactionRequests = transactionListItems.map(
-      ({rawInput, transformedInput}) => {
+      ({ rawInput, transformedInput }) => {
         // make all promises in pLimitable so their concurrency can be controlled properly
         return this.toLimited(
           () =>
@@ -119,7 +119,7 @@ export class BatchManager {
     // 1.2. get all the lazy loaded promises
     // these are basically all the delete requests that uses unique keys
     const lazyTransactionRequests = lazyTransactionWriteItemListLoaderItems.map(
-      ({rawInput, transformedInput}) => {
+      ({ rawInput, transformedInput }) => {
         return this.toLimited(
           async () => {
             const existingItem = await this.connection.entityManager.findOne(
@@ -156,7 +156,7 @@ export class BatchManager {
       return this.toLimited(
         async () =>
           this.connection.documentClient.batchWrite({
-            RequestItems: {...batchRequestMap},
+            RequestItems: { ...batchRequestMap },
             ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
           }),
         // for batch requests this returning item will be transformed to
@@ -260,7 +260,7 @@ export class BatchManager {
     });
 
     // 0. transform batch request
-    const {batchRequestItemsList, metadata} =
+    const { batchRequestItemsList, metadata } =
       this._dcBatchTransformer.toDynamoReadBatchItems(batch, {
         requestId,
       });
@@ -270,7 +270,7 @@ export class BatchManager {
       return this.toLimited(
         async () =>
           this.connection.documentClient.batchGet({
-            RequestItems: {...batchRequestItems},
+            RequestItems: { ...batchRequestItems },
             ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
           }),
         batchRequestItems,
@@ -295,7 +295,7 @@ export class BatchManager {
     });
 
     // 3. run retries
-    const {items, unprocessedItemsList} =
+    const { items, unprocessedItemsList } =
       await this.recursiveHandleBatchReadItemsResponse(
         initialResponses,
         0,
@@ -321,7 +321,7 @@ export class BatchManager {
         return item;
       }
 
-      const {target} =
+      const { target } =
         this.connection.getEntityByPhysicalName(entityPhysicalName);
       return this._dcBatchTransformer.fromDynamoEntity(target, item, {
         requestId,
@@ -425,7 +425,7 @@ export class BatchManager {
       return this.toLimited(
         async () =>
           this.connection.documentClient.batchWrite({
-            RequestItems: {...batchRequestMap},
+            RequestItems: { ...batchRequestMap },
             ReturnItemCollectionMetrics:
               metadataOptions?.returnConsumedCapacity,
           }),
@@ -528,7 +528,7 @@ export class BatchManager {
 
     // aggregate all requests by table name
     const sortedUnprocessedItems = unprocessedItemsList.reduce(
-      (acc, {UnprocessedKeys}: DocumentClientTypes.BatchGetItemOutput) => {
+      (acc, { UnprocessedKeys }: DocumentClientTypes.BatchGetItemOutput) => {
         Object.entries(UnprocessedKeys!).forEach(
           ([tableName, unprocessedRequests]) => {
             if (!acc[tableName]) {
@@ -555,7 +555,7 @@ export class BatchManager {
       return this.toLimited(
         async () =>
           this.connection.documentClient.batchGet({
-            RequestItems: {...batchRequestMap},
+            RequestItems: { ...batchRequestMap },
             ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
           }),
         batchRequestMap,

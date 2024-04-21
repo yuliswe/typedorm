@@ -1,5 +1,5 @@
-import {NoSuchAttributeExistsError} from '@typedorm/common';
-import {validateKey} from '../validate-key';
+import { NoSuchAttributeExistsError } from '@typedorm/common';
+import { validateKey } from '../validate-key';
 
 describe('validateKey()', () => {
   it('should validate key type', () => {

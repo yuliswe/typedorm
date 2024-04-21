@@ -1,5 +1,5 @@
-import {IndexOptions} from './index-options';
-import {CompositePrimaryKey} from './metadata/metadata-storage';
+import { IndexOptions } from './index-options';
+import { CompositePrimaryKey } from './metadata/metadata-storage';
 
 export const IsCompositePrimaryKey = (
   key: unknown
@@ -45,7 +45,7 @@ export class Table {
   }
 
   getIndexByKey(key: string) {
-    const {indexes = {}} = this.options;
+    const { indexes = {} } = this.options;
     return indexes[key];
   }
 }

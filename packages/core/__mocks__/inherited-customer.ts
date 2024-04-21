@@ -1,5 +1,5 @@
-import {Attribute, Entity} from '@typedorm/common';
-import {table} from './table';
+import { Attribute, Entity } from '@typedorm/common';
+import { table } from './table';
 
 abstract class BaseUser {
   @Attribute()

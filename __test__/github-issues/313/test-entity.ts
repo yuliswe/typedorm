@@ -1,5 +1,5 @@
-import {Attribute, Entity, INDEX_TYPE} from '@typedorm/common';
-import {testTable} from '../../__mocks__/test-table';
+import { Attribute, Entity, INDEX_TYPE } from '@typedorm/common';
+import { testTable } from '../../__mocks__/test-table';
 
 @Entity<TestEntity>({
   name: 'test-entity',

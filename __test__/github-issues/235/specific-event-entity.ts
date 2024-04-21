@@ -1,4 +1,4 @@
-import {Attribute, Entity, INDEX_TYPE} from '@typedorm/common';
+import { Attribute, Entity, INDEX_TYPE } from '@typedorm/common';
 
 export const ProductPrefix = 'PRD';
 export const EventPrefix = 'EVT';

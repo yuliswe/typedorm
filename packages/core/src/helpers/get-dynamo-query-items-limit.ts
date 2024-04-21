@@ -1,4 +1,4 @@
-import {DYNAMO_QUERY_ITEMS_IMPLICIT_LIMIT} from '@typedorm/common';
+import { DYNAMO_QUERY_ITEMS_IMPLICIT_LIMIT } from '@typedorm/common';
 
 export function getDynamoQueryItemsLimit() {
   try {

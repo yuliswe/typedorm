@@ -8,7 +8,7 @@ import {
   TransactionManager,
   ScanManager,
 } from '@typedorm/core';
-import {createTestConnection, resetTestConnection} from './index';
+import { createTestConnection, resetTestConnection } from './index';
 
 beforeEach(() => {
   createTestConnection({

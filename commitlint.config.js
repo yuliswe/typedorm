@@ -1,7 +1,7 @@
-const {readdirSync} = require('fs');
+const { readdirSync } = require('fs');
 
 const packages = () =>
-  readdirSync('./packages', {withFileTypes: true})
+  readdirSync('./packages', { withFileTypes: true })
     .filter(dir => dir.isDirectory())
     .map(dir => dir.name);
 

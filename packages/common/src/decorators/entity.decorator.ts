@@ -1,7 +1,7 @@
-import {MetadataManager} from '../metadata/metadata-manager';
-import {EntityRawMetadataOptions} from '../metadata/metadata-storage';
+import { MetadataManager } from '../metadata/metadata-manager';
+import { EntityRawMetadataOptions } from '../metadata/metadata-storage';
 
-type Constructor = {new (...args: any[]): {}};
+type Constructor = { new (...args: any[]): {} };
 
 export function Entity<E>({
   table,

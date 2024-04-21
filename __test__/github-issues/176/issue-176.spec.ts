@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import {
   AutoGenerateAttributeValue,
   BatchManager,
   WriteBatch,
 } from '@typedorm/core';
-import {User} from './user-entity';
+import { User } from './user-entity';
 
 jest.mock('uuid', () => {
   const originalUUID = jest.requireActual('uuid');

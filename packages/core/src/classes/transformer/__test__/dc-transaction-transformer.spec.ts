@@ -1,12 +1,12 @@
-import {WriteTransaction} from './../../transaction/write-transaction';
-import {Organisation} from '@typedorm/core/__mocks__/organisation';
-import {table} from '@typedorm/core/__mocks__/table';
-import {User} from '@typedorm/core/__mocks__/user';
-import {UserUniqueEmail} from '@typedorm/core/__mocks__/user-unique-email';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {Connection} from '../../connection/connection';
-import {DocumentClientTransactionTransformer} from '../document-client-transaction-transformer';
-import {ReadTransaction} from '../../transaction/read-transaction';
+import { WriteTransaction } from './../../transaction/write-transaction';
+import { Organisation } from '@typedorm/core/__mocks__/organisation';
+import { table } from '@typedorm/core/__mocks__/table';
+import { User } from '@typedorm/core/__mocks__/user';
+import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Connection } from '../../connection/connection';
+import { DocumentClientTransactionTransformer } from '../document-client-transaction-transformer';
+import { ReadTransaction } from '../../transaction/read-transaction';
 
 let connection: Connection;
 let dcTransactionTransformer: DocumentClientTransactionTransformer;

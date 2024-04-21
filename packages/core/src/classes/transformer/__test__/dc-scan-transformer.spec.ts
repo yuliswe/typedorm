@@ -3,13 +3,13 @@ import {
   NoSuchEntityExistsError,
   NoSuchIndexFoundError,
 } from '@typedorm/common';
-import {Organisation} from '@typedorm/core/__mocks__/organisation';
-import {table} from '@typedorm/core/__mocks__/table';
-import {User} from '@typedorm/core/__mocks__/user';
-import {UserUniqueEmail} from '@typedorm/core/__mocks__/user-unique-email';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {Connection} from '../../connection/connection';
-import {DocumentClientScanTransformer} from '../document-client-scan-transformer';
+import { Organisation } from '@typedorm/core/__mocks__/organisation';
+import { table } from '@typedorm/core/__mocks__/table';
+import { User } from '@typedorm/core/__mocks__/user';
+import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Connection } from '../../connection/connection';
+import { DocumentClientScanTransformer } from '../document-client-scan-transformer';
 
 jest.mock('uuid', () => ({
   v4: jest.fn().mockReturnValue('66a7b3d6-323a-49b0-a12d-c99afff5005a'),
@@ -38,13 +38,13 @@ test('correctly extends low order transformers', () => {
  */
 test('transforms simple scan input', () => {
   const transformed = dcScanTransformer.toDynamoScanItem();
-  expect(transformed).toEqual({TableName: 'test-table'});
+  expect(transformed).toEqual({ TableName: 'test-table' });
 });
 
 test('transforms scan input with options', () => {
   const transformed = dcScanTransformer.toDynamoScanItem(
     {
-      cursor: {PK: 123},
+      cursor: { PK: 123 },
     },
     {
       returnConsumedCapacity: CONSUMED_CAPACITY_TYPE.TOTAL,
@@ -162,8 +162,8 @@ test('throws when invalid values are configured for segments', () => {
  */
 test('transforms simple dynamodb output items', () => {
   const transformed = dcScanTransformer.fromDynamoScanResponseItemList([
-    {id: '1', __en: 'user', name: 'test-user'},
-    {id: 'ORG_1', __en: 'organisation', name: 'test organisation'},
+    { id: '1', __en: 'user', name: 'test-user' },
+    { id: 'ORG_1', __en: 'organisation', name: 'test organisation' },
     {
       email: 'some@entity.com',
     },
@@ -191,7 +191,7 @@ test('transforms simple dynamodb output items', () => {
 test('throws for unknown entity name', () => {
   const transformedFactory = () =>
     dcScanTransformer.fromDynamoScanResponseItemList([
-      {id: 1, __en: 'unusual entity'},
+      { id: 1, __en: 'unusual entity' },
     ]);
 
   expect(transformedFactory).toThrow(NoSuchEntityExistsError);

@@ -16,20 +16,20 @@ import {
   Table,
   TRANSFORM_TYPE,
 } from '@typedorm/common';
-import {DocumentClientTypes} from '@typedorm/document-client';
-import {autoGenerateValue} from '../../helpers/auto-generate-attribute-value';
-import {dropProp} from '../../helpers/drop-prop';
-import {getConstructorForInstance} from '../../helpers/get-constructor-for-instance';
-import {parseKey} from '../../helpers/parse-key';
-import {Connection} from '../connection/connection';
-import {ExpressionBuilder} from '../expression/expression-builder';
-import {KeyCondition} from '../expression/key-condition';
-import {KeyConditionOptions} from '../expression/key-condition-options-type';
-import {UpdateBody} from '../expression/update-body-type';
-import {AttributeMetadata} from '../metadata/attribute-metadata';
-import {DynamoEntitySchemaPrimaryKey} from '../metadata/entity-metadata';
-import {BaseTransformer, MetadataOptions} from './base-transformer';
-import {LazyTransactionWriteItemListLoader} from './is-lazy-transaction-write-item-list-loader';
+import { DocumentClientTypes } from '@typedorm/document-client';
+import { autoGenerateValue } from '../../helpers/auto-generate-attribute-value';
+import { dropProp } from '../../helpers/drop-prop';
+import { getConstructorForInstance } from '../../helpers/get-constructor-for-instance';
+import { parseKey } from '../../helpers/parse-key';
+import { Connection } from '../connection/connection';
+import { ExpressionBuilder } from '../expression/expression-builder';
+import { KeyCondition } from '../expression/key-condition';
+import { KeyConditionOptions } from '../expression/key-condition-options-type';
+import { UpdateBody } from '../expression/update-body-type';
+import { AttributeMetadata } from '../metadata/attribute-metadata';
+import { DynamoEntitySchemaPrimaryKey } from '../metadata/entity-metadata';
+import { BaseTransformer, MetadataOptions } from './base-transformer';
+import { LazyTransactionWriteItemListLoader } from './is-lazy-transaction-write-item-list-loader';
 
 export interface ManagerToDynamoPutItemOptions {
   /**
@@ -115,7 +115,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     | DocumentClientTypes.PutItemInput
     | DocumentClientTypes.TransactWriteItemList {
     const entityClass = getConstructorForInstance(entity);
-    const {table, internalAttributes, name} =
+    const { table, internalAttributes, name } =
       this.connection.getEntityByTarget(entityClass);
 
     this.connection.logger.logTransform({
@@ -252,7 +252,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     }
 
     const uniqueAttributesPutItems = [
-      {Put: dynamoPutItem},
+      { Put: dynamoPutItem },
       ...uniqueAttributePutItems,
     ];
 
@@ -319,7 +319,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
         );
       }
 
-      const {ProjectionExpression, ExpressionAttributeNames} =
+      const { ProjectionExpression, ExpressionAttributeNames } =
         this.expressionBuilder.buildProjectionExpression(projection);
 
       transformBody = {
@@ -346,7 +346,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
   toDynamoUpdateItem<
     Entity,
     PrimaryKey = Record<string, unknown>,
-    AdditionalProperties = Entity
+    AdditionalProperties = Entity,
   >(
     entityClass: EntityTarget<Entity>,
     primaryKeyAttributes: PrimaryKey,
@@ -355,7 +355,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     metadataOptions?: MetadataOptions
   ): DocumentClientTypes.UpdateItemInput | LazyTransactionWriteItemListLoader {
     // default values
-    const {nestedKeySeparator = '.'} = options;
+    const { nestedKeySeparator = '.' } = options;
 
     if (!this.connection.hasMetadata(entityClass)) {
       throw new Error(`No metadata found for class "${entityClass.name}".`);
@@ -397,13 +397,13 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     const formattedAutoUpdateAttributes = autoUpdateAttributes.reduce(
       (acc, attr) => {
         if ('strategy' in attr) {
-        acc[attr.name] = autoGenerateValue(attr.strategy);
+          acc[attr.name] = autoGenerateValue(attr.strategy);
         } else if (typeof attr.autoUpdate === 'function') {
           acc[attr.name] = attr.autoUpdate();
         }
         return acc;
       },
-      {} as {[key: string]: any}
+      {} as { [key: string]: any }
     );
 
     const rawAttributesToUpdate = {
@@ -428,13 +428,13 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
           this.expressionInputParser.parseAttributeToUpdateValue(
             attrName,
             attrValue
-          ) as {value: any; type: 'static' | 'dynamic'};
+          ) as { value: any; type: 'static' | 'dynamic' };
 
         acc.transformed[attrName] = valueWithType.value;
         acc.typeMetadata[attrName] = valueWithType.type;
         return acc;
       },
-      {transformed: {}, typeMetadata: {}} as {
+      { transformed: {}, typeMetadata: {} } as {
         transformed: Record<string, any>;
         typeMetadata: Record<string, 'dynamic' | 'static'>;
       }
@@ -494,15 +494,19 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
      */
     const explicitAttributesToUpdate = Object.entries({
       ...staticOrDynamicUpdateAttributesWithMetadata.transformed,
-    }).reduce((acc, [attrKey, attrValue]) => {
-      // Attribute in Body that are in primary key attributes and have the do not require any updates
-      if (
-        (primaryKeyAttributes as Record<string, unknown>)[attrKey] !== attrValue
-      ) {
-        acc[attrKey] = attrValue;
-      }
-      return acc;
-    }, {} as Record<string, any>);
+    }).reduce(
+      (acc, [attrKey, attrValue]) => {
+        // Attribute in Body that are in primary key attributes and have the do not require any updates
+        if (
+          (primaryKeyAttributes as Record<string, unknown>)[attrKey] !==
+          attrValue
+        ) {
+          acc[attrKey] = attrValue;
+        }
+        return acc;
+      },
+      {} as Record<string, any>
+    );
 
     const affectedPrimaryKeyAttributes =
       this.getAffectedPrimaryKeyAttributes<Entity>(
@@ -790,7 +794,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     queryOptions?: ManagerToDynamoQueryItemsOptions,
     metadataOptions?: MetadataOptions
   ): DocumentClientTypes.QueryInput {
-    const {table, schema, name} =
+    const { table, schema, name } =
       this.connection.getEntityByTarget(entityClass);
     this.connection.logger.logTransform({
       requestId: metadataOptions?.requestId,
@@ -821,7 +825,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
 
     // query will be executed against main table or
     // if querying local  index, then partition key will be same as main table
-    const parsedPartitionKey = {} as {name: string; value: any};
+    const parsedPartitionKey = {} as { name: string; value: any };
     if (
       !queryIndexName ||
       !indexToQuery ||
@@ -857,7 +861,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     const partitionKeyConditionExpression =
       this.expressionBuilder.buildKeyConditionExpression(partitionKeyCondition);
 
-    const parsedSortKey = {} as {name: string};
+    const parsedSortKey = {} as { name: string };
     // if no we are not querying against index, validate if table is using composite key
     if (!indexToQuery) {
       if (!table.usesCompositeKey()) {
@@ -978,7 +982,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
           throw new InvalidSelectInputError(select);
         }
 
-        const {ProjectionExpression, ExpressionAttributeNames} =
+        const { ProjectionExpression, ExpressionAttributeNames } =
           this.expressionBuilder.buildProjectionExpression(projection);
 
         queryInputParams = {
@@ -1018,7 +1022,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
             Put: {
               ...newItemBody,
               // import existing current item
-              Item: {...previousItemBody, ...newItemBody.Item},
+              Item: { ...previousItemBody, ...newItemBody.Item },
             },
           },
         ] as DocumentClientTypes.TransactWriteItemList;
@@ -1119,7 +1123,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
 
       // in order for update express to succeed, all listed must succeed in a transaction
       const updateTransactionItems = [
-        {Update: mainItem},
+        { Update: mainItem },
         ...uniqueAttributeInputs,
       ] as DocumentClientTypes.TransactWriteItemList;
       this.connection.logger.logTransform({

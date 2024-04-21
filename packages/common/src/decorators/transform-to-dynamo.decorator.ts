@@ -1,5 +1,5 @@
-import {Transform} from 'class-transformer';
-import {HeadType} from '../helpers/head-type';
+import { Transform } from 'class-transformer';
+import { HeadType } from '../helpers/head-type';
 
 /**
  * Simple @Transform wrapper to run when transforming items for to insert into DynamoDB

@@ -1,5 +1,5 @@
-import {AUTO_GENERATE_ATTRIBUTE_STRATEGY} from '@typedorm/common';
-import {autoGenerateValue} from '../auto-generate-attribute-value';
+import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from '@typedorm/common';
+import { autoGenerateValue } from '../auto-generate-attribute-value';
 
 jest.mock('uuid', () => ({
   v4: () => 'c0ac5395-ba7c-41bf-bbc3-09a6087bcca2',

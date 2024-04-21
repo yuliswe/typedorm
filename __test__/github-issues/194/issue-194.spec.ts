@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityManager} from '@typedorm/core';
-import {Tenant} from './tenant-entity';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from '@typedorm/core';
+import { Tenant } from './tenant-entity';
 
 let entityManager: EntityManager;
 
@@ -24,7 +24,7 @@ afterEach(() => {
 });
 
 test('creates tenant and preserves attribute types for primary key attributes', async () => {
-  dcMock.put.mockReturnValue({promise: () => ({})});
+  dcMock.put.mockReturnValue({ promise: () => ({}) });
 
   const ten = new Tenant();
   ten.id = 1;
@@ -55,7 +55,7 @@ test('creates tenant and preserves attribute types for primary key attributes', 
 });
 
 test('allows updating attributes', async () => {
-  dcMock.update.mockReturnValue({promise: () => ({})});
+  dcMock.update.mockReturnValue({ promise: () => ({}) });
 
   const updateResponse = await entityManager.update(
     Tenant,

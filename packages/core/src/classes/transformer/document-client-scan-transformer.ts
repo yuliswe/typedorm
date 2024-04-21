@@ -1,4 +1,4 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
+import { DocumentClientTypes } from '@typedorm/document-client';
 import {
   EntityTarget,
   INTERNAL_ENTITY_ATTRIBUTE,
@@ -10,11 +10,11 @@ import {
   TRANSFORM_SCAN_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import {Connection} from '../connection/connection';
-import {MERGE_STRATEGY} from '../expression/base-expression-input';
-import {Filter} from '../expression/filter';
-import {MetadataOptions} from './base-transformer';
-import {LowOrderTransformers} from './low-order-transformers';
+import { Connection } from '../connection/connection';
+import { MERGE_STRATEGY } from '../expression/base-expression-input';
+import { Filter } from '../expression/filter';
+import { MetadataOptions } from './base-transformer';
+import { LowOrderTransformers } from './low-order-transformers';
 
 interface ScanTransformerToDynamoScanOptions {
   entity?: EntityTarget<any>;
@@ -73,7 +73,7 @@ export class DocumentClientScanTransformer extends LowOrderTransformers {
 
     // transform additional options
     if (scanOptions && !isEmptyObject(scanOptions)) {
-      const {cursor, limit, where, onlyCount, select, entity} = scanOptions;
+      const { cursor, limit, where, onlyCount, select, entity } = scanOptions;
 
       transformedScanInput.Limit = limit;
       transformedScanInput.ExclusiveStartKey = cursor;
@@ -157,7 +157,7 @@ export class DocumentClientScanTransformer extends LowOrderTransformers {
           throw new InvalidSelectInputError(select);
         }
 
-        const {ProjectionExpression, ExpressionAttributeNames} =
+        const { ProjectionExpression, ExpressionAttributeNames } =
           this.expressionBuilder.buildProjectionExpression(projection);
 
         transformedScanInput = {

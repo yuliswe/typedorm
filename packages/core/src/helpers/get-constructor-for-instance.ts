@@ -1,4 +1,4 @@
-import {EntityTarget, IsEntityInstance} from '@typedorm/common';
+import { EntityTarget, IsEntityInstance } from '@typedorm/common';
 
 export function getConstructorForInstance<Entity>(
   entity: unknown

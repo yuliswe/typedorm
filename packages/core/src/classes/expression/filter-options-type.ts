@@ -20,7 +20,7 @@ type AttributeFilterOptions<Entity, PrimaryKey> =
         } & {
           [key in Extract<FilterType.RangeOperator, 'BETWEEN'>]: [
             ResolveScalarType<Entity[enKey]>,
-            ResolveScalarType<Entity[enKey]>
+            ResolveScalarType<Entity[enKey]>,
           ];
         } & {
           [key in Extract<FilterType.RangeOperator, 'IN'>]: ResolveScalarType<

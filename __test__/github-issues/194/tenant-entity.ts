@@ -1,5 +1,5 @@
-import {Attribute, Entity} from '@typedorm/common';
-import {testTable} from '../../__mocks__/test-table';
+import { Attribute, Entity } from '@typedorm/common';
+import { testTable } from '../../__mocks__/test-table';
 
 @Entity<Tenant>({
   table: testTable,

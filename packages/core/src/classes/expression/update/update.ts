@@ -1,5 +1,5 @@
-import {UpdateType} from '@typedorm/common';
-import {BaseExpressionInput} from '../base-expression-input';
+import { UpdateType } from '@typedorm/common';
+import { BaseExpressionInput } from '../base-expression-input';
 
 export class Update extends BaseExpressionInput {
   // empty prefix for base update type
@@ -32,7 +32,7 @@ export class Update extends BaseExpressionInput {
    * @override merge
    */
   merge(update: Update) {
-    const {expression, names, values, prefix} = update;
+    const { expression, names, values, prefix } = update;
 
     if (!prefix) {
       throw new Error(
@@ -52,8 +52,8 @@ export class Update extends BaseExpressionInput {
       this.appendToExpression(`${prefix} ${expression}`);
     }
 
-    this.names = {...this.names, ...names};
-    this.values = {...this.values, ...values};
+    this.names = { ...this.names, ...names };
+    this.values = { ...this.values, ...values };
 
     return this;
   }

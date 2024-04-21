@@ -7,8 +7,8 @@ import {
   AttributeMetadataType,
   EntityMetadata,
 } from '../metadata/entity-metadata';
-import {AttributesMetadataBuilder} from './attribute-metadata-builder';
-import {Connection} from './connection';
+import { AttributesMetadataBuilder } from './attribute-metadata-builder';
+import { Connection } from './connection';
 
 export class EntityMetadataBuilder {
   table: Table;
@@ -18,7 +18,14 @@ export class EntityMetadataBuilder {
   }
   build(entityClasses: Function[]): EntityMetadata[] {
     return entityClasses.map(decoratedEntityClass => {
-      const {target, table, name, primaryKey, indexes, schemaVersionAttribute} =
+      const {
+        target,
+        table,
+        name,
+        primaryKey,
+        indexes,
+        schemaVersionAttribute,
+      } =
         MetadataManager.metadataStorage.getRawEntityByTarget(
           decoratedEntityClass
         );

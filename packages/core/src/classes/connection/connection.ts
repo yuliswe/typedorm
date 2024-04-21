@@ -13,18 +13,18 @@ import {
   DocumentClientV2,
   DocumentClientV3,
 } from '@typedorm/document-client';
-import {isUsedForPrimaryKey} from '../../helpers/is-used-for-primary-key';
-import {BatchManager} from '../manager/batch-manager';
-import {EntityManager} from '../manager/entity-manager';
-import {ScanManager} from '../manager/scan-manager';
-import {TransactionManager} from '../manager/transaction-manager';
-import {AttributeMetadata} from '../metadata/attribute-metadata';
+import { isUsedForPrimaryKey } from '../../helpers/is-used-for-primary-key';
+import { BatchManager } from '../manager/batch-manager';
+import { EntityManager } from '../manager/entity-manager';
+import { ScanManager } from '../manager/scan-manager';
+import { TransactionManager } from '../manager/transaction-manager';
+import { AttributeMetadata } from '../metadata/attribute-metadata';
 import {
   DynamoEntitySchemaPrimaryKey,
   EntityMetadata,
 } from '../metadata/entity-metadata';
-import {ConnectionMetadataBuilder} from './connection-metadata-builder';
-import {ConnectionOptions} from './connection-options';
+import { ConnectionMetadataBuilder } from './connection-metadata-builder';
+import { ConnectionOptions } from './connection-options';
 
 export class Connection {
   readonly name: string;
@@ -33,7 +33,7 @@ export class Connection {
   readonly transactionManger: TransactionManager;
   readonly batchManager: BatchManager;
   readonly scanManager: ScanManager;
-  readonly defaultConfig: {queryItemsImplicitLimit: number};
+  readonly defaultConfig: { queryItemsImplicitLimit: number };
   readonly documentClient: DocumentClient;
   readonly logger: DebugLogger;
 
@@ -44,7 +44,7 @@ export class Connection {
     private options: ConnectionOptions,
     private destroySelf: (name: string) => void
   ) {
-    const {table, name = 'default'} = options;
+    const { table, name = 'default' } = options;
     if (table) {
       this.table = table;
     }
@@ -133,7 +133,7 @@ export class Connection {
     }) as Replace<
       AttributeMetadata,
       'unique',
-      {unique: DynamoEntitySchemaPrimaryKey}
+      { unique: DynamoEntitySchemaPrimaryKey }
     >[];
   }
 

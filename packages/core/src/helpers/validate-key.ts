@@ -3,8 +3,8 @@ import {
   InvalidAttributeAliasSchemaError,
   NoSuchAttributeExistsError,
 } from '@typedorm/common';
-import {regexInterpolatedWord} from './constants';
-import {isKeyOfTypeAliasSchema} from './is-key-of-type-alias-schema';
+import { regexInterpolatedWord } from './constants';
+import { isKeyOfTypeAliasSchema } from './is-key-of-type-alias-schema';
 
 /**
  *
@@ -13,7 +13,7 @@ import {isKeyOfTypeAliasSchema} from './is-key-of-type-alias-schema';
  */
 export function validateKey(
   key: EntityAliasOrString<any>,
-  dict: {[key: string]: string},
+  dict: { [key: string]: string },
   entityName?: string
 ) {
   // validate aliases
@@ -38,7 +38,7 @@ export function validateKey(
 function validateMatch(
   key: string,
   iterator: IterableIterator<RegExpMatchArray>,
-  dict: {[key: string]: string}
+  dict: { [key: string]: string }
 ) {
   const next = iterator.next();
   if (next.done) {

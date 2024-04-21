@@ -1,5 +1,5 @@
-import {Attribute, Entity, INDEX_TYPE} from '@typedorm/common';
-import {table} from './table';
+import { Attribute, Entity, INDEX_TYPE } from '@typedorm/common';
+import { table } from './table';
 
 export interface UserSparseIndexesPrimaryKey {
   id: string;

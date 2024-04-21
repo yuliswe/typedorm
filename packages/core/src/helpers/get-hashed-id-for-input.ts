@@ -1,5 +1,5 @@
-import {validate, v5} from 'uuid';
-import {deepSortObject} from './deep-sort-object';
+import { validate, v5 } from 'uuid';
+import { deepSortObject } from './deep-sort-object';
 
 /**
  * Generates unique id from SHA1 hashed data and given namespaceId

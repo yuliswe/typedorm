@@ -1,4 +1,4 @@
-import {DocumentClientTypes} from './../types/document-client-types';
+import { DocumentClientTypes } from './../types/document-client-types';
 export abstract class DocumentClient {
   abstract readonly version: number;
 

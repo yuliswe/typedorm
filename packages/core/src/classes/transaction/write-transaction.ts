@@ -1,8 +1,8 @@
-import {EntityTarget} from '@typedorm/common';
-import {Connection} from '../connection/connection';
-import {ConditionOptions} from '../expression/condition-options-type';
-import {UpdateBody} from '../expression/update-body-type';
-import {Transaction} from './transaction';
+import { EntityTarget } from '@typedorm/common';
+import { Connection } from '../connection/connection';
+import { ConditionOptions } from '../expression/condition-options-type';
+import { UpdateBody } from '../expression/update-body-type';
+import { Transaction } from './transaction';
 
 interface WriteTransactionCreateOptions<Entity> {
   /**
@@ -16,7 +16,7 @@ interface WriteTransactionCreateOptions<Entity> {
   where?: ConditionOptions<Entity>;
 }
 export interface WriteTransactionCreate<Entity> {
-  create: {item: Entity; options?: WriteTransactionCreateOptions<Entity>};
+  create: { item: Entity; options?: WriteTransactionCreateOptions<Entity> };
 }
 
 interface WriteTransactionUpdateOptions<Entity> {
@@ -33,7 +33,7 @@ interface WriteTransactionUpdateOptions<Entity> {
 export interface WriteTransactionUpdate<
   Entity,
   PrimaryKey = Partial<Entity>,
-  AdditionalProperties = Entity
+  AdditionalProperties = Entity,
 > {
   update: {
     item: EntityTarget<Entity>;
@@ -117,7 +117,7 @@ export class WriteTransaction extends Transaction<
   addUpdateItem<
     Entity,
     PrimaryKey = Partial<Entity>,
-    AdditionalProperties = Entity
+    AdditionalProperties = Entity,
   >(
     item: EntityTarget<Entity>,
     primaryKey: PrimaryKey,

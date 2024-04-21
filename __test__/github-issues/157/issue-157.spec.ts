@@ -1,11 +1,11 @@
 // assuming there is a EMAIL_INDEX loaded before anything else
 process.env.EMAIL_INDEX = 'email-index-v2';
 
-import {testTable} from './test-table';
-import {EntityManager} from '@typedorm/core';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
+import { testTable } from './test-table';
+import { EntityManager } from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import EntityData from './test-entity';
-import {DocumentClient} from 'aws-sdk/clients/dynamodb';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 let entityManager: EntityManager;
 
 const dcMock = {

@@ -1,4 +1,4 @@
-import {ObjectType} from './object-type';
+import { ObjectType } from './object-type';
 
 export type EntityTarget<Entity> = ObjectType<Entity>;
 

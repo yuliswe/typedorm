@@ -1,16 +1,16 @@
-import {UserPrimaryKey} from '../../../../__mocks__/user';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {Connection} from '../../connection/connection';
-import {WriteTransaction} from '../../transaction/write-transaction';
-import {TransactionManager} from '../transaction-manager';
-import {User} from '../../../../__mocks__/user';
+import { UserPrimaryKey } from '../../../../__mocks__/user';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Connection } from '../../connection/connection';
+import { WriteTransaction } from '../../transaction/write-transaction';
+import { TransactionManager } from '../transaction-manager';
+import { User } from '../../../../__mocks__/user';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
 } from '@typedorm/core/__mocks__/user-unique-email';
-import {Organisation} from '@typedorm/core/__mocks__/organisation';
-import {ReadTransaction} from '../../transaction/read-transaction';
-import {CONSUMED_CAPACITY_TYPE} from '@typedorm/common';
+import { Organisation } from '@typedorm/core/__mocks__/organisation';
+import { ReadTransaction } from '../../transaction/read-transaction';
+import { CONSUMED_CAPACITY_TYPE } from '@typedorm/common';
 
 let manager: TransactionManager;
 const dcMock = {
@@ -390,7 +390,7 @@ test('performs write transactions when with mixed update actions ', async () => 
     UserPrimaryKey
   >(
     User,
-    {id: '1'},
+    { id: '1' },
     {
       addresses: {
         REMOVE: {

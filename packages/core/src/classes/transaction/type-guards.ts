@@ -1,10 +1,10 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
+import { DocumentClientTypes } from '@typedorm/document-client';
 import {
   WriteTransactionCreate,
   WriteTransactionDelete,
   WriteTransactionUpdate,
 } from './write-transaction';
-import {ReadTransactionGet} from './read-transaction';
+import { ReadTransactionGet } from './read-transaction';
 
 export function isTransactionAddCreateItem<Entity>(
   item: any

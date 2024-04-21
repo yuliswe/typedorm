@@ -1,4 +1,4 @@
-import {buildRegexForKeyMatch} from '../build-regex-for-key-match';
+import { buildRegexForKeyMatch } from '../build-regex-for-key-match';
 
 test('builds regex for given key schema', () => {
   const result = buildRegexForKeyMatch('USER#{{id}}@NAME#{{name}}', [

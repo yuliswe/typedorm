@@ -4,7 +4,7 @@ import {
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
 } from '@typedorm/common';
-import {testTable} from '../../__mocks__/test-table';
+import { testTable } from '../../__mocks__/test-table';
 
 @Entity({
   name: 'User',

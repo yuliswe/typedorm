@@ -9,22 +9,22 @@ import {
   STATS_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import {getDynamoQueryItemsLimit} from '../../helpers/get-dynamo-query-items-limit';
-import {Connection} from '../connection/connection';
-import {DocumentClientRequestTransformer} from '../transformer/document-client-request-transformer';
-import {EntityTransformer} from '../transformer/entity-transformer';
-import {getConstructorForInstance} from '../../helpers/get-constructor-for-instance';
-import {isUsedForPrimaryKey} from '../../helpers/is-used-for-primary-key';
-import {isWriteTransactionItemList} from '../transaction/type-guards';
-import {isLazyTransactionWriteItemListLoader} from '../transformer/is-lazy-transaction-write-item-list-loader';
-import {FilterOptions} from '../expression/filter-options-type';
-import {ConditionOptions} from '../expression/condition-options-type';
-import {MetadataOptions} from '../transformer/base-transformer';
-import {getUniqueRequestId} from '../../helpers/get-unique-request-id';
-import {ProjectionKeys} from '../expression/projection-keys-options-type';
-import {KeyConditionOptions} from '../expression/key-condition-options-type';
-import {UpdateBody} from '../expression/update-body-type';
-import {DocumentClientTypes} from '@typedorm/document-client';
+import { getDynamoQueryItemsLimit } from '../../helpers/get-dynamo-query-items-limit';
+import { Connection } from '../connection/connection';
+import { DocumentClientRequestTransformer } from '../transformer/document-client-request-transformer';
+import { EntityTransformer } from '../transformer/entity-transformer';
+import { getConstructorForInstance } from '../../helpers/get-constructor-for-instance';
+import { isUsedForPrimaryKey } from '../../helpers/is-used-for-primary-key';
+import { isWriteTransactionItemList } from '../transaction/type-guards';
+import { isLazyTransactionWriteItemListLoader } from '../transformer/is-lazy-transaction-write-item-list-loader';
+import { FilterOptions } from '../expression/filter-options-type';
+import { ConditionOptions } from '../expression/condition-options-type';
+import { MetadataOptions } from '../transformer/base-transformer';
+import { getUniqueRequestId } from '../../helpers/get-unique-request-id';
+import { ProjectionKeys } from '../expression/projection-keys-options-type';
+import { KeyConditionOptions } from '../expression/key-condition-options-type';
+import { UpdateBody } from '../expression/update-body-type';
+import { DocumentClientTypes } from '@typedorm/document-client';
 
 export interface EntityManagerCreateOptions<Entity> {
   /**
@@ -216,9 +216,8 @@ export class EntityManager {
     const entityClass = getConstructorForInstance(entity);
 
     if (!isWriteTransactionItemList(dynamoPutItemInput)) {
-      const response = await this.connection.documentClient.put(
-        dynamoPutItemInput
-      );
+      const response =
+        await this.connection.documentClient.put(dynamoPutItemInput);
 
       // log stats
       if (response?.ConsumedCapacity) {
@@ -337,7 +336,7 @@ export class EntityManager {
       attr => attr.name
     );
 
-    const {primaryKeyAttributes, uniqueAttributes} = Object.entries(
+    const { primaryKeyAttributes, uniqueAttributes } = Object.entries(
       attributes as object
     ).reduce(
       (acc, [attrKey, value]) => {
@@ -373,7 +372,7 @@ export class EntityManager {
       return !!(await this.findOne(
         entityClass,
         attributes,
-        {consistentRead: options?.consistentRead},
+        { consistentRead: options?.consistentRead },
         {
           requestId: options?.requestId ?? metadataOptions?.requestId,
           returnConsumedCapacity:
@@ -405,11 +404,11 @@ export class EntityManager {
       const parsedPrimaryKey = this._entityTransformer.getParsedPrimaryKey(
         metadata.table,
         uniqueAttributePrimaryKey,
-        {[attrName]: attrValue}
+        { [attrName]: attrValue }
       );
 
       const response = await this.connection.documentClient.get({
-        Key: {...parsedPrimaryKey},
+        Key: { ...parsedPrimaryKey },
         TableName: metadata.table.name,
         ConsistentRead: options?.consistentRead,
         ReturnConsumedCapacity:
@@ -441,7 +440,7 @@ export class EntityManager {
   async update<
     Entity,
     PrimaryKey = Partial<Entity>,
-    AdditionalProperties = Entity
+    AdditionalProperties = Entity,
   >(
     entityClass: EntityTarget<Entity>,
     primaryKeyAttributes: PrimaryKey,
@@ -460,9 +459,8 @@ export class EntityManager {
     });
 
     if (!isLazyTransactionWriteItemListLoader(dynamoUpdateItem)) {
-      const response = await this.connection.documentClient.update(
-        dynamoUpdateItem
-      );
+      const response =
+        await this.connection.documentClient.update(dynamoUpdateItem);
       // stats
       if (response.ConsumedCapacity) {
         this.connection.logger.logStats({
@@ -528,9 +526,8 @@ export class EntityManager {
     });
 
     if (!isLazyTransactionWriteItemListLoader(dynamoDeleteItem)) {
-      const response = await this.connection.documentClient.delete(
-        dynamoDeleteItem
-      );
+      const response =
+        await this.connection.documentClient.delete(dynamoDeleteItem);
       // stats
       if (response.ConsumedCapacity) {
         this.connection.logger.logStats({
@@ -623,7 +620,7 @@ export class EntityManager {
    */
   async count<
     Entity,
-    PartitionKey = Partial<EntityAttributes<Entity>> | string
+    PartitionKey = Partial<EntityAttributes<Entity>> | string,
   >(
     entityClass: EntityTarget<Entity>,
     partitionKey: PartitionKey,
@@ -638,7 +635,7 @@ export class EntityManager {
     >(
       entityClass,
       partitionKey,
-      {...queryOptions, onlyCount: true, select: undefined}, // select projection and count can not be used together
+      { ...queryOptions, onlyCount: true, select: undefined }, // select projection and count can not be used together
       {
         requestId,
         returnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
@@ -705,7 +702,7 @@ export class EntityManager {
         metadataOptions,
       });
     }
-    return {items: itemsFetched, cursor: LastEvaluatedKey};
+    return { items: itemsFetched, cursor: LastEvaluatedKey };
   }
 
   /**
@@ -723,7 +720,7 @@ export class EntityManager {
     currentCount?: number;
     metadataOptions?: MetadataOptions;
   }): Promise<number> {
-    const {LastEvaluatedKey, Count, ConsumedCapacity} =
+    const { LastEvaluatedKey, Count, ConsumedCapacity } =
       await this.connection.documentClient.query({
         ...queryInput,
         ExclusiveStartKey: cursor,

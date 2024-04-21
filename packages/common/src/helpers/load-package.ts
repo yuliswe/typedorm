@@ -1,4 +1,4 @@
-import {MissingRequiredDependencyError} from './../error/missing-required-dep';
+import { MissingRequiredDependencyError } from './../error/missing-required-dep';
 export function loadPackage(packageName: string) {
   try {
     return require(packageName);

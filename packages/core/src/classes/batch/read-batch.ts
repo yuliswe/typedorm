@@ -1,5 +1,5 @@
-import {EntityTarget} from '@typedorm/common';
-import {Batch} from './batch';
+import { EntityTarget } from '@typedorm/common';
+import { Batch } from './batch';
 
 export interface ReadBatchItem<Entity, PrimaryKey> {
   item: EntityTarget<Entity>;

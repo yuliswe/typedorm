@@ -1,6 +1,6 @@
-import {TransactionCancelledException} from './../../exceptions/transaction-cancelled-exception';
-import {DynamoDB, Response} from 'aws-sdk';
-import {DocumentClientV2} from '../document-client-v2';
+import { TransactionCancelledException } from './../../exceptions/transaction-cancelled-exception';
+import { DynamoDB, Response } from 'aws-sdk';
+import { DocumentClientV2 } from '../document-client-v2';
 
 let dc: DocumentClientV2;
 
@@ -54,7 +54,7 @@ test('correctly aggregates cancellation reasons', async () => {
       cb(response);
     }),
     send: jest.fn().mockImplementation(cb => {
-      cb({code: 500});
+      cb({ code: 500 });
     }),
   } as any;
 

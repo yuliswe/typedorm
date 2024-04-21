@@ -1,21 +1,25 @@
-import {LazyTransactionWriteItemListLoader} from './../is-lazy-transaction-write-item-list-loader';
+import { LazyTransactionWriteItemListLoader } from './../is-lazy-transaction-write-item-list-loader';
 import {
   Attribute,
   Entity,
   InvalidUniqueAttributeUpdateError,
   QUERY_ORDER,
 } from '@typedorm/common';
-import {Customer} from '../../../../__mocks__/inherited-customer';
-import {table} from '../../../../__mocks__/table';
-import {User, UserGSI1} from '../../../../__mocks__/user';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {UserPrimaryKey} from '../../../../__mocks__/user';
-import {DocumentClientRequestTransformer} from '../document-client-request-transformer';
+import { Customer } from '../../../../__mocks__/inherited-customer';
+import { table } from '../../../../__mocks__/table';
+import { User, UserGSI1 } from '../../../../__mocks__/user';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { UserPrimaryKey } from '../../../../__mocks__/user';
+import { DocumentClientRequestTransformer } from '../document-client-request-transformer';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
 } from '../../../../__mocks__/user-unique-email';
-import {CATEGORY, Photo, PhotoPrimaryKey} from '@typedorm/core/__mocks__/photo';
+import {
+  CATEGORY,
+  Photo,
+  PhotoPrimaryKey,
+} from '@typedorm/core/__mocks__/photo';
 // eslint-disable-next-line node/no-extraneous-import
 import moment from 'moment';
 jest.useFakeTimers().setSystemTime(1622530750000);
@@ -211,7 +215,7 @@ test('transforms put item request with unique attributes', () => {
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'USER#1',
           SK: 'USER#1',
@@ -226,7 +230,7 @@ test('transforms put item request with unique attributes', () => {
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
           SK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
@@ -277,7 +281,7 @@ test('transforms put item request with unique attributes and condition options',
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
           SK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
@@ -438,7 +442,7 @@ test('transforms put item request consisting unique attributes with provided pri
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'USER#1',
           SK: 'USER#1',
@@ -453,7 +457,7 @@ test('transforms put item request consisting unique attributes with provided pri
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'CUSTOM#user@example.com',
           SK: 'CUSTOM#user@example.com',
@@ -618,7 +622,7 @@ test('transforms update item record with unique attributes', () => {
           ':UE_email': 'new@email.com',
           ':UE_GSI1SK': 'USER#new name',
         },
-        Key: {PK: 'USER#1', SK: 'USER#1'},
+        Key: { PK: 'USER#1', SK: 'USER#1' },
         TableName: 'test-table',
         UpdateExpression:
           'SET #UE_name = :UE_name, #UE_email = :UE_email, #UE_GSI1SK = :UE_GSI1SK',
@@ -628,7 +632,7 @@ test('transforms update item record with unique attributes', () => {
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#new@email.com',
           SK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#new@email.com',
@@ -798,7 +802,7 @@ test('transforms update item record with unique attributes and condition options
           ':UE_GSI1SK': 'USER#new name',
           ':CE_user_name': 'test user',
         },
-        Key: {PK: 'USER#1', SK: 'USER#1'},
+        Key: { PK: 'USER#1', SK: 'USER#1' },
         TableName: 'test-table',
         UpdateExpression:
           'SET #UE_name = :UE_name, #UE_email = :UE_email, #UE_GSI1SK = :UE_GSI1SK',
@@ -809,7 +813,7 @@ test('transforms update item record with unique attributes and condition options
       Put: {
         ConditionExpression:
           '(attribute_not_exists(#CE_PK)) AND (attribute_not_exists(#CE_SK))',
-        ExpressionAttributeNames: {'#CE_PK': 'PK', '#CE_SK': 'SK'},
+        ExpressionAttributeNames: { '#CE_PK': 'PK', '#CE_SK': 'SK' },
         Item: {
           PK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#new@email.com',
           SK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#new@email.com',

@@ -1,4 +1,4 @@
-import {MetadataStorage} from './metadata-storage';
+import { MetadataStorage } from './metadata-storage';
 const metadataKey = Symbol.for('DynamoDBMetadataStorageKey');
 
 export class MetadataManager {

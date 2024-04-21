@@ -1,7 +1,7 @@
-import {DynamoDBClient} from '@aws-sdk/client-dynamodb';
-import {DEFAULT_TRANSLATE_CONFIG_V3} from '../../constants/translate-config';
-import {DocumentClient} from '../base-document-client';
-import {DocumentClientV3} from '../document-client-v3';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DEFAULT_TRANSLATE_CONFIG_V3 } from '../../constants/translate-config';
+import { DocumentClient } from '../base-document-client';
+import { DocumentClientV3 } from '../document-client-v3';
 
 let dc: DocumentClient;
 

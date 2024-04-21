@@ -1,23 +1,26 @@
-import {DocumentClientTypes} from '@typedorm/document-client';
+import { DocumentClientTypes } from '@typedorm/document-client';
 import {
   BATCH_READ_ITEMS_LIMIT,
   BATCH_WRITE_ITEMS_LIMIT,
   InvalidBatchWriteItemError,
   TRANSFORM_BATCH_TYPE,
 } from '@typedorm/common';
-import {v4} from 'uuid';
-import {getHashedIdForInput} from '../../helpers/get-hashed-id-for-input';
-import {ReadBatch, ReadBatchItem} from '../batch/read-batch';
-import {isBatchAddCreateItem, isBatchAddDeleteItem} from '../batch/type-guards';
-import {WriteBatchItem, WriteBatch} from '../batch/write-batch';
-import {Connection} from '../connection/connection';
-import {isWriteTransactionItemList} from '../transaction/type-guards';
-import {MetadataOptions} from './base-transformer';
+import { v4 } from 'uuid';
+import { getHashedIdForInput } from '../../helpers/get-hashed-id-for-input';
+import { ReadBatch, ReadBatchItem } from '../batch/read-batch';
+import {
+  isBatchAddCreateItem,
+  isBatchAddDeleteItem,
+} from '../batch/type-guards';
+import { WriteBatchItem, WriteBatch } from '../batch/write-batch';
+import { Connection } from '../connection/connection';
+import { isWriteTransactionItemList } from '../transaction/type-guards';
+import { MetadataOptions } from './base-transformer';
 import {
   isLazyTransactionWriteItemListLoader,
   LazyTransactionWriteItemListLoader,
 } from './is-lazy-transaction-write-item-list-loader';
-import {LowOrderTransformers} from './low-order-transformers';
+import { LowOrderTransformers } from './low-order-transformers';
 
 export type WriteRequestWithMeta = {
   tableName: string;
@@ -55,7 +58,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
       itemTransformHashMap: Map<string, WriteBatchItem<any, any>>;
     };
   } {
-    const {items} = writeBatch;
+    const { items } = writeBatch;
     this.connection.logger.logTransformBatch({
       requestId: metadataOptions?.requestId,
       operation: TRANSFORM_BATCH_TYPE.BATCH_WRITE,
@@ -105,7 +108,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
       itemTransformHashMap: Map<string, ReadBatchItem<any, any>>;
     };
   } {
-    const {items} = readBatch;
+    const { items } = readBatch;
 
     this.connection.logger.logTransformBatch({
       requestId: metadataOptions?.requestId,
@@ -114,7 +117,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
       body: items,
     });
 
-    const {metadata, batchReadRequestItems} =
+    const { metadata, batchReadRequestItems } =
       this.transformBatchReadItems(items);
 
     // organize all requests in "tableName - requestItem" format
@@ -333,7 +336,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
           // is delete
         } else if (isBatchAddDeleteItem(batchItem)) {
           const {
-            delete: {item, primaryKey},
+            delete: { item, primaryKey },
           } = batchItem;
           // transform delete item
           const itemToRemove = this.toDynamoDeleteItem(
@@ -391,7 +394,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
     const itemTransformHashMap = new Map<string, ReadBatchItem<any, any>>();
     return batchItems.reduce(
       (acc, batchItem) => {
-        const {item, primaryKey} = batchItem;
+        const { item, primaryKey } = batchItem;
 
         // TODO: add read options support
         const itemToGet = this.toDynamoGetItem(

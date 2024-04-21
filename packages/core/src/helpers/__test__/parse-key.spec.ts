@@ -1,5 +1,5 @@
-import {parseKey} from '../parse-key';
-import {SparseIndexParseError} from '@typedorm/common';
+import { parseKey } from '../parse-key';
+import { SparseIndexParseError } from '@typedorm/common';
 
 describe('parseKey()', () => {
   it('should parse key and replace interpolation values with actual value', () => {
@@ -25,7 +25,7 @@ describe('parseKey()', () => {
         {
           id: 1111,
         },
-        {isSparseIndex: true}
+        { isSparseIndex: true }
       );
 
     expect(parsed).toThrowError(SparseIndexParseError);

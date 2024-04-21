@@ -1,4 +1,4 @@
-import {UserAutoGenerateAttributes} from '../../../../__mocks__/user-auto-generate-attributes';
+import { UserAutoGenerateAttributes } from '../../../../__mocks__/user-auto-generate-attributes';
 import {
   Attribute,
   AutoGenerateAttribute,
@@ -7,24 +7,24 @@ import {
   INDEX_TYPE,
   Table,
 } from '@typedorm/common';
-import {Organisation} from '../../../../__mocks__/organisation';
-import {User} from '../../../../__mocks__/user';
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityTransformer} from '../entity-transformer';
-import {UserSparseIndexes} from '../../../../__mocks__/user-sparse-indexes';
-import {table} from '@typedorm/core/__mocks__/table';
-import {UserAttrAlias} from '@typedorm/core/__mocks__/user-with-attribute-alias';
-import {CATEGORY, Photo} from '@typedorm/core/__mocks__/photo';
+import { Organisation } from '../../../../__mocks__/organisation';
+import { User } from '../../../../__mocks__/user';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityTransformer } from '../entity-transformer';
+import { UserSparseIndexes } from '../../../../__mocks__/user-sparse-indexes';
+import { table } from '@typedorm/core/__mocks__/table';
+import { UserAttrAlias } from '@typedorm/core/__mocks__/user-with-attribute-alias';
+import { CATEGORY, Photo } from '@typedorm/core/__mocks__/photo';
 // Moment is only being used here to display the usage of @transform utility
 // eslint-disable-next-line node/no-extraneous-import
 import moment from 'moment';
-import {UserCustomConstructor} from '@typedorm/core/__mocks__/user-custom-constructor';
+import { UserCustomConstructor } from '@typedorm/core/__mocks__/user-custom-constructor';
 
 jest.mock('uuid', () => ({
   v4: () => 'c0ac5395-ba7c-41bf-bbc3-09a6087bcca2',
 }));
 jest.useFakeTimers().setSystemTime(1622530750000);
-import {UserWithDefaultValues} from '@typedorm/core/__mocks__/user-default-value';
+import { UserWithDefaultValues } from '@typedorm/core/__mocks__/user-default-value';
 
 let transformer: EntityTransformer;
 beforeEach(() => {
@@ -444,7 +444,7 @@ test('returns all affected indexes for static attributes', () => {
     {
       name: 'new updated name',
     },
-    {name: 'static'}
+    { name: 'static' }
   );
   expect(affectedIndexes).toEqual({
     GSI1SK: 'USER#new updated name',
@@ -459,7 +459,7 @@ test('returns all affected indexes for dynamic update body', () => {
         DECREMENT_BY: 2,
       },
     },
-    {age: 'dynamic'}
+    { age: 'dynamic' }
   );
   expect(affectedIndexes).toEqual({});
 });
@@ -471,7 +471,7 @@ test('returns all affected indexes for alias attributes', () => {
       age: 10,
       status: 'inactive',
     },
-    {age: 'static', status: 'static'}
+    { age: 'static', status: 'static' }
   );
   expect(affectedIndexes).toEqual({
     LSI1SK: 10, // <-- aliased indexes are correctly persisting attribute types

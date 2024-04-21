@@ -7,13 +7,13 @@ import {
   TransformFromDynamo,
   TransformToDynamo,
 } from '@typedorm/common';
-import {table} from './table';
+import { table } from './table';
 
 // Moment is only being used here to display the usage of @transform utility
 // eslint-disable-next-line node/no-extraneous-import
 import moment from 'moment';
 // eslint-disable-next-line node/no-extraneous-import
-import {Moment} from 'moment';
+import { Moment } from 'moment';
 
 export enum CATEGORY {
   PETS = 'PETS',
@@ -47,7 +47,7 @@ export class Photo implements PhotoPrimaryKey {
   id: number;
 
   @Attribute()
-  @TransformToDynamo(({value}) => {
+  @TransformToDynamo(({ value }) => {
     if (value === CATEGORY.KIDS) {
       return 'kids-new';
     } else {
@@ -62,10 +62,10 @@ export class Photo implements PhotoPrimaryKey {
   @Attribute({
     default: () => new Date().toISOString(),
   })
-  @TransformToDynamo(({value}: {value: Date}) =>
+  @TransformToDynamo(({ value }: { value: Date }) =>
     moment(value, moment.ISO_8601).utc().format('yyyy-MM-DD')
   )
-  @TransformFromDynamo(({value}) => moment(value, 'yyyy-MM-DD'))
+  @TransformFromDynamo(({ value }) => moment(value, 'yyyy-MM-DD'))
   createdAt: Moment;
 
   constructor(category: CATEGORY, name: string) {
@@ -77,7 +77,7 @@ export class Photo implements PhotoPrimaryKey {
     strategy: AUTO_GENERATE_ATTRIBUTE_STRATEGY.EPOCH_DATE,
     autoUpdate: true,
   })
-  @TransformToDynamo(({value}) => {
+  @TransformToDynamo(({ value }) => {
     return value.toString();
   })
   updatedAt: Date;

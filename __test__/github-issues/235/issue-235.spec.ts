@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-import {testTable} from './test-table';
-import {ProductEntity} from './specific-event-entity';
+import { testTable } from './test-table';
+import { ProductEntity } from './specific-event-entity';
 
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityManager} from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from '@typedorm/core';
 
 jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
 

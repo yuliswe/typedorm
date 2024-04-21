@@ -1,6 +1,6 @@
-import {MetadataManager} from '../../metadata/metadata-manager';
-import {Attribute} from '../attribute.decorator';
-import {Entity} from '../entity.decorator';
+import { MetadataManager } from '../../metadata/metadata-manager';
+import { Attribute } from '../attribute.decorator';
+import { Entity } from '../entity.decorator';
 
 beforeEach(() => {
   MetadataManager.createMetadataStorage();

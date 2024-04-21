@@ -5,11 +5,11 @@ import {
   Entity,
   Table,
 } from '@typedorm/common';
-import {User} from '../../../../__mocks__/user';
-import {UserAutoGenerateAttributes} from '../../../../__mocks__/user-auto-generate-attributes';
-import {AttributesMetadataBuilder} from '../attribute-metadata-builder';
-import {table} from './../../../../__mocks__/table';
-import {UserUniqueEmail} from './../../../../__mocks__/user-unique-email';
+import { User } from '../../../../__mocks__/user';
+import { UserAutoGenerateAttributes } from '../../../../__mocks__/user-auto-generate-attributes';
+import { AttributesMetadataBuilder } from '../attribute-metadata-builder';
+import { table } from './../../../../__mocks__/table';
+import { UserUniqueEmail } from './../../../../__mocks__/user-unique-email';
 
 jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
 

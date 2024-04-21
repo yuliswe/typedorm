@@ -1,5 +1,5 @@
-import {EntityAliasOrString, SparseIndexParseError} from '@typedorm/common';
-import {isKeyOfTypeAliasSchema} from './is-key-of-type-alias-schema';
+import { EntityAliasOrString, SparseIndexParseError } from '@typedorm/common';
+import { isKeyOfTypeAliasSchema } from './is-key-of-type-alias-schema';
 
 const regexExp = {
   interpolation: /\{{.+?\}}/g,
@@ -9,7 +9,7 @@ const regexExp = {
 export function parseKey<Entity>(
   key: EntityAliasOrString<any>,
   dict: Entity,
-  {isSparseIndex}: {isSparseIndex: boolean} = {isSparseIndex: false}
+  { isSparseIndex }: { isSparseIndex: boolean } = { isSparseIndex: false }
 ) {
   if (isKeyOfTypeAliasSchema(key)) {
     const aliasAttr = key.alias as string;

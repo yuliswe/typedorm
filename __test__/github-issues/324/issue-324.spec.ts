@@ -1,6 +1,6 @@
-import {createTestConnection, resetTestConnection} from '@typedorm/testing';
-import {EntityManager} from '@typedorm/core';
-import {TestEntity} from './test-entity';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from '@typedorm/core';
+import { TestEntity } from './test-entity';
 
 let entityManager: EntityManager;
 
@@ -20,7 +20,7 @@ afterEach(() => {
 });
 
 test('allows querying items with only partition key', async () => {
-  dcMock.query.mockReturnValue({promise: () => ({})});
+  dcMock.query.mockReturnValue({ promise: () => ({}) });
 
   await entityManager.find(TestEntity, {
     pk: 'onlyPK',
@@ -39,7 +39,7 @@ test('allows querying items with only partition key', async () => {
 });
 
 test('allows querying items with PK and SK', async () => {
-  dcMock.query.mockReturnValue({promise: () => ({})});
+  dcMock.query.mockReturnValue({ promise: () => ({}) });
 
   await entityManager.find(
     TestEntity,

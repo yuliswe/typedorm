@@ -1,5 +1,5 @@
-import {ScalarType, UpdateType} from '@typedorm/common';
-import {Update} from './update';
+import { ScalarType, UpdateType } from '@typedorm/common';
+import { Update } from './update';
 
 export class DeleteUpdate extends Update {
   protected prefix: UpdateType.Action = 'DELETE';

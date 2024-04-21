@@ -4,8 +4,8 @@ import {
   IsCompositePrimaryKey,
   EntityAliasOrString,
 } from '@typedorm/common';
-import {getInterpolatedKeys} from './get-interpolated-keys';
-import {validateKey} from './validate-key';
+import { getInterpolatedKeys } from './get-interpolated-keys';
+import { validateKey } from './validate-key';
 
 export function buildPrimaryKeySchema({
   table,
@@ -14,11 +14,11 @@ export function buildPrimaryKeySchema({
 }: {
   table: Table;
   primaryKey: PrimaryKey;
-  attributes: {[key: string]: string};
+  attributes: { [key: string]: string };
 }): {
-  attributes: {[key: string]: EntityAliasOrString<any>};
+  attributes: { [key: string]: EntityAliasOrString<any> };
   metadata: {
-    _interpolations: {[key: string]: any};
+    _interpolations: { [key: string]: any };
   };
 } {
   const partitionKeyInterpolations = getInterpolatedKeys(

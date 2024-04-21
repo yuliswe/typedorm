@@ -1,23 +1,20 @@
 # [1.16.0-beta.3](https://github.com/typedorm/typedorm/compare/v1.16.0-beta.2...v1.16.0-beta.3) (2023-09-19)
 
-
 ### Features
 
-* **core:** support retrieval by connection name in getConnection ([#359](https://github.com/typedorm/typedorm/issues/359)) ([406b1d7](https://github.com/typedorm/typedorm/commit/406b1d7d350bb3f5ccd70ca789d168861815d5b5))
+- **core:** support retrieval by connection name in getConnection ([#359](https://github.com/typedorm/typedorm/issues/359)) ([406b1d7](https://github.com/typedorm/typedorm/commit/406b1d7d350bb3f5ccd70ca789d168861815d5b5))
 
 # [1.16.0-beta.2](https://github.com/typedorm/typedorm/compare/v1.16.0-beta.1...v1.16.0-beta.2) (2023-03-26)
 
-
 ### Features
 
-* **document-client:** expose translateConfig options to DocumentClientV3 ([03f4343](https://github.com/typedorm/typedorm/commit/03f4343cf53abdee2d32b60563d13411f2b296ea))
+- **document-client:** expose translateConfig options to DocumentClientV3 ([03f4343](https://github.com/typedorm/typedorm/commit/03f4343cf53abdee2d32b60563d13411f2b296ea))
 
 # [1.16.0-beta.1](https://github.com/typedorm/typedorm/compare/v1.15.4-beta.1...v1.16.0-beta.1) (2023-03-08)
 
-
 ### Features
 
-* add schemaVersionAttribute option to enable schema versioning ([7856e29](https://github.com/typedorm/typedorm/commit/7856e2937f5d8fcb826173379c2dad2d1d553f88))
+- add schemaVersionAttribute option to enable schema versioning ([7856e29](https://github.com/typedorm/typedorm/commit/7856e2937f5d8fcb826173379c2dad2d1d553f88))
 
 ## [1.15.4-beta.1](https://github.com/typedorm/typedorm/compare/v1.15.3...v1.15.4-beta.1) (2023-02-26)
 

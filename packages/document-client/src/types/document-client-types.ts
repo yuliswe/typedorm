@@ -1,4 +1,4 @@
-import AWS, {DynamoDB} from 'aws-sdk';
+import AWS, { DynamoDB } from 'aws-sdk';
 import DynamoDBClientV3 from '@aws-sdk/client-dynamodb';
 
 /* eslint-disable @typescript-eslint/no-namespace */
@@ -11,7 +11,7 @@ export namespace DocumentClientTypes {
     [key: string]: any;
   };
 
-  export type AttributeMap = {[key: string]: any};
+  export type AttributeMap = { [key: string]: any };
 
   export type ItemList = AttributeMap[];
 
@@ -128,7 +128,7 @@ export namespace DocumentClientTypes {
 
   export type BatchGetResponseMap =
     | DynamoDB.DocumentClient.BatchGetResponseMap
-    | {[key: string]: ItemList};
+    | { [key: string]: ItemList };
 
   /**
    * TransactWrite

@@ -9,7 +9,7 @@ export class InternalAttributeMetadata {
   readonly name: string;
   readonly type: string;
 
-  constructor({name, type, value}: InternalAttributeMetadataOptions) {
+  constructor({ name, type, value }: InternalAttributeMetadataOptions) {
     this.name = name;
     this.type = type;
     this.value = value;

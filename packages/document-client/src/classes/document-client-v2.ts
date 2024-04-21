@@ -1,8 +1,8 @@
-import {AWSError, DynamoDB, Request} from 'aws-sdk';
-import {TransactionCancelledException} from '../exceptions';
-import {DocumentClient} from './base-document-client';
+import { AWSError, DynamoDB, Request } from 'aws-sdk';
+import { TransactionCancelledException } from '../exceptions';
+import { DocumentClient } from './base-document-client';
 export class DocumentClientV2<
-  DocumentClientType extends DynamoDB.DocumentClient = DynamoDB.DocumentClient
+  DocumentClientType extends DynamoDB.DocumentClient = DynamoDB.DocumentClient,
 > extends DocumentClient {
   readonly documentClient: DocumentClientType;
   readonly version = 2;
