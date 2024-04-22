@@ -33,53 +33,22 @@
     "emitDecoratorMetadata": true,
     "allowJs": true,
     "baseUrl": ".",
-    "outDir": "build",
+    "outDir": "./dist",
+    "sourceRoot": "./packages",
     "paths": {
-      "@typedorm/*": [
-        "packages/*",
-        "bazel-out/x64_windows-fastbuild/bin/packages/*",
-        "bazel-out/x64_windows-dbg/bin/packages/*",
-        "bazel-out/k8-fastbuild/bin/packages/*",
-        "bazel-out/k8-dbg/bin/packages/*",
-        "bazel-out/host/bin/packages/*",
-        "bazel-out/darwin-fastbuild/bin/packages/*",
-        "bazel-out/darwin_arm64-fastbuild/bin/packages/*",
-        "bazel-out/darwin-dbg/bin/packages/*",
-        "bazel-out/x64_windows-fastbuild/bin/packages/*/cjs",
-        "bazel-out/x64_windows-dbg/bin/packages/*/cjs",
-        "bazel-out/k8-fastbuild/bin/packages/*/cjs",
-        "bazel-out/k8-dbg/bin/packages/*/cjs",
-        "bazel-out/host/bin/packages/*/cjs",
-        "bazel-out/darwin-fastbuild/bin/packages/*/cjs",
-        "bazel-out/darwin_arm64-fastbuild/bin/packages/*/cjs",
-        "bazel-out/darwin-dbg/bin/packages/*/cjs",
-        "bazel-out/x64_windows-fastbuild/bin/packages/*/esm",
-        "bazel-out/x64_windows-dbg/bin/packages/*/esm",
-        "bazel-out/k8-fastbuild/bin/packages/*/esm",
-        "bazel-out/k8-dbg/bin/packages/*/esm",
-        "bazel-out/host/bin/packages/*/esm",
-        "bazel-out/darwin-fastbuild/bin/packages/*/esm",
-        "bazel-out/darwin_arm64-fastbuild/bin/packages/*/esm",
-        "bazel-out/darwin-dbg/bin/packages/*/esm"
-      ]
+      "@typedorm/common": ["packages/common"],
+      "@typedorm/common/*": ["packages/common/src/*", "packages/common/*"],
+      "@typedorm/core/*": ["packages/core/src/*", "packages/core/*"],
+      "@typedorm/testing/*": ["packages/testing/src/*"],
+      "@typedorm/*": ["packages/*"]
     },
     // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
     "plugins": [
       { "transform": "typescript-transform-paths" },
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ],
-    "rootDirs": [
-      ".",
-      "bazel-out/x64_windows-fastbuild/bin/*",
-      "bazel-out/x64_windows-dbg/bin/*",
-      "bazel-out/k8-fastbuild/bin/*",
-      "bazel-out/k8-dbg/bin/*",
-      "bazel-out/host/bin/*",
-      "bazel-out/darwin-fastbuild/bin/*",
-      "bazel-out/darwin_arm64-fastbuild/bin/*",
-      "bazel-out/darwin-dbg/bin/*"
-    ]
+    "rootDirs": ["."]
   },
   "exclude": ["dist", "node_modules", "tools", "build"],
-  "include": ["packages/**/*", "bazel-out/**/*"]
+  "include": ["packages/**/*"]
 }
