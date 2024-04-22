@@ -1,23 +1,23 @@
+import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
 import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
 import { Container } from 'packages/core/src/classes/container';
-import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
 
 // options
 export * from './src/classes/connection/connection-options';
 
 // models
+export * from './src/classes/batch/read-batch';
+export * from './src/classes/batch/write-batch';
 export * from './src/classes/expression/condition';
 export * from './src/classes/expression/key-condition';
-export * from './src/classes/transaction/write-transaction';
 export * from './src/classes/transaction/read-transaction';
-export * from './src/classes/batch/write-batch';
-export * from './src/classes/batch/read-batch';
+export * from './src/classes/transaction/write-transaction';
 
 // managers
-export * from './src/classes/manager/entity-manager';
 export * from './src/classes/manager/batch-manager';
-export * from './src/classes/manager/transaction-manager';
+export * from './src/classes/manager/entity-manager';
 export * from './src/classes/manager/scan-manager';
+export * from './src/classes/manager/transaction-manager';
 
 // classes
 export { Connection } from './src/classes/connection/connection';

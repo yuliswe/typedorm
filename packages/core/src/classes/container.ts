@@ -7,7 +7,10 @@ export class Container {
     this.modules = new Map<Function, any>();
   }
 
-  static get<T>(anyClass: new (...args: any) => T, ...args: Parameters<T>): T {
+  static get<T>(
+    anyClass: new (...args: any) => T,
+    ...args: Parameters<T>[]
+  ): T {
     if (!this._instance) {
       this._instance = new Container();
     }
