@@ -1,25 +1,24 @@
-import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 import {
   Attribute,
   Entity,
   InvalidUniqueAttributeUpdateError,
   QUERY_ORDER,
 } from '@typedorm/common';
-import { Customer } from 'packages/core/__mocks__/inherited-customer';
-import { table } from 'packages/core/__mocks__/table';
-import { User, UserGSI1 } from 'packages/core/__mocks__/user';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { UserPrimaryKey } from 'packages/core/__mocks__/user';
-import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
-import {
-  UserUniqueEmail,
-  UserUniqueEmailPrimaryKey,
-} from 'packages/core/__mocks__/user-unique-email';
 import {
   CATEGORY,
   Photo,
   PhotoPrimaryKey,
 } from '@typedorm/core/__mocks__/photo';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Customer } from 'packages/core/__mocks__/inherited-customer';
+import { table } from 'packages/core/__mocks__/table';
+import { User, UserGSI1, UserPrimaryKey } from 'packages/core/__mocks__/user';
+import {
+  UserUniqueEmail,
+  UserUniqueEmailPrimaryKey,
+} from 'packages/core/__mocks__/user-unique-email';
+import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
+import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 // eslint-disable-next-line node/no-extraneous-import
 import moment from 'moment';
 jest.useFakeTimers().setSystemTime(1622530750000);
@@ -367,7 +366,7 @@ test('transforms put item request with dynamic default values ', () => {
     lastName: string;
 
     @Attribute<Person>({
-      default: person => `${person.firstName} ${person.lastName}`,
+      default: (person: Person) => `${person.firstName} ${person.lastName}`,
     })
     name: string;
   }
