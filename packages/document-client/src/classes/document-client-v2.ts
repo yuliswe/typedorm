@@ -2,7 +2,7 @@ import { AWSError, DynamoDB, Request } from 'aws-sdk';
 import { DocumentClient } from 'packages/document-client/src/classes/base-document-client';
 import { TransactionCancelledException } from 'packages/document-client/src/exceptions';
 export class DocumentClientV2<
-  DocumentClientType extends DynamoDB.DocumentClient = DynamoDB.DocumentClient
+  DocumentClientType extends DynamoDB.DocumentClient = DynamoDB.DocumentClient,
 > extends DocumentClient {
   readonly documentClient: DocumentClientType;
   readonly version = 2;

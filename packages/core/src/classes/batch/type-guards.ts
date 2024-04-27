@@ -1,5 +1,8 @@
 import { isEmptyObject } from '@typedorm/common';
-import { WriteBatchCreate, WriteBatchDelete } from 'packages/core/src/classes/batch/write-batch';
+import {
+  WriteBatchCreate,
+  WriteBatchDelete,
+} from 'packages/core/src/classes/batch/write-batch';
 
 export function isBatchAddCreateItem<Entity>(
   item: any

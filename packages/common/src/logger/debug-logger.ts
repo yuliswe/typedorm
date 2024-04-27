@@ -287,6 +287,8 @@ export class DebugLogger {
   private ensurePrintable(log: any) {
     if (typeof log === 'object' && log !== null) {
       return `\n${JSON.stringify(log, null, 2)}\n`;
-    } else {return log;}
+    } else {
+      return log;
+    }
   }
 }

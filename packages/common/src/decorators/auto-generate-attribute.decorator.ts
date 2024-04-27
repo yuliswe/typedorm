@@ -45,10 +45,11 @@ export function AutoGenerateAttribute(
       hidden: options.hidden,
     };
 
-    if (options.strategy)
-      {MetadataManager.metadataStorage.addRawAttribute(
+    if (options.strategy) {
+      MetadataManager.metadataStorage.addRawAttribute(
         target.constructor,
         attributeProps
-      );}
+      );
+    }
   };
 }

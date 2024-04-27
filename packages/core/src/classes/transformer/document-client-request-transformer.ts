@@ -28,7 +28,10 @@ import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-co
 import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
 import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
 import { DynamoEntitySchemaPrimaryKey } from 'packages/core/src/classes/metadata/entity-metadata';
-import { BaseTransformer, MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import {
+  BaseTransformer,
+  MetadataOptions,
+} from 'packages/core/src/classes/transformer/base-transformer';
 import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 
 export interface ManagerToDynamoPutItemOptions {

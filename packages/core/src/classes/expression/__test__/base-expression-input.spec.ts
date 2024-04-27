@@ -1,4 +1,7 @@
-import { BaseExpressionInput, MERGE_STRATEGY } from 'packages/core/src/classes/expression/base-expression-input';
+import {
+  BaseExpressionInput,
+  MERGE_STRATEGY,
+} from 'packages/core/src/classes/expression/base-expression-input';
 import { Condition } from 'packages/core/src/classes/expression/condition';
 
 class TestCondition extends BaseExpressionInput {

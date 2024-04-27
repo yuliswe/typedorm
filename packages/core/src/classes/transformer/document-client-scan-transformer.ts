@@ -54,9 +54,7 @@ export class DocumentClientScanTransformer extends LowOrderTransformers {
     let verifiedIndexToScan: string | undefined;
     // validate if index requested to scan belongs to current resolved table
     if (scanOptions?.scanIndex) {
-      const scanIndexOptions = tableToScan.getIndexByKey(
-        scanOptions.scanIndex
-      );
+      const scanIndexOptions = tableToScan.getIndexByKey(scanOptions.scanIndex);
       if (!scanIndexOptions) {
         throw new NoSuchIndexFoundError(
           tableToScan.name,

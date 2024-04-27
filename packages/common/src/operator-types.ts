@@ -54,10 +54,8 @@ export namespace UpdateType {
 
 export type SimpleOperator =
   | KeyConditionType.SimpleOperator
-  | ConditionType.SimpleOperator
-   ;
+  | ConditionType.SimpleOperator;
 
 export type RangeOperator =
   | KeyConditionType.RangeOperator
-  | ConditionType.RangeOperator
-   ;
+  | ConditionType.RangeOperator;

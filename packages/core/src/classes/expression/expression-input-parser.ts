@@ -9,7 +9,10 @@ import {
 } from '@typedorm/common';
 import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
 import { Filter } from 'packages/core/src/classes/expression/filter';
-import { BaseExpressionInput, MERGE_STRATEGY } from 'packages/core/src/classes/expression/base-expression-input';
+import {
+  BaseExpressionInput,
+  MERGE_STRATEGY,
+} from 'packages/core/src/classes/expression/base-expression-input';
 import { isScalarType } from 'packages/core/src/helpers/is-scalar-type';
 import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
 import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
@@ -17,7 +20,10 @@ import { Condition } from 'packages/core/src/classes/expression/condition';
 import { Projection } from 'packages/core/src/classes/expression/projection';
 import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
 import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
-import { isSetOperatorComplexValueType, UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
+import {
+  isSetOperatorComplexValueType,
+  UpdateBody,
+} from 'packages/core/src/classes/expression/update-body-type';
 import { SetUpdate } from 'packages/core/src/classes/expression/update/set-update';
 import { AddUpdate } from 'packages/core/src/classes/expression/update/add-update';
 import { Update } from 'packages/core/src/classes/expression/update/update';

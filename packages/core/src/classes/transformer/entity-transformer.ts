@@ -3,7 +3,10 @@ import { DynamoEntity, EntityTarget, TRANSFORM_TYPE } from '@typedorm/common';
 import { plainToClassFromExist } from 'class-transformer';
 import { unParseKey } from 'packages/core/src/helpers/unparse-key';
 import { Connection } from 'packages/core/src/classes/connection/connection';
-import { BaseTransformer, MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import {
+  BaseTransformer,
+  MetadataOptions,
+} from 'packages/core/src/classes/transformer/base-transformer';
 
 /**
  * Note: To use any of the base transformer methods, this default entity transformer should be used

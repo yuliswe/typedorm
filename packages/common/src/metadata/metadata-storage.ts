@@ -5,7 +5,10 @@ import {
 import { Table } from 'packages/common/src/table';
 import { AttributeOptionsUniqueType } from 'packages/common/src/decorators/attribute.decorator';
 import { ScalarType } from 'packages/common/src/helpers/scalar-type';
-import { EntityAliasOrString, IndexOptionsWithAlias } from 'packages/common/src/index-options';
+import {
+  EntityAliasOrString,
+  IndexOptionsWithAlias,
+} from 'packages/common/src/index-options';
 
 export const IsAutoGenerateAttributeRawMetadataOptions = (
   attr: any
