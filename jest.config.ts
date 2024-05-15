@@ -25,9 +25,9 @@ const jestConfig: JestConfigWithTsJest = {
   roots: ['<rootDir>'],
   modulePaths: [compilerOptions.baseUrl ?? './'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths ?? {}),
-  transformIgnorePatterns: ['.*/node_modules/(?!(chalk)/)'],
+  transformIgnorePatterns: ['.*/node_modules/(?!(chalk|p-limit|yocto-queue)/)'],
   modulePathIgnorePatterns: ['dist'],
-  setupFilesAfterEnv: [], // runs before every test suite
+  setupFilesAfterEnv: ['<rootDir>/packages/testing/test.setupAfterEnv.ts'],
   coverageDirectory: '.coverage',
   coverageReporters: ['lcov'],
   testTimeout: 120_000,

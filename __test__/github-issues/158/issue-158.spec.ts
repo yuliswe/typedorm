@@ -1,10 +1,10 @@
 // assuming there is a EMAIL_INDEX loaded before anything else
 process.env.EMAIL_INDEX = 'email-index-v2';
 
-import { testTable } from './test-table';
 import { EntityManager } from '@typedorm/core';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import EntityData from './test-entity';
+import { testTable } from './test-table';
 let entityManager: EntityManager;
 
 const dcMock = {
@@ -25,17 +25,15 @@ afterEach(() => {
 
 test('entityManager find returns attributes that has the same name as key', async () => {
   dcMock.query.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          SK: 'root',
-          stringSet: ['test'],
-          email: 'test-entity@gmail.com',
-          PK: 'entity#12345678',
-          name: 'ABCD',
-        },
-      ],
-    }),
+    Items: [
+      {
+        SK: 'root',
+        stringSet: ['test'],
+        email: 'test-entity@gmail.com',
+        PK: 'entity#12345678',
+        name: 'ABCD',
+      },
+    ],
   });
 
   const response = await entityManager.find(

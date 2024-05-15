@@ -1,7 +1,3 @@
-import { DocumentClientTypes } from '@typedorm/document-client';
-import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';
-import { Connection } from 'packages/core/src/classes/connection/connection';
-import { DocumentClientTransactionTransformer } from 'packages/core/src/classes/transformer/document-client-transaction-transformer';
 import {
   MANAGER_NAME,
   ReadTransactionItemLimitExceededError,
@@ -10,7 +6,11 @@ import {
   TRANSACTION_WRITE_ITEMS_LIMIT,
   WriteTransactionItemLimitExceededError,
 } from '@typedorm/common';
+import { DocumentClientTransactionTransformer } from '@typedorm/core/classes/transformer/document-client-transaction-transformer';
+import { DocumentClientTypes } from '@typedorm/document-client';
+import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ReadTransaction } from 'packages/core/src/classes/transaction/read-transaction';
+import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';
 import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
 import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
 
@@ -137,23 +137,21 @@ export class TransactionManager {
     // Items are always returned in the same as they were requested.
     // An ordered array of up to 25 ItemResponse objects, each of which corresponds to the
     // TransactGetItem object in the same position in the TransactItems array
-    return (response.Responses as DocumentClientTypes.ItemResponseList).map(
-      (response, index) => {
-        if (!response.Item) {
-          // If a requested item could not be retrieved, the corresponding ItemResponse object is Null,
-          return null;
-        }
-
-        const originalRequest = transaction.items[index];
-        return this._dcTransactionTransformer.fromDynamoEntity(
-          originalRequest.get.item,
-          response.Item,
-          {
-            requestId,
-          }
-        );
+    return response.Responses?.map((response, index) => {
+      if (!response.Item) {
+        // If a requested item could not be retrieved, the corresponding ItemResponse object is Null,
+        return null;
       }
-    );
+
+      const originalRequest = transaction.items[index];
+      return this._dcTransactionTransformer.fromDynamoEntity(
+        originalRequest.get.item,
+        response.Item,
+        {
+          requestId,
+        }
+      );
+    });
   }
 
   /**

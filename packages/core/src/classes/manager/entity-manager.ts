@@ -1,5 +1,5 @@
+import type { ReturnConsumedCapacity } from '@aws-sdk/client-dynamodb';
 import {
-  CONSUMED_CAPACITY_TYPE,
   EntityAttributes,
   EntityInstance,
   EntityTarget,
@@ -9,22 +9,22 @@ import {
   STATS_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
-import { getDynamoQueryItemsLimit } from 'packages/core/src/helpers/get-dynamo-query-items-limit';
-import { Connection } from 'packages/core/src/classes/connection/connection';
-import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
-import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
-import { getConstructorForInstance } from 'packages/core/src/helpers/get-constructor-for-instance';
-import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
-import { isWriteTransactionItemList } from 'packages/core/src/classes/transaction/type-guards';
-import { isLazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
-import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
-import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
-import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
-import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
-import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
-import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
-import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
+import { DocumentClientRequestTransformer } from '@typedorm/core/classes/transformer/document-client-request-transformer';
 import { DocumentClientTypes } from '@typedorm/document-client';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
+import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
+import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
+import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
+import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
+import { isWriteTransactionItemList } from 'packages/core/src/classes/transaction/type-guards';
+import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
+import { isLazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
+import { getConstructorForInstance } from 'packages/core/src/helpers/get-constructor-for-instance';
+import { getDynamoQueryItemsLimit } from 'packages/core/src/helpers/get-dynamo-query-items-limit';
+import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
+import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
 
 export interface EntityManagerCreateOptions<Entity> {
   /**
@@ -67,7 +67,7 @@ export interface EntityManagerFindOptions<Entity, PartitionKey> {
    * Sort key condition
    * @default none - no sort key condition is applied
    */
-  keyCondition?: KeyConditionOptions;
+  keyCondition?: KeyConditionOptions<any>;
 
   /**
    * Max number of records to query
@@ -120,7 +120,7 @@ export interface EntityManagerCountOptions<Entity, PartitionKey> {
    * Sort key condition
    * @default none - no sort key condition is applied
    */
-  keyCondition?: KeyConditionOptions;
+  keyCondition?: KeyConditionOptions<any>;
 
   /**
    * Specify filter to apply
@@ -174,7 +174,7 @@ export interface EntityManagerExistsOptions {
    * @deprecated - Provide the "returnConsumedCapacity" in the next parameter instead
    * Only available here for backwards compatibility
    */
-  returnConsumedCapacity?: CONSUMED_CAPACITY_TYPE;
+  returnConsumedCapacity?: ReturnConsumedCapacity;
 }
 
 export class EntityManager {
@@ -232,7 +232,7 @@ export class EntityManager {
       // by default dynamodb does not return attributes on create operation, so return one
       const itemToReturn = this._entityTransformer.fromDynamoEntity<Entity>(
         entityClass,
-        dynamoPutItemInput.Item as DocumentClientTypes.AttributeMap,
+        dynamoPutItemInput.Item,
         {
           requestId,
         }
@@ -248,11 +248,10 @@ export class EntityManager {
       requestId,
       returnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
     });
-
     const itemToReturn = this._entityTransformer.fromDynamoEntity<Entity>(
       entityClass,
       // if create operation contains multiple items, first one will the original item
-      dynamoPutItemInput[0]?.Put?.Item ?? {},
+      dynamoPutItemInput[0].Put?.Item ?? {},
       {
         requestId,
       }
@@ -411,9 +410,9 @@ export class EntityManager {
         Key: { ...parsedPrimaryKey },
         TableName: metadata.table.name,
         ConsistentRead: options?.consistentRead,
-        ReturnConsumedCapacity:
-          options?.requestId ?? metadataOptions?.returnConsumedCapacity,
+        ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
       });
+
       // stats
       if (response.ConsumedCapacity) {
         this.connection.logger.logStats({

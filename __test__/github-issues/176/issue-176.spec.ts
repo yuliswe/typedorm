@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import {
   AutoGenerateAttributeValue,
   BatchManager,
   WriteBatch,
 } from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import { User } from './user-entity';
 
 jest.mock('uuid', () => {
@@ -39,9 +39,7 @@ afterEach(() => {
 });
 
 test('correctly create event record using batch manager', async () => {
-  dcMock.batchWrite.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.batchWrite.mockReturnValue({});
 
   const user1 = new User();
   user1.id = AutoGenerateAttributeValue.UUID4;

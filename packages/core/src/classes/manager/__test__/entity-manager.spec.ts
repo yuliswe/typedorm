@@ -1,19 +1,5 @@
-jest.useFakeTimers().setSystemTime(new Date(1606896235000));
-
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { EntityManager } from 'packages/core/src/classes/manager/entity-manager';
-import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
+import { ReturnConsumedCapacity } from '@aws-sdk/client-dynamodb';
 import {
-  UserUniqueEmail,
-  UserUniqueEmailPrimaryKey,
-} from 'packages/core/__mocks__/user-unique-email';
-import {
-  UserAutoGenerateAttributesPrimaryKey,
-  UserAutoGenerateAttributes,
-} from 'packages/core/__mocks__/user-auto-generate-attributes';
-import { Connection } from 'packages/core/src/classes/connection/connection';
-import {
-  CONSUMED_CAPACITY_TYPE,
   EntityInstance,
   InvalidDynamicUpdateAttributeValueError,
 } from '@typedorm/common';
@@ -21,6 +7,18 @@ import {
   UserAttrAlias,
   UserAttrAliasPrimaryKey,
 } from '@typedorm/core/__mocks__/user-with-attribute-alias';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
+import {
+  UserAutoGenerateAttributes,
+  UserAutoGenerateAttributesPrimaryKey,
+} from 'packages/core/__mocks__/user-auto-generate-attributes';
+import {
+  UserUniqueEmail,
+  UserUniqueEmailPrimaryKey,
+} from 'packages/core/__mocks__/user-unique-email';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { EntityManager } from 'packages/core/src/classes/manager/entity-manager';
 
 let manager: EntityManager;
 let connection: Connection;
@@ -33,6 +31,7 @@ const dcMock = {
   transactWrite: jest.fn(),
 };
 beforeEach(() => {
+  jest.useFakeTimers().setSystemTime(new Date(1606896235000));
   connection = createTestConnection({
     entities: [
       User,
@@ -54,9 +53,7 @@ afterEach(() => {
  * @group create
  */
 test('creates entity', async () => {
-  dcMock.put.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.put.mockReturnValue({});
 
   const user = new User();
   user.id = '1';
@@ -64,7 +61,7 @@ test('creates entity', async () => {
   user.status = 'active';
 
   const userEntity = await manager.create(user, undefined, {
-    returnConsumedCapacity: CONSUMED_CAPACITY_TYPE.TOTAL,
+    returnConsumedCapacity: ReturnConsumedCapacity.TOTAL,
   });
   expect(dcMock.put).toHaveBeenCalledTimes(1);
   expect(dcMock.put).toHaveBeenCalledWith({
@@ -95,9 +92,7 @@ test('creates entity', async () => {
 });
 
 test('creates entity with possible overwrite', async () => {
-  dcMock.put.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.put.mockReturnValue({});
 
   const user = new User();
   user.id = '1';
@@ -129,9 +124,7 @@ test('creates entity with possible overwrite', async () => {
 });
 
 test('creates entity with possible overwrite and given condition', async () => {
-  dcMock.put.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.put.mockReturnValue({});
 
   const user = new User();
   user.id = '1';
@@ -180,9 +173,7 @@ test('creates entity with possible overwrite and given condition', async () => {
  * Issue: #11
  */
 test('creates entity and returns all attributes, including auto generated ones', async () => {
-  dcMock.put.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.put.mockReturnValue({});
 
   const user = new UserAutoGenerateAttributes();
   user.id = '1';
@@ -217,9 +208,7 @@ test('creates entity and returns all attributes, including auto generated ones',
  * Issue: #203
  */
 test('will throw when called with a POJO rather than an instance of a entity class', async () => {
-  dcMock.put.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.put.mockReturnValue({});
 
   const user = new User();
   user.id = '1';
@@ -246,17 +235,15 @@ test('will throw when called with a POJO rather than an instance of a entity cla
  */
 test('finds one entity by given primary key', async () => {
   dcMock.get.mockReturnValue({
-    promise: () => ({
-      Item: {
-        PK: 'USER#1',
-        SK: 'USER#1',
-        GSI1PK: 'USER#STATUS#active',
-        GSI1SK: 'USER#Me',
-        id: '1',
-        name: 'Me',
-        status: 'active',
-      },
-    }),
+    Item: {
+      PK: 'USER#1',
+      SK: 'USER#1',
+      GSI1PK: 'USER#STATUS#active',
+      GSI1SK: 'USER#Me',
+      id: '1',
+      name: 'Me',
+      status: 'active',
+    },
   });
 
   const userEntity = await manager.findOne<User, UserPrimaryKey>(
@@ -287,9 +274,7 @@ test('finds one entity by given primary key', async () => {
 
 // issue: 110
 test('returns undefined when no item was found with given primary key', async () => {
-  dcMock.get.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.get.mockReturnValue({});
 
   const userEntity = await manager.findOne<User, UserPrimaryKey>(User, {
     id: '1',
@@ -311,7 +296,7 @@ test('throws an error when trying to do a get request with non primary key attri
     manager.findOne(User, {
       name: 'User',
     })
-  ).rejects.toThrowError(
+  ).rejects.toThrow(
     '"id" was referenced in USER#{{id}} but it\'s value could not be resolved.'
   );
 });
@@ -321,17 +306,15 @@ test('throws an error when trying to do a get request with non primary key attri
  */
 test('checks if given item exists', async () => {
   dcMock.get.mockReturnValue({
-    promise: () => ({
-      Item: {
-        PK: 'USER#1',
-        SK: 'USER#1',
-        GSI1PK: 'USER#STATUS#active',
-        GSI1SK: 'USER#Me',
-        id: '1',
-        name: 'Me',
-        status: 'active',
-      },
-    }),
+    Item: {
+      PK: 'USER#1',
+      SK: 'USER#1',
+      GSI1PK: 'USER#STATUS#active',
+      GSI1SK: 'USER#Me',
+      id: '1',
+      name: 'Me',
+      status: 'active',
+    },
   });
 
   const userEntity = await manager.exists<User, UserUniqueEmailPrimaryKey>(
@@ -341,7 +324,7 @@ test('checks if given item exists', async () => {
     },
     {
       consistentRead: true,
-      returnConsumedCapacity: CONSUMED_CAPACITY_TYPE.INDEXES,
+      returnConsumedCapacity: ReturnConsumedCapacity.INDEXES,
     }
   );
 
@@ -359,9 +342,7 @@ test('checks if given item exists', async () => {
 
 // issue: 110
 test('returns correct value when trying check existence of item that does not exist', async () => {
-  dcMock.get.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.get.mockReturnValue({});
 
   const userEntity = await manager.exists<User, UserUniqueEmailPrimaryKey>(
     User,
@@ -382,12 +363,10 @@ test('returns correct value when trying check existence of item that does not ex
 
 test('checks if item with given unique attribute exists', async () => {
   dcMock.get.mockReturnValue({
-    promise: () => ({
-      Item: {
-        PK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
-        SK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
-      },
-    }),
+    Item: {
+      PK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
+      SK: 'DRM_GEN_USERUNIQUEEMAIL.EMAIL#user@example.com',
+    },
   });
 
   const userEntity = await manager.exists<UserUniqueEmail>(UserUniqueEmail, {
@@ -411,7 +390,7 @@ test('throws an error if trying to perform exists check with non key or non uniq
       await manager.exists<UserUniqueEmail>(UserUniqueEmail, {
         status: 'active',
       })
-  ).rejects.toThrowError(
+  ).rejects.toThrow(
     'Only attributes that are part of primary key or is marked as unique attribute can be queried, attribute "status is neither."'
   );
 });
@@ -421,7 +400,7 @@ test('throws an error if trying to perform exists check with partial primary key
     manager.findOne(User, {
       name: 'User',
     })
-  ).rejects.toThrowError(
+  ).rejects.toThrow(
     '"id" was referenced in USER#{{id}} but it\'s value could not be resolved.'
   );
 });
@@ -431,17 +410,15 @@ test('throws an error if trying to perform exists check with partial primary key
  */
 test('updates item and return all new attributes', async () => {
   dcMock.update.mockReturnValue({
-    promise: () => ({
-      Attributes: {
-        PK: 'USER#1',
-        SK: 'USER#1',
-        GSI1PK: 'USER#STATUS#active',
-        GSI1SK: 'USER#Me',
-        id: '1',
-        name: 'user',
-        status: 'active',
-      },
-    }),
+    Attributes: {
+      PK: 'USER#1',
+      SK: 'USER#1',
+      GSI1PK: 'USER#STATUS#active',
+      GSI1SK: 'USER#Me',
+      id: '1',
+      name: 'user',
+      status: 'active',
+    },
   });
   const updatedItem = await manager.update<User, UserPrimaryKey>(
     User,
@@ -479,17 +456,15 @@ test('updates item and return all new attributes', async () => {
 
 test('updates item with multiple body actions', async () => {
   dcMock.update.mockReturnValue({
-    promise: () => ({
-      Attributes: {
-        PK: 'USER#1',
-        SK: 'USER#1',
-        GSI1PK: 'USER#STATUS#active',
-        GSI1SK: 'USER#Me',
-        id: '1',
-        name: 'user',
-        status: 'active',
-      },
-    }),
+    Attributes: {
+      PK: 'USER#1',
+      SK: 'USER#1',
+      GSI1PK: 'USER#STATUS#active',
+      GSI1SK: 'USER#Me',
+      id: '1',
+      name: 'user',
+      status: 'active',
+    },
   });
   const updatedItem = await manager.update<User, UserPrimaryKey>(
     User,
@@ -532,9 +507,7 @@ test('updates item with multiple body actions', async () => {
 });
 
 test('updates item when trying to update attribute with dynamic value that is not referenced in any index', async () => {
-  dcMock.update.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.update.mockReturnValue({});
 
   await manager.update<User, UserPrimaryKey>(
     User,
@@ -584,17 +557,15 @@ test('updates item and attributes marked to be autoUpdated', async () => {
   jest.useFakeTimers().setSystemTime(new Date('2020-01-01'));
 
   dcMock.update.mockReturnValue({
-    promise: () => ({
-      Attributes: {
-        PK: 'USER#1',
-        SK: 'USER#1',
-        GSI1PK: 'USER#STATUS#active',
-        GSI1SK: 'USER#Me',
-        id: '1',
-        name: 'Me',
-        status: 'active',
-      },
-    }),
+    Attributes: {
+      PK: 'USER#1',
+      SK: 'USER#1',
+      GSI1PK: 'USER#STATUS#active',
+      GSI1SK: 'USER#Me',
+      id: '1',
+      name: 'Me',
+      status: 'active',
+    },
   });
 
   const updatedItem = await manager.update<
@@ -732,18 +703,16 @@ test('updates item with unique attributes and returns all updated attributes', a
 
 test('updates item and return all new attributes with given condition', async () => {
   dcMock.update.mockReturnValue({
-    promise: () => ({
-      Attributes: {
-        PK: 'USER#1',
-        SK: 'USER#1',
-        GSI1PK: 'USER#STATUS#active',
-        GSI1SK: 'USER#Me',
-        id: '1',
-        name: 'user',
-        status: 'active',
-        age: 4,
-      },
-    }),
+    Attributes: {
+      PK: 'USER#1',
+      SK: 'USER#1',
+      GSI1PK: 'USER#STATUS#active',
+      GSI1SK: 'USER#Me',
+      id: '1',
+      name: 'user',
+      status: 'active',
+      age: 4,
+    },
   });
   const updatedItem = await manager.update<User, UserPrimaryKey>(
     User,
@@ -879,9 +848,7 @@ test('updates item and create new unique item when no previous record was found'
  */
 test('deletes item by primary key', async () => {
   dcMock.delete.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Attributes: {},
-    }),
+    Attributes: {},
   });
 
   const result = await manager.delete<User, UserPrimaryKey>(User, {
@@ -902,9 +869,7 @@ test('deletes item by primary key', async () => {
 
 test('deletes item by primary key and given condition', async () => {
   dcMock.delete.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Attributes: {},
-    }),
+    Attributes: {},
   });
 
   const result = await manager.delete<User, UserPrimaryKey>(
@@ -945,7 +910,7 @@ test('throws an error when trying to delete item by non primary key attributes',
     manager.delete(User, {
       name: 'User',
     })
-  ).rejects.toThrowError(
+  ).rejects.toThrow(
     '"id" was referenced in USER#{{id}} but it\'s value could not be resolved.'
   );
 });
@@ -1048,28 +1013,26 @@ test('deletes an item with unique attributes when no existing item is found', as
  */
 test('finds items matching given query params', async () => {
   dcMock.query.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Items: [
-        {
-          PK: 'USER#1',
-          SK: 'USER#1',
-          GSI1PK: 'USER#STATUS#active',
-          GSI1SK: 'USER#Me',
-          id: '1',
-          name: 'Me',
-          status: 'active',
-        },
-        {
-          PK: 'USER#2',
-          SK: 'USER#2',
-          GSI1PK: 'USER#STATUS#active',
-          GSI1SK: 'USER#Me2',
-          id: '2',
-          name: 'Me',
-          status: 'active',
-        },
-      ],
-    }),
+    Items: [
+      {
+        PK: 'USER#1',
+        SK: 'USER#1',
+        GSI1PK: 'USER#STATUS#active',
+        GSI1SK: 'USER#Me',
+        id: '1',
+        name: 'Me',
+        status: 'active',
+      },
+      {
+        PK: 'USER#2',
+        SK: 'USER#2',
+        GSI1PK: 'USER#STATUS#active',
+        GSI1SK: 'USER#Me2',
+        id: '2',
+        name: 'Me',
+        status: 'active',
+      },
+    ],
   });
 
   const users = await manager.find<User, UserPrimaryKey>(
@@ -1122,20 +1085,18 @@ test('finds items matching given query params', async () => {
 
 test('finds items matching given query params and options', async () => {
   dcMock.query.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Items: [
-        {
-          PK: 'USER#1',
-          SK: 'USER#1',
-          GSI1PK: 'USER#STATUS#active',
-          GSI1SK: 'USER#Me',
-          id: '1',
-          name: 'Me',
-          status: 'active',
-          age: 4,
-        },
-      ],
-    }),
+    Items: [
+      {
+        PK: 'USER#1',
+        SK: 'USER#1',
+        GSI1PK: 'USER#STATUS#active',
+        GSI1SK: 'USER#Me',
+        id: '1',
+        name: 'Me',
+        status: 'active',
+        age: 4,
+      },
+    ],
   });
 
   const users = await manager.find<User, UserPrimaryKey>(
@@ -1202,19 +1163,17 @@ test('finds items matching given query params and options', async () => {
 
 test('finds items with alternate syntax', async () => {
   dcMock.query.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Items: [
-        {
-          PK: 'USER#1',
-          SK: 'USER#1',
-          GSI1PK: 'USER#STATUS#active',
-          GSI1SK: 'USER#Me',
-          id: '1',
-          name: 'Me',
-          status: 'active',
-        },
-      ],
-    }),
+    Items: [
+      {
+        PK: 'USER#1',
+        SK: 'USER#1',
+        GSI1PK: 'USER#STATUS#active',
+        GSI1SK: 'USER#Me',
+        id: '1',
+        name: 'Me',
+        status: 'active',
+      },
+    ],
   });
 
   const users = await manager.find<User>(User, 'USER#1', {
@@ -1252,28 +1211,26 @@ test('finds items with alternate syntax', async () => {
 
 test('finds item from given cursor position', async () => {
   dcMock.query.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Items: [
-        {
-          PK: 'USER#1',
-          SK: 'USER#1',
-          GSI1PK: 'USER#STATUS#active',
-          GSI1SK: 'USER#Me',
-          id: '1',
-          name: 'Me',
-          status: 'active',
-        },
-        {
-          PK: 'USER#2',
-          SK: 'USER#2',
-          GSI1PK: 'USER#STATUS#active',
-          GSI1SK: 'USER#Me2',
-          id: '2',
-          name: 'Me',
-          status: 'active',
-        },
-      ],
-    }),
+    Items: [
+      {
+        PK: 'USER#1',
+        SK: 'USER#1',
+        GSI1PK: 'USER#STATUS#active',
+        GSI1SK: 'USER#Me',
+        id: '1',
+        name: 'Me',
+        status: 'active',
+      },
+      {
+        PK: 'USER#2',
+        SK: 'USER#2',
+        GSI1PK: 'USER#STATUS#active',
+        GSI1SK: 'USER#Me2',
+        id: '2',
+        name: 'Me',
+        status: 'active',
+      },
+    ],
   });
 
   await manager.find<User, UserPrimaryKey>(
@@ -1325,20 +1282,16 @@ test('queries items until limit is met', async () => {
   }
   dcMock.query
     .mockImplementationOnce(() => ({
-      promise: jest.fn().mockReturnValue({
-        Items: itemsToReturn,
-        Count: itemsToReturn.length,
-        LastEvaluatedKey: {
-          partitionKey: 'USER#1000',
-          sortKey: 'USER#1000',
-        },
-      }),
+      Items: itemsToReturn,
+      Count: itemsToReturn.length,
+      LastEvaluatedKey: {
+        partitionKey: 'USER#1000',
+        sortKey: 'USER#1000',
+      },
     }))
     .mockImplementationOnce(() => ({
-      promise: jest.fn().mockReturnValue({
-        Items: itemsToReturn,
-        Count: itemsToReturn.length,
-      }),
+      Items: itemsToReturn,
+      Count: itemsToReturn.length,
     }));
 
   const users = await manager.find<User, UserPrimaryKey>(
@@ -1398,9 +1351,7 @@ test('queries items until limit is met', async () => {
  */
 test('counts items matching given query params', async () => {
   dcMock.query.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      Count: 132,
-    }),
+    Count: 132,
   });
 
   const usersCount = await manager.count<User, UserPrimaryKey>(
@@ -1438,21 +1389,15 @@ test('counts items matching given query params', async () => {
 test('counts items with multiple requests', async () => {
   dcMock.query
     .mockImplementationOnce(() => ({
-      promise: jest.fn().mockReturnValue({
-        Count: 121,
-        LastEvaluatedKey: 'AAAA',
-      }),
+      Count: 121,
+      LastEvaluatedKey: 'AAAA',
     }))
     .mockImplementationOnce(() => ({
-      promise: jest.fn().mockReturnValue({
-        Count: 56,
-        LastEvaluatedKey: 'BB',
-      }),
+      Count: 56,
+      LastEvaluatedKey: 'BB',
     }))
     .mockImplementationOnce(() => ({
-      promise: jest.fn().mockReturnValue({
-        Count: 13,
-      }),
+      Count: 13,
     }));
 
   const users = await manager.count<User, UserPrimaryKey>(

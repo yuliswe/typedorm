@@ -1,7 +1,55 @@
-import AWS, { DynamoDB } from 'aws-sdk';
 import DynamoDBClientV3 from '@aws-sdk/client-dynamodb';
+import type {
+  BatchGetCommandInput,
+  BatchGetCommandOutput,
+  BatchWriteCommandInput,
+  BatchWriteCommandOutput,
+  DeleteCommandInput,
+  DeleteCommandOutput,
+  GetCommandInput,
+  GetCommandOutput,
+  NativeAttributeValue,
+  PutCommandInput,
+  PutCommandOutput,
+  QueryCommandInput,
+  QueryCommandOutput,
+  ScanCommandInput,
+  ScanCommandOutput,
+  TransactGetCommandInput,
+  TransactGetCommandOutput,
+  TransactWriteCommandInput,
+  TransactWriteCommandOutput,
+  UpdateCommandInput,
+  UpdateCommandOutput,
+} from '@aws-sdk/lib-dynamodb';
 
 /* eslint-disable @typescript-eslint/no-namespace */
+
+type Replace<T, K extends keyof T, R> = Omit<T, K> & { [k in K]: R };
+
+type ReplaceAndExcludeUndefined<T, K extends keyof T, R> = Replace<
+  T,
+  K,
+  Exclude<R, undefined>
+>;
+
+type RemoveUndefined<T, K extends keyof T> = Replace<
+  T,
+  K,
+  Exclude<T[K], undefined>
+>;
+
+type RemoveUndefined2<
+  T,
+  K extends keyof T,
+  S extends keyof Exclude<T[K], undefined> & keyof T[K],
+> = Replace<T, K, RemoveUndefined<T[K], S>>;
+
+type DeepExpand<T> = T extends object
+  ? T extends infer O
+    ? { [K in keyof O]: DeepExpand<O[K]> }
+    : never
+  : T;
 
 export namespace DocumentClientTypes {
   /**
@@ -15,163 +63,167 @@ export namespace DocumentClientTypes {
 
   export type ItemList = AttributeMap[];
 
-  export type WriteRequest =
-    | DynamoDB.DocumentClient.WriteRequest
-    | DynamoDBClientV3.WriteRequest;
+  export type WriteRequest = DynamoDBClientV3.WriteRequest;
 
-  export type Request<T> = AWS.Request<T, AWS.AWSError>;
-
-  export type ItemResponse =
-    | AWS.DynamoDB.DocumentClient.ItemResponse
-    | DynamoDBClientV3.ItemResponse;
+  export type ItemResponse = DynamoDBClientV3.ItemResponse;
 
   export type ItemResponseList = ItemResponse[];
 
   /**
    * Put
    */
-  export type PutItemInput =
-    | DynamoDB.DocumentClient.PutItemInput
-    | DynamoDBClientV3.PutItemInput;
+  export type PutItemInput = RemoveUndefined<PutCommandInput, 'Item'>;
 
-  export type PutItemOutput =
-    | DynamoDB.DocumentClient.PutItemOutput
-    | DynamoDBClientV3.PutItemOutput;
+  export type PutItemOutput = PutCommandOutput;
 
   /**
    * Get
    */
-  export type GetItemInput =
-    | DynamoDB.DocumentClient.GetItemInput
-    | DynamoDBClientV3.GetItemInput;
+  export type GetItemInput = RemoveUndefined<GetCommandInput, 'Key'>;
 
-  export type GetItemOutput =
-    | DynamoDB.DocumentClient.GetItemOutput
-    | DynamoDBClientV3.GetItemOutput;
+  export type GetItemOutput = GetCommandOutput;
 
   /**
    * Update
    */
-  export type Update = DynamoDB.DocumentClient.Update | DynamoDBClientV3.Update;
+  export type Update = TransactWriteItem['Update'];
 
-  export type UpdateItemInput =
-    | DynamoDB.DocumentClient.UpdateItemInput
-    | DynamoDBClientV3.UpdateItemInput;
+  export type UpdateItemInput = RemoveUndefined<UpdateCommandInput, 'Key'>;
 
-  export type UpdateItemOutput =
-    | DynamoDB.DocumentClient.UpdateItemOutput
-    | DynamoDBClientV3.UpdateItemOutput;
+  export type UpdateItemOutput = UpdateCommandOutput;
 
   /**
    * Delete
    */
-  export type DeleteItemInput =
-    | DynamoDB.DocumentClient.DeleteItemInput
-    | DynamoDBClientV3.DeleteItemInput;
+  export type DeleteItemInput = RemoveUndefined<DeleteCommandInput, 'Key'>;
 
-  export type DeleteItemOutput =
-    | DynamoDB.DocumentClient.DeleteItemOutput
-    | DynamoDBClientV3.DeleteItemOutput;
+  export type DeleteItemOutput = DeleteCommandOutput;
 
   /**
    * Query
    */
-  export type QueryInput =
-    | DynamoDB.DocumentClient.QueryInput
-    | DynamoDBClientV3.QueryInput;
+  export type QueryInput = QueryCommandInput;
 
-  export type QueryOutput =
-    | DynamoDB.DocumentClient.QueryOutput
-    | DynamoDBClientV3.QueryOutput;
+  export type QueryOutput = QueryCommandOutput;
 
   /**
    * BatchWrite
    */
-  export type BatchWriteItemRequestMap =
-    | DynamoDB.DocumentClient.BatchWriteItemRequestMap
-    | {
-        [key: string]: DynamoDBClientV3.WriteRequest[];
-      };
+  export type BatchWriteItemRequestMap = {
+    [key: string]: NativeAttributeValue;
+  };
 
   export type BatchWriteItemRequestMapList = BatchWriteItemRequestMap[];
 
-  export type BatchWriteItemInput =
-    | DynamoDB.DocumentClient.BatchWriteItemInput
-    | DynamoDBClientV3.BatchWriteItemInput;
+  export type BatchWriteItemInput = RemoveUndefined<
+    BatchWriteCommandInput,
+    'RequestItems'
+  >;
 
-  export type BatchWriteItemOutput =
-    | DynamoDB.DocumentClient.BatchWriteItemOutput
-    | DynamoDBClientV3.BatchWriteItemOutput;
+  export type BatchWriteItemOutput = BatchWriteCommandOutput;
 
   export type BatchWriteItemOutputList = BatchWriteItemOutput[];
 
   /**
    * BatchGet
    */
-  export type BatchGetRequestMap =
-    | DynamoDB.DocumentClient.BatchGetRequestMap
-    | {
-        [key: string]: DynamoDBClientV3.KeysAndAttributes;
-      };
+  export type BatchGetRequestMap = {
+    [key: string]: NativeAttributeValue;
+    // & {
+    //   // This fixes the type error from the original package? Why would Keys be
+    //   // null-able?
+    //   Keys: Record<string, DynamoDBClientV3.AttributeValue>[];
+    // };
+  };
 
   export type BatchGetRequestMapList = BatchGetRequestMap[];
 
-  export type BatchGetItemInput =
-    | DynamoDB.DocumentClient.BatchGetItemInput
-    | DynamoDBClientV3.BatchGetItemInput;
+  export type BatchGetItemInput = RemoveUndefined<
+    BatchGetCommandInput,
+    'RequestItems'
+  >;
 
-  export type BatchGetItemOutput =
-    | DynamoDB.DocumentClient.BatchGetItemOutput
-    | DynamoDBClientV3.BatchGetItemOutput;
+  export type BatchGetItemOutput = BatchGetCommandOutput;
 
   export type BatchGetItemOutputList = BatchGetItemOutput[];
 
-  export type BatchGetResponseMap =
-    | DynamoDB.DocumentClient.BatchGetResponseMap
-    | { [key: string]: ItemList };
+  export type BatchGetResponseMap = { [key: string]: ItemList };
 
   /**
    * TransactWrite
    */
-  export type TransactWriteItem =
-    | DynamoDB.DocumentClient.TransactWriteItem
-    | DynamoDBClientV3.TransactWriteItem;
+  type _TransactWriteItem = Exclude<
+    TransactWriteCommandInput['TransactItems'],
+    undefined
+  >[0];
+  export type TransactWriteItem = DeepExpand<
+    Omit<_TransactWriteItem, 'ConditionCheck' | 'Delete' | 'Update' | 'Put'> & {
+      ConditionCheck?: Omit<
+        Exclude<_TransactWriteItem['ConditionCheck'], undefined>,
+        'Key'
+      > & {
+        Key: Exclude<
+          Exclude<_TransactWriteItem['ConditionCheck'], undefined>['Key'],
+          undefined
+        >;
+      };
+      Put?: Omit<Exclude<_TransactWriteItem['Put'], undefined>, 'Item'> & {
+        Item: Exclude<
+          Exclude<_TransactWriteItem['Put'], undefined>['Item'],
+          undefined
+        >;
+      };
+      Delete?: Omit<Exclude<_TransactWriteItem['Delete'], undefined>, 'Key'> & {
+        Key: Exclude<
+          Exclude<_TransactWriteItem['Delete'], undefined>['Key'],
+          undefined
+        >;
+      };
+      Update?: Omit<Exclude<_TransactWriteItem['Update'], undefined>, 'Key'> & {
+        Key: Exclude<
+          Exclude<_TransactWriteItem['Update'], undefined>['Key'],
+          undefined
+        >;
+      };
+    }
+  >;
 
   export type TransactWriteItemList = TransactWriteItem[];
 
-  export type TransactWriteItemInput =
-    | DynamoDB.DocumentClient.TransactWriteItemsInput
-    | DynamoDBClientV3.TransactWriteItemsInput;
+  export type TransactWriteItemInput = DeepExpand<
+    Replace<TransactWriteCommandInput, 'TransactItems', TransactWriteItemList>
+  >;
 
-  export type TransactWriteItemOutput =
-    | DynamoDB.DocumentClient.TransactWriteItemsOutput
-    | DynamoDBClientV3.TransactWriteItemsOutput;
+  export type TransactWriteItemOutput = TransactWriteCommandOutput;
 
   /**
    * TransactGet
    */
-  export type TransactGetItem =
-    | DynamoDB.DocumentClient.TransactGetItem
-    | DynamoDBClientV3.TransactGetItem;
+  type _TransactGetItem = Exclude<
+    Exclude<TransactGetCommandInput['TransactItems'], undefined>[0],
+    undefined
+  >;
+  export type TransactGetItem = Omit<_TransactGetItem, 'Get'> & {
+    Get: Omit<Exclude<_TransactGetItem['Get'], undefined>, 'Key'> & {
+      Key: Exclude<
+        Exclude<_TransactGetItem['Get'], undefined>['Key'],
+        undefined
+      >;
+    };
+  };
 
   export type TransactGetItemList = TransactGetItem[];
 
-  export type TransactGetItemInput =
-    | DynamoDB.DocumentClient.TransactGetItemsInput
-    | DynamoDBClientV3.TransactGetItemsInput;
+  export type TransactGetItemInput = DeepExpand<
+    Replace<TransactGetCommandInput, 'TransactItems', TransactGetItemList>
+  >;
 
-  export type TransactGetItemOutput =
-    | DynamoDB.DocumentClient.TransactGetItemsOutput
-    | DynamoDBClientV3.TransactGetItemsOutput;
+  export type TransactGetItemOutput = TransactGetCommandOutput;
 
   /**
    * Scan
    */
-  export type ScanInput =
-    | DynamoDB.DocumentClient.ScanInput
-    | DynamoDBClientV3.ScanInput;
+  export type ScanInput = ScanCommandInput;
 
-  export type ScanOutput =
-    | DynamoDB.DocumentClient.ScanOutput
-    | DynamoDBClientV3.ScanOutput;
+  export type ScanOutput = ScanCommandOutput;
 }

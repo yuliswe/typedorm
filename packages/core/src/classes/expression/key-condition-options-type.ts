@@ -1,11 +1,11 @@
-import { KeyConditionType, RequireOnlyOne, ScalarType } from '@typedorm/common';
+import { RequireOnlyOne, type KeyConditionType } from '@typedorm/common';
 
-export type KeyConditionOptions = RequireOnlyOne<
+export type KeyConditionOptions<V> = RequireOnlyOne<
   {
-    [key in KeyConditionType.SimpleOperator]: ScalarType;
+    [key in KeyConditionType.SimpleOperator]: V;
   } & {
-    [key in KeyConditionType.FunctionOperator]: ScalarType;
+    [key in KeyConditionType.FunctionOperator]: string;
   } & {
-    [key in KeyConditionType.RangeOperator]: [ScalarType, ScalarType];
+    [key in KeyConditionType.RangeOperator]: [V, V];
   }
 >;

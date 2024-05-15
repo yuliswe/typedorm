@@ -1,10 +1,10 @@
-import { applyMixins } from 'packages/core/src/helpers/apply-mixins';
+import { DocumentClientRequestTransformer } from '@typedorm/core/classes/transformer/document-client-request-transformer';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ExpressionBuilder } from 'packages/core/src/classes/expression/expression-builder';
 import { ExpressionInputParser } from 'packages/core/src/classes/expression/expression-input-parser';
 import { BaseTransformer } from 'packages/core/src/classes/transformer/base-transformer';
-import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
 import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
+import { applyMixins } from 'packages/core/src/helpers/apply-mixins';
 
 export interface LowOrderTransformers
   extends DocumentClientRequestTransformer,

@@ -1,21 +1,21 @@
-import { UserPrimaryKey } from 'packages/core/__mocks__/user';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { Connection } from 'packages/core/src/classes/connection/connection';
-import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';
-import { TransactionManager } from 'packages/core/src/classes/manager/transaction-manager';
-import { User } from 'packages/core/__mocks__/user';
+import { ReturnConsumedCapacity } from '@aws-sdk/client-dynamodb';
+import { Organisation } from '@typedorm/core/__mocks__/organisation';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
 } from '@typedorm/core/__mocks__/user-unique-email';
-import { Organisation } from '@typedorm/core/__mocks__/organisation';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
+import { Connection } from 'packages/core/src/classes/connection/connection';
+import { TransactionManager } from 'packages/core/src/classes/manager/transaction-manager';
 import { ReadTransaction } from 'packages/core/src/classes/transaction/read-transaction';
-import { CONSUMED_CAPACITY_TYPE } from '@typedorm/common';
+import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';
 
 let manager: TransactionManager;
 const dcMock = {
   transactWrite: jest.fn(),
   transactGet: jest.fn(),
+  send: jest.fn(),
 };
 
 let connection: Connection;
@@ -36,17 +36,8 @@ afterEach(() => {
  */
 test('performs write transactions for simple writes', async () => {
   dcMock.transactWrite.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      ConsumedCapacity: [{}],
-      ItemCollectionMetrics: [{}],
-    }),
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        ItemCollectionMetrics: [{}],
-      });
-    }),
+    ConsumedCapacity: [{}],
+    ItemCollectionMetrics: [{}],
   });
 
   const user = new User();
@@ -81,7 +72,7 @@ test('performs write transactions for simple writes', async () => {
     ]);
 
   const response = await manager.write(transaction, {
-    returnConsumedCapacity: CONSUMED_CAPACITY_TYPE.TOTAL,
+    returnConsumedCapacity: ReturnConsumedCapacity.TOTAL,
   });
 
   expect(dcMock.transactWrite).toHaveBeenCalledTimes(1);
@@ -156,20 +147,15 @@ test('performs write transactions for simple writes', async () => {
   });
 });
 
-test('performs write transactions for entities with unique attributes ', async () => {
+test('performs write transactions for entities with unique attributes', async () => {
   connection.entityManager.findOne = jest.fn().mockReturnValue({
     id: '1',
     email: 'olduser@example.com',
   });
 
   dcMock.transactWrite.mockReturnValue({
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        ItemCollectionMetrics: [{}],
-      });
-    }),
+    ConsumedCapacity: [{}],
+    ItemCollectionMetrics: [{}],
   });
 
   const transaction = new WriteTransaction(connection).chian<
@@ -242,20 +228,15 @@ test('performs write transactions for entities with unique attributes ', async (
   });
 });
 
-test('performs write transactions for entities with non existing unique attributes ', async () => {
+test('performs write transactions for entities with non existing unique attributes', async () => {
   connection.entityManager.findOne = jest.fn().mockReturnValue({
     id: '1',
     status: 'inactive',
   });
 
   dcMock.transactWrite.mockReturnValue({
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        ItemCollectionMetrics: [{}],
-      });
-    }),
+    ConsumedCapacity: [{}],
+    ItemCollectionMetrics: [{}],
   });
 
   const transaction = new WriteTransaction(connection).chian<
@@ -319,20 +300,15 @@ test('performs write transactions for entities with non existing unique attribut
   });
 });
 
-test('performs write transactions when removing entities with unique attributes ', async () => {
+test('performs write transactions when removing entities with unique attributes', async () => {
   connection.entityManager.findOne = jest.fn().mockReturnValue({
     id: '1',
     email: 'olduser@example.com',
   });
 
   dcMock.transactWrite.mockReturnValue({
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        ItemCollectionMetrics: [{}],
-      });
-    }),
+    ConsumedCapacity: [{}],
+    ItemCollectionMetrics: [{}],
   });
 
   const transaction = new WriteTransaction(connection).chian<
@@ -374,15 +350,10 @@ test('performs write transactions when removing entities with unique attributes 
   });
 });
 
-test('performs write transactions when with mixed update actions ', async () => {
+test('performs write transactions when with mixed update actions', async () => {
   dcMock.transactWrite.mockReturnValue({
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        ItemCollectionMetrics: [{}],
-      });
-    }),
+    ConsumedCapacity: [{}],
+    ItemCollectionMetrics: [{}],
   });
 
   const transaction = new WriteTransaction(connection).addUpdateItem<
@@ -441,46 +412,37 @@ test('performs write transactions when with mixed update actions ', async () => 
  */
 test('reads items in a transaction', async () => {
   dcMock.transactGet.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      ConsumedCapacity: [{}],
-      ItemCollectionMetrics: [{}],
-    }),
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        Responses: [
-          {
-            Item: {
-              GSI1PK: 'USER#STATUS#inactive',
-              GSI1SK: 'USER#user name',
-              PK: 'USER#1',
-              SK: 'USER#1',
-              id: '1',
-              __en: 'user',
-              name: 'user name',
-              status: 'inactive',
-            },
-          },
-          {
-            Item: {
-              GSI1PK: 'ORG#1#STATUS#inactive',
-              GSI1SK: 'ORG#test-org#ACTIVE#active',
-              GSI2PK: 'ORG#1#STATUS#inactive',
-              GSI2SK: 'ORG#test-org#TEAM_COUNT#110',
-              PK: 'ORG#1',
-              SK: 'ORG#1',
-              id: '1',
-              __en: 'organisation',
-              name: 'test-org',
-              status: 'inactive',
-              active: 'active',
-              teamCount: 110,
-            },
-          },
-        ],
-      });
-    }),
+    ConsumedCapacity: [{}],
+    Responses: [
+      {
+        Item: {
+          GSI1PK: 'USER#STATUS#inactive',
+          GSI1SK: 'USER#user name',
+          PK: 'USER#1',
+          SK: 'USER#1',
+          id: '1',
+          __en: 'user',
+          name: 'user name',
+          status: 'inactive',
+        },
+      },
+      {
+        Item: {
+          GSI1PK: 'ORG#1#STATUS#inactive',
+          GSI1SK: 'ORG#test-org#ACTIVE#active',
+          GSI2PK: 'ORG#1#STATUS#inactive',
+          GSI2SK: 'ORG#test-org#TEAM_COUNT#110',
+          PK: 'ORG#1',
+          SK: 'ORG#1',
+          id: '1',
+          __en: 'organisation',
+          name: 'test-org',
+          status: 'inactive',
+          active: 'active',
+          teamCount: 110,
+        },
+      },
+    ],
   });
 
   const readTransaction = new ReadTransaction().add([
@@ -519,41 +481,32 @@ test('reads items in a transaction', async () => {
 });
 
 test('reads items in a transaction and parses them to original item properly when one of the item requested did not exist', async () => {
-  dcMock.transactGet.mockReturnValue({
-    promise: jest.fn().mockReturnValue({
-      ConsumedCapacity: [{}],
-      ItemCollectionMetrics: [{}],
-    }),
-    on: jest.fn(),
-    send: jest.fn().mockImplementation(cb => {
-      cb(null, {
-        ConsumedCapacity: [{}],
-        Responses: [
-          {
-            Item: null,
-          },
-          {
-            Item: {},
-          },
-          {
-            Item: {
-              GSI1PK: 'ORG#1#STATUS#inactive',
-              GSI1SK: 'ORG#test-org#ACTIVE#active',
-              GSI2PK: 'ORG#1#STATUS#inactive',
-              GSI2SK: 'ORG#test-org#TEAM_COUNT#110',
-              PK: 'ORG#1',
-              SK: 'ORG#1',
-              id: '1',
-              __en: 'organisation',
-              name: 'test-org',
-              status: 'inactive',
-              active: 'active',
-              teamCount: 110,
-            },
-          },
-        ],
-      });
-    }),
+  dcMock.transactGet.mockResolvedValue({
+    ConsumedCapacity: [{}],
+    Responses: [
+      {
+        Item: null,
+      },
+      {
+        Item: {},
+      },
+      {
+        Item: {
+          GSI1PK: 'ORG#1#STATUS#inactive',
+          GSI1SK: 'ORG#test-org#ACTIVE#active',
+          GSI2PK: 'ORG#1#STATUS#inactive',
+          GSI2SK: 'ORG#test-org#TEAM_COUNT#110',
+          PK: 'ORG#1',
+          SK: 'ORG#1',
+          id: '1',
+          __en: 'organisation',
+          name: 'test-org',
+          status: 'inactive',
+          active: 'active',
+          teamCount: 110,
+        },
+      },
+    ],
   });
 
   const readTransaction = new ReadTransaction().add([

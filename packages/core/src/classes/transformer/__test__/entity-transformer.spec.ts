@@ -1,33 +1,33 @@
-import { UserAutoGenerateAttributes } from 'packages/core/__mocks__/user-auto-generate-attributes';
 import {
+  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Attribute,
   AutoGenerateAttribute,
-  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
   INDEX_TYPE,
   Table,
 } from '@typedorm/common';
-import { Organisation } from 'packages/core/__mocks__/organisation';
-import { User } from 'packages/core/__mocks__/user';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
-import { UserSparseIndexes } from 'packages/core/__mocks__/user-sparse-indexes';
+import { CATEGORY, Photo } from '@typedorm/core/__mocks__/photo';
 import { table } from '@typedorm/core/__mocks__/table';
 import { UserAttrAlias } from '@typedorm/core/__mocks__/user-with-attribute-alias';
-import { CATEGORY, Photo } from '@typedorm/core/__mocks__/photo';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Organisation } from 'packages/core/__mocks__/organisation';
+import { User } from 'packages/core/__mocks__/user';
+import { UserAutoGenerateAttributes } from 'packages/core/__mocks__/user-auto-generate-attributes';
+import { UserSparseIndexes } from 'packages/core/__mocks__/user-sparse-indexes';
+import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
 // Moment is only being used here to display the usage of @transform utility
 // eslint-disable-next-line node/no-extraneous-import
-import moment from 'moment';
 import { UserCustomConstructor } from '@typedorm/core/__mocks__/user-custom-constructor';
+import { UserWithDefaultValues } from '@typedorm/core/__mocks__/user-default-value';
+import moment from 'moment';
 
 jest.mock('uuid', () => ({
   v4: () => 'c0ac5395-ba7c-41bf-bbc3-09a6087bcca2',
 }));
-jest.useFakeTimers().setSystemTime(1622530750000);
-import { UserWithDefaultValues } from '@typedorm/core/__mocks__/user-default-value';
 
 let transformer: EntityTransformer;
 beforeEach(() => {
+  jest.useFakeTimers().setSystemTime(1622530750000);
   const connection = createTestConnection({
     entities: [
       User,
@@ -195,7 +195,7 @@ test('excludes hidden props from returned response', () => {
   });
 });
 
-test('transforms photo dynamo item to entity model instance ', () => {
+test('transforms photo dynamo item to entity model instance', () => {
   const dynamoEntity = {
     PK: 'PHOTO#PETS',
     SK: 'PHOTO#1',
@@ -238,7 +238,7 @@ test('transforms simple model to dynamo entity', () => {
   });
 });
 
-test('transforms photo entity to valid dynamo item ', () => {
+test('transforms photo entity to valid dynamo item', () => {
   const photo = new Photo(CATEGORY.KIDS, 'my baby');
 
   const response = transformer.toDynamoEntity(photo);
@@ -513,7 +513,7 @@ test('reverse transforms key schema to attributes', () => {
   });
 });
 
-test('safely fails to transform key for unknown entity ', () => {
+test('safely fails to transform key for unknown entity', () => {
   const attributes = transformer.fromDynamoKeyToAttributes(User, {
     PK: 'OTHERsUSER#12',
     SK: 'OTHER_USER#12',

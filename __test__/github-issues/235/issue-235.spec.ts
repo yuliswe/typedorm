@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-import { testTable } from './test-table';
 import { ProductEntity } from './specific-event-entity';
+import { testTable } from './test-table';
 
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import { EntityManager } from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 
 jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
 
@@ -26,9 +26,7 @@ afterEach(() => {
 });
 
 test('allows updating product with attribute affecting primary key and index', async () => {
-  dcMock.update.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.update.mockReturnValue({});
 
   await entityManager.update<ProductEntity>(
     ProductEntity,

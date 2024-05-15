@@ -4,35 +4,34 @@ import {
   IndexOptions,
   InvalidDynamicUpdateAttributeValueError,
   InvalidFilterInputError,
-  InvalidSelectInputError,
   InvalidUniqueAttributeUpdateError,
   isEmptyObject,
   isObject,
   NoSuchIndexFoundError,
   QUERY_ORDER,
   QUERY_SELECT_TYPE,
-  Replace,
   RETURN_VALUES,
   Table,
   TRANSFORM_TYPE,
+  type Replace,
 } from '@typedorm/common';
+import type { DynamoEntitySchemaPrimaryKey } from '@typedorm/core/classes/metadata/entity-metadata';
+import type { LazyTransactionWriteItemListLoader } from '@typedorm/core/classes/transformer/is-lazy-transaction-write-item-list-loader';
 import { DocumentClientTypes } from '@typedorm/document-client';
-import { autoGenerateValue } from 'packages/core/src/helpers/auto-generate-attribute-value';
-import { dropProp } from 'packages/core/src/helpers/drop-prop';
-import { getConstructorForInstance } from 'packages/core/src/helpers/get-constructor-for-instance';
-import { parseKey } from 'packages/core/src/helpers/parse-key';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ExpressionBuilder } from 'packages/core/src/classes/expression/expression-builder';
 import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
 import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
 import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';
 import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
-import { DynamoEntitySchemaPrimaryKey } from 'packages/core/src/classes/metadata/entity-metadata';
 import {
   BaseTransformer,
   MetadataOptions,
 } from 'packages/core/src/classes/transformer/base-transformer';
-import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
+import { autoGenerateValue } from 'packages/core/src/helpers/auto-generate-attribute-value';
+import { dropProp } from 'packages/core/src/helpers/drop-prop';
+import { getConstructorForInstance } from 'packages/core/src/helpers/get-constructor-for-instance';
+import { parseKey } from 'packages/core/src/helpers/parse-key';
 
 export interface ManagerToDynamoPutItemOptions {
   /**
@@ -66,7 +65,7 @@ export interface ManagerToDynamoQueryItemsOptions {
    * Sort key condition
    * @default none - no sort key condition is applied
    */
-  keyCondition?: KeyConditionOptions;
+  keyCondition?: KeyConditionOptions<any>;
 
   /**
    * Max number of records to query
@@ -306,7 +305,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
       },
       ConsistentRead: options?.consistentRead,
       ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
-    } as DocumentClientTypes.GetItemInput;
+    };
 
     // if restricted item projection was requested
     if (options?.select?.length) {
@@ -314,6 +313,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
         options.select
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (!projection) {
         throw new Error(
           `Failed to build projection expression for input: ${JSON.stringify(
@@ -327,11 +327,8 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
 
       transformBody = {
         ...transformBody,
-        ProjectionExpression,
-        ExpressionAttributeNames: {
-          ...transformBody.ExpressionAttributeNames,
-          ...ExpressionAttributeNames,
-        },
+        ...(ProjectionExpression && { ProjectionExpression }),
+        ...(ExpressionAttributeNames && { ExpressionAttributeNames }),
       };
     }
 
@@ -343,6 +340,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
       primaryKey: null,
       body: transformBody,
     });
+
     return transformBody;
   }
 
@@ -379,7 +377,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     // FIXME: correctly apply decorated transformations on the primary key attributes
     // apply class transformation on attributes before further processing
     // primaryKeyAttributes = this.applyClassTransformerFormations(
-    //   primaryKeyAttributes
+    //   entityClass
     // ) as PrimaryKey;
 
     const parsedPrimaryKey = this.getParsedPrimaryKey<PrimaryKey>(
@@ -877,6 +875,7 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
     } else {
       parsedSortKey.name = indexToQuery.sortKey;
     }
+    // const sortKeyClass = schema.attributes[parsedSortKey.name];
 
     // at this point we have resolved partition key and table to query
     let queryInputParams = {
@@ -980,10 +979,6 @@ export class DocumentClientRequestTransformer extends BaseTransformer {
       // when projection keys are provided
       if (select && select.length) {
         const projection = this.expressionInputParser.parseToProjection(select);
-
-        if (!projection) {
-          throw new InvalidSelectInputError(select);
-        }
 
         const { ProjectionExpression, ExpressionAttributeNames } =
           this.expressionBuilder.buildProjectionExpression(projection);

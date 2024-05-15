@@ -14,7 +14,7 @@ export interface TableOptions {
   partitionKey: string; // identifier of partition key
   sortKey?: string; // identifier of sort key
   indexes?: {
-    [key: string]: IndexOptions;
+    [key: string]: IndexOptions | undefined;
   };
 }
 

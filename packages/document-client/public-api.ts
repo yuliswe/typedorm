@@ -1,5 +1,4 @@
 // Classes
-export * from './src/classes/document-client-v2';
 export * from './src/classes/document-client-v3';
 
 // Interfaces

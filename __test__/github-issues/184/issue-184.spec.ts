@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
-import { BatchManager, EntityManager, WriteBatch } from '@typedorm/core';
-import { SpecificEvent } from './specific-event-entity';
 import { QUERY_ORDER } from '@typedorm/common';
+import { BatchManager, EntityManager, WriteBatch } from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { SpecificEvent } from './specific-event-entity';
 
 let entityManager: EntityManager;
 let batchManager: BatchManager;
@@ -26,9 +26,7 @@ afterEach(() => {
 });
 
 test('correctly create event record using batch manager', async () => {
-  dcMock.batchWrite.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.batchWrite.mockReturnValue({});
 
   // when trying write entity of type specific event
   const event = new SpecificEvent();
@@ -63,18 +61,16 @@ test('correctly create event record using batch manager', async () => {
 
 test('correctly finds event record by id', async () => {
   dcMock.query.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          PK: 'SpecificEvent___100ConditionId',
-          SK: 1622529932772,
-          __en: 'SpecificEvent',
-          id: '100ConditionId',
-          sortKey: 1622529932772,
-          value: 6.831363201141357,
-        },
-      ],
-    }),
+    Items: [
+      {
+        PK: 'SpecificEvent___100ConditionId',
+        SK: 1622529932772,
+        __en: 'SpecificEvent',
+        id: '100ConditionId',
+        sortKey: 1622529932772,
+        value: 6.831363201141357,
+      },
+    ],
   });
 
   // when trying to find an entity by its id

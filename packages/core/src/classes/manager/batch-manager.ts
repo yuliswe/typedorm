@@ -1,8 +1,3 @@
-import { DocumentClientTypes } from '@typedorm/document-client';
-import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
-import { Connection } from 'packages/core/src/classes/connection/connection';
-import { DocumentClientBatchTransformer } from 'packages/core/src/classes/transformer/document-client-batch-transformer';
-import pLimit from 'p-limit';
 import {
   BATCH_READ_MAX_ALLOWED_ATTEMPTS,
   BATCH_WRITE_CONCURRENCY_LIMIT,
@@ -12,8 +7,13 @@ import {
   STATS_TYPE,
   isEmptyObject,
 } from '@typedorm/common';
+import { DocumentClientTypes } from '@typedorm/document-client';
+import pLimit from 'p-limit';
 import { ReadBatch } from 'packages/core/src/classes/batch/read-batch';
+import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
+import { Connection } from 'packages/core/src/classes/connection/connection';
 import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
+import { DocumentClientBatchTransformer } from 'packages/core/src/classes/transformer/document-client-batch-transformer';
 import { getUniqueRequestId } from 'packages/core/src/helpers/get-unique-request-id';
 
 export enum REQUEST_TYPE {
@@ -54,10 +54,20 @@ export interface BatchManageBaseOptions {
 
 export class BatchManager {
   private _dcBatchTransformer: DocumentClientBatchTransformer;
-  private _errorQueue: {
-    requestInput: any;
+  private _errorQueueForBatchRead: {
+    requestInput: DocumentClientTypes.BatchGetRequestMap;
     error: Error;
-    requestType: REQUEST_TYPE;
+    requestType: REQUEST_TYPE.BATCH_READ;
+  }[];
+  private _errorQueueForBatchWrite: {
+    requestInput: DocumentClientTypes.BatchWriteItemRequestMap;
+    error: Error;
+    requestType: REQUEST_TYPE.BATCH_WRITE;
+  }[];
+  private _errorQueueForTransactWrite: {
+    requestInput: DocumentClientTypes.TransactWriteItem;
+    error: Error;
+    requestType: REQUEST_TYPE.TRANSACT_WRITE;
   }[];
   private limit = pLimit(BATCH_WRITE_CONCURRENCY_LIMIT);
 
@@ -110,8 +120,8 @@ export class BatchManager {
               returnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
             }),
           // return original item when failed to process
-          rawInput,
-          REQUEST_TYPE.TRANSACT_WRITE
+          { requestInput: rawInput, requestType: REQUEST_TYPE.TRANSACT_WRITE },
+          this._errorQueueForTransactWrite
         );
       }
     );
@@ -145,8 +155,8 @@ export class BatchManager {
           },
 
           // default item to return if failed to process
-          rawInput,
-          REQUEST_TYPE.TRANSACT_WRITE
+          { requestInput: rawInput, requestType: REQUEST_TYPE.TRANSACT_WRITE },
+          this._errorQueueForTransactWrite
         );
       }
     );
@@ -161,8 +171,11 @@ export class BatchManager {
           }),
         // for batch requests this returning item will be transformed to
         // original input items later
-        batchRequestMap,
-        REQUEST_TYPE.BATCH_WRITE
+        {
+          requestInput: batchRequestMap,
+          requestType: REQUEST_TYPE.BATCH_WRITE,
+        },
+        this._errorQueueForBatchWrite
       );
     });
 
@@ -215,20 +228,15 @@ export class BatchManager {
 
     // 4.2. reverse parse all unprocessed inputs to original user inputs
     // parse failed items to original input
-    const failedItemsOriginalInput = this._errorQueue.flatMap(item => {
-      if (item.requestType === REQUEST_TYPE.BATCH_WRITE) {
-        return this._dcBatchTransformer.toWriteBatchInputList(
+    const failedItemsOriginalInput = [
+      ...this._errorQueueForBatchWrite.flatMap(item =>
+        this._dcBatchTransformer.toWriteBatchInputList(
           item.requestInput,
           metadata
-        );
-      } else if (item.requestType === REQUEST_TYPE.TRANSACT_WRITE) {
-        return item.requestInput;
-      } else {
-        throw new Error(
-          'Unsupported request type, if this continues please file an issue on github'
-        );
-      }
-    });
+        )
+      ),
+      ...this._errorQueueForTransactWrite.flatMap(item => item.requestInput),
+    ];
 
     // 5. return unProcessable or failed items to user
     return {
@@ -273,8 +281,11 @@ export class BatchManager {
             RequestItems: { ...batchRequestItems },
             ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
           }),
-        batchRequestItems,
-        REQUEST_TYPE.BATCH_READ
+        {
+          requestInput: batchRequestItems,
+          requestType: REQUEST_TYPE.BATCH_READ,
+        },
+        this._errorQueueForBatchRead
       );
     });
 
@@ -335,23 +346,25 @@ export class BatchManager {
     );
 
     // 4.3 transform failed items
-    const failedTransformedItems = this._errorQueue.flatMap(item => {
-      this.connection.logger.logError({
-        requestId,
-        scope: MANAGER_NAME.BATCH_MANAGER,
-        log: item.error,
-      });
-      return this._dcBatchTransformer.toReadBatchInputList(
-        item.requestInput,
-        metadata
-      );
-    });
+    const failedTransformedItems = this._errorQueueForBatchRead.flatMap(
+      item => {
+        this.connection.logger.logError({
+          requestId,
+          scope: MANAGER_NAME.BATCH_MANAGER,
+          log: item.error,
+        });
+        return this._dcBatchTransformer.toReadBatchInputList(
+          item.requestInput,
+          metadata
+        );
+      }
+    );
 
     // 5. return all items
     return {
-      items: transformedItems ?? [],
+      items: transformedItems,
       unprocessedItems: unprocessedTransformedItems ?? [],
-      failedItems: failedTransformedItems ?? [],
+      failedItems: failedTransformedItems,
     };
   }
 
@@ -426,11 +439,13 @@ export class BatchManager {
         async () =>
           this.connection.documentClient.batchWrite({
             RequestItems: { ...batchRequestMap },
-            ReturnItemCollectionMetrics:
-              metadataOptions?.returnConsumedCapacity,
+            ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
           }),
-        batchRequestMap,
-        REQUEST_TYPE.BATCH_WRITE
+        {
+          requestInput: batchRequestMap,
+          requestType: REQUEST_TYPE.BATCH_WRITE,
+        },
+        this._errorQueueForBatchWrite
       );
     });
 
@@ -537,7 +552,7 @@ export class BatchManager {
               };
             }
 
-            acc[tableName].Keys?.push(...unprocessedRequests.Keys);
+            acc[tableName].Keys?.push(...unprocessedRequests.Keys!);
           }
         );
         return acc;
@@ -558,8 +573,8 @@ export class BatchManager {
             RequestItems: { ...batchRequestMap },
             ReturnConsumedCapacity: metadataOptions?.returnConsumedCapacity,
           }),
-        batchRequestMap,
-        REQUEST_TYPE.BATCH_READ
+        { requestInput: batchRequestMap, requestType: REQUEST_TYPE.BATCH_READ },
+        this._errorQueueForBatchRead
       );
     });
 
@@ -591,7 +606,9 @@ export class BatchManager {
   }
 
   private resetErrorQueue() {
-    this._errorQueue = [];
+    this._errorQueueForBatchRead = [];
+    this._errorQueueForBatchWrite = [];
+    this._errorQueueForTransactWrite = [];
   }
 
   private mapBatchGetResponseToItemList(
@@ -608,20 +625,30 @@ export class BatchManager {
    * @param requestItem // request item input
    * @param requestType // request type
    */
-  private toLimited<T>(
-    anyPromiseFactory: () => Promise<T>,
-    requestItem: any,
-    requestType: REQUEST_TYPE
-  ) {
+  private toLimited<
+    T,
+    R extends
+      | {
+          requestInput: DocumentClientTypes.BatchWriteItemRequestMap;
+          requestType: REQUEST_TYPE.BATCH_WRITE;
+        }
+      | {
+          requestInput: DocumentClientTypes.BatchGetRequestMap;
+          requestType: REQUEST_TYPE.BATCH_READ;
+        }
+      | {
+          requestInput: DocumentClientTypes.TransactWriteItem;
+          requestType: REQUEST_TYPE.TRANSACT_WRITE;
+        },
+  >(anyPromiseFactory: () => Promise<T>, request: R, errorQueue: Partial<R>[]) {
     return this.limit(async () => {
       try {
         const response = await anyPromiseFactory();
         return response;
       } catch (err) {
-        this._errorQueue.push({
-          requestInput: requestItem,
-          error: err as any,
-          requestType,
+        errorQueue.push({
+          ...request,
+          error: err as Error,
         });
         // when any error is thrown while promises are running, return it
         // instead of throwing it to have other requests run as is without

@@ -36,20 +36,18 @@ test('scan manager works', () => {
  */
 test('scans table with simple options', async () => {
   dcMock.scan.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          id: '1',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-        {
-          id: '2',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-      ],
-    }),
+    Items: [
+      {
+        id: '1',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+      {
+        id: '2',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+    ],
   });
   const response = await manager.scan({
     limit: 1000,
@@ -80,20 +78,18 @@ test('scans table with simple options', async () => {
 
 test('scans table with parallel scan options', async () => {
   dcMock.scan.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          id: '1',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-        {
-          id: '2',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-      ],
-    }),
+    Items: [
+      {
+        id: '1',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+      {
+        id: '2',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+    ],
   });
   const response = await manager.scan({
     limitPerSegment: 1000,
@@ -129,27 +125,23 @@ test('scans table with parallel scan options', async () => {
 test('scans table with multiple requests', async () => {
   dcMock.scan
     .mockImplementationOnce(() => ({
-      promise: () => ({
-        Items: [
-          {
-            id: '1',
-            __en: 'user',
-          },
-        ],
-        LastEvaluatedKey: {
-          PK: '1',
+      Items: [
+        {
+          id: '1',
+          __en: 'user',
         },
-      }),
+      ],
+      LastEvaluatedKey: {
+        PK: '1',
+      },
     }))
     .mockImplementationOnce(() => ({
-      promise: () => ({
-        Items: [
-          {
-            id: '2',
-            __en: 'user',
-          },
-        ],
-      }),
+      Items: [
+        {
+          id: '2',
+          __en: 'user',
+        },
+      ],
     }));
   const response = await manager.scan({
     limit: 1000,
@@ -187,19 +179,17 @@ test('scans table with multiple requests', async () => {
 
 test('scans table with given options and returns deserialized and unknown items', async () => {
   dcMock.scan.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          id: '1',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-        {
-          id: '2',
-          data: '0x0000',
-        },
-      ],
-    }),
+    Items: [
+      {
+        id: '1',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+      {
+        id: '2',
+        data: '0x0000',
+      },
+    ],
   });
   const response = await manager.scan({
     limit: 1000,
@@ -244,15 +234,13 @@ test('runs parallel scan requests for each segment', async () => {
   dcMock.scan.mockImplementation(({ Segment }: { Segment: 0 | 1 }) => {
     callIndex[Segment] = callIndex[Segment] + 1;
     return {
-      promise: () => ({
-        Items: new Array(10).fill({
-          id: Segment,
-          __en: 'user',
-        }),
-        LastEvaluatedKey: {
-          PK: callIndex[Segment],
-        },
+      Items: new Array(10).fill({
+        id: Segment,
+        __en: 'user',
       }),
+      LastEvaluatedKey: {
+        PK: callIndex[Segment],
+      },
     };
   });
 
@@ -324,20 +312,18 @@ test('throws when trying to run parallel scan with invalid limit values', async 
  */
 test('finds items from table with over the scan api', async () => {
   dcMock.scan.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          id: '1',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-        {
-          id: '2',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-      ],
-    }),
+    Items: [
+      {
+        id: '1',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+      {
+        id: '2',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+    ],
   });
   const response = await manager.find(User);
 
@@ -366,20 +352,18 @@ test('finds items from table with over the scan api', async () => {
 
 test('finds items from table with over the scan api with given options', async () => {
   dcMock.scan.mockReturnValue({
-    promise: () => ({
-      Items: [
-        {
-          id: '1',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-        {
-          id: '2',
-          PK: 'USER#1',
-          __en: 'user',
-        },
-      ],
-    }),
+    Items: [
+      {
+        id: '1',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+      {
+        id: '2',
+        PK: 'USER#1',
+        __en: 'user',
+      },
+    ],
   });
   const response = await manager.find(User, {
     where: {
@@ -416,15 +400,13 @@ test('finds items from table with over the scan api with given options', async (
 
 test('finds items from table with using parallel scan', async () => {
   dcMock.scan.mockImplementation(({ Segment }) => ({
-    promise: () => ({
-      Items: [
-        {
-          id: Segment,
-          PK: `USER#${Segment}`,
-          __en: 'user',
-        },
-      ],
-    }),
+    Items: [
+      {
+        id: Segment,
+        PK: `USER#${Segment}`,
+        __en: 'user',
+      },
+    ],
   }));
   const response = await manager.find(User, {
     totalSegments: 2,
@@ -480,9 +462,7 @@ test('finds items from table with using parallel scan', async () => {
  */
 test('counts all entity items in the table', async () => {
   dcMock.scan.mockReturnValue({
-    promise: () => ({
-      Count: 7,
-    }),
+    Count: 7,
   });
   const response = await manager.count(User, {
     where: {
@@ -513,25 +493,19 @@ test('counts all entity items in the table', async () => {
 test('counts all entity items recursively with multiple requests', async () => {
   dcMock.scan
     .mockReturnValueOnce({
-      promise: () => ({
-        Count: 7,
-        LastEvaluatedKey: {
-          PK: 'USER#8',
-        },
-      }),
+      Count: 7,
+      LastEvaluatedKey: {
+        PK: 'USER#8',
+      },
     })
     .mockReturnValueOnce({
-      promise: () => ({
-        Count: 100,
-        LastEvaluatedKey: {
-          PK: 'USER#100',
-        },
-      }),
+      Count: 100,
+      LastEvaluatedKey: {
+        PK: 'USER#100',
+      },
     })
     .mockReturnValueOnce({
-      promise: () => ({
-        Count: 8,
-      }),
+      Count: 8,
     });
 
   const response = await manager.count(User);

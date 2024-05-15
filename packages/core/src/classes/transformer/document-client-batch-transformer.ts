@@ -1,12 +1,10 @@
-import { DocumentClientTypes } from '@typedorm/document-client';
 import {
   BATCH_READ_ITEMS_LIMIT,
   BATCH_WRITE_ITEMS_LIMIT,
   InvalidBatchWriteItemError,
   TRANSFORM_BATCH_TYPE,
 } from '@typedorm/common';
-import { v4 } from 'uuid';
-import { getHashedIdForInput } from 'packages/core/src/helpers/get-hashed-id-for-input';
+import { DocumentClientTypes } from '@typedorm/document-client';
 import {
   ReadBatch,
   ReadBatchItem,
@@ -16,17 +14,19 @@ import {
   isBatchAddDeleteItem,
 } from 'packages/core/src/classes/batch/type-guards';
 import {
-  WriteBatchItem,
   WriteBatch,
+  WriteBatchItem,
 } from 'packages/core/src/classes/batch/write-batch';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { isWriteTransactionItemList } from 'packages/core/src/classes/transaction/type-guards';
 import { MetadataOptions } from 'packages/core/src/classes/transformer/base-transformer';
 import {
-  isLazyTransactionWriteItemListLoader,
   LazyTransactionWriteItemListLoader,
+  isLazyTransactionWriteItemListLoader,
 } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 import { LowOrderTransformers } from 'packages/core/src/classes/transformer/low-order-transformers';
+import { getHashedIdForInput } from 'packages/core/src/helpers/get-hashed-id-for-input';
+import { v4 } from 'uuid';
 
 export type WriteRequestWithMeta = {
   tableName: string;
@@ -167,7 +167,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
             acc[currentFillingIndex][tableName] = [];
           }
 
-          acc[currentFillingIndex][tableName].push(perTableItems.shift());
+          acc[currentFillingIndex][tableName].push(perTableItems.shift()!);
           ++totalItemsAtCurrentFillingIndex;
 
           // batch write request has limit of 25 items per batch so once we hit that limit,
@@ -192,7 +192,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
     const multiBatchItems = Object.entries(requestsSortedByTable).reduce(
       (acc, [tableName, perTableItems]) => {
         // separate requests into multiple batch items, if there are more than allowed items to process in batch
-        while (perTableItems.Keys.length) {
+        while (perTableItems.Keys!.length) {
           if (!acc[currentFillingIndex]) {
             acc[currentFillingIndex] = {};
           }
@@ -204,7 +204,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
           }
 
           acc[currentFillingIndex][tableName].Keys?.push(
-            perTableItems.Keys.shift()
+            perTableItems.Keys!.shift()!
           );
           ++totalItemsAtCurrentFillingIndex;
 
@@ -259,11 +259,11 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
       itemTransformHashMap: Map<string, ReadBatchItem<any, any>>;
     }
   ) {
-    return Object.entries(requestMap).flatMap(([, readRequests]) => {
+    return Object.entries(requestMap).flatMap(([_, readRequests]) => {
       return this.toRawBatchInputItem<
         DocumentClientTypes.Key,
         ReadBatchItem<any, any>
-      >(readRequests.Keys, {
+      >(readRequests.Keys!, {
         namespaceId,
         itemTransformHashMap,
       });
@@ -409,6 +409,7 @@ export class DocumentClientBatchTransformer extends LowOrderTransformers {
           undefined,
           metadataOptions
         );
+
         acc.batchReadRequestItems.push({
           readRequest: itemToGet.Key as DocumentClientTypes.Key,
           tableName: itemToGet.TableName as string,

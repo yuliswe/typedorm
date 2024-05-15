@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import { EntityManager } from '@typedorm/core';
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import { TestEntity } from './test-entity';
 
 let entityManager: EntityManager;
@@ -25,15 +25,13 @@ afterEach(() => {
 describe('when schema version attribute is provided', () => {
   it('applies versioning to attributes on deserialization', async () => {
     dcMock.get.mockReturnValue({
-      promise: () => ({
-        Item: {
-          PK: 'ITEM#1',
-          id: '1',
-          unversionedAttribute: 'should always be here',
-          attributeInVersion2And3: 'should be omitted',
-          schemaVersion: 1,
-        },
-      }),
+      Item: {
+        PK: 'ITEM#1',
+        id: '1',
+        unversionedAttribute: 'should always be here',
+        attributeInVersion2And3: 'should be omitted',
+        schemaVersion: 1,
+      },
     });
 
     const item = await entityManager.findOne(TestEntity, {
@@ -50,7 +48,7 @@ describe('when schema version attribute is provided', () => {
   });
 
   it('applies versioning to attributes on serialization', async () => {
-    dcMock.put.mockReturnValue({ promise: () => ({}) });
+    dcMock.put.mockReturnValue({});
     const item = Object.assign(new TestEntity(), {
       id: '1',
       unversionedAttribute: 'should always be here',

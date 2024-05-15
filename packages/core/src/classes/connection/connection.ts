@@ -1,19 +1,16 @@
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DebugLogger,
   DYNAMO_QUERY_ITEMS_IMPLICIT_LIMIT,
   EntityTarget,
   getEntityDefinition,
-  loadPackage,
   NoSuchEntityExistsError,
   Replace,
   Table,
 } from '@typedorm/common';
-import {
-  DocumentClient,
-  DocumentClientV2,
-  DocumentClientV3,
-} from '@typedorm/document-client';
-import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
+import { DocumentClient, DocumentClientV3 } from '@typedorm/document-client';
+import { ConnectionMetadataBuilder } from 'packages/core/src/classes/connection/connection-metadata-builder';
+import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
 import { BatchManager } from 'packages/core/src/classes/manager/batch-manager';
 import { EntityManager } from 'packages/core/src/classes/manager/entity-manager';
 import { ScanManager } from 'packages/core/src/classes/manager/scan-manager';
@@ -23,8 +20,7 @@ import {
   DynamoEntitySchemaPrimaryKey,
   EntityMetadata,
 } from 'packages/core/src/classes/metadata/entity-metadata';
-import { ConnectionMetadataBuilder } from 'packages/core/src/classes/connection/connection-metadata-builder';
-import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
+import { isUsedForPrimaryKey } from 'packages/core/src/helpers/is-used-for-primary-key';
 
 export class Connection {
   readonly name: string;
@@ -59,9 +55,8 @@ export class Connection {
         DYNAMO_QUERY_ITEMS_IMPLICIT_LIMIT,
     };
 
-    this.documentClient = this.loadOrInitiateDocumentClient(
-      options.documentClient
-    );
+    this.documentClient =
+      options.documentClient ?? new DocumentClientV3(new DynamoDBClient());
 
     /**
      * This makes sure that we only ever build entity metadatas once per connection
@@ -195,20 +190,5 @@ export class Connection {
     return new ConnectionMetadataBuilder(this).buildEntityMetadatas(
       this.options.entities
     );
-  }
-
-  loadOrInitiateDocumentClient(documentClient?: unknown) {
-    if (!documentClient) {
-      const AWSModule = loadPackage('aws-sdk');
-      return new DocumentClientV2(new AWSModule.DynamoDB.DocumentClient());
-    }
-
-    if (documentClient instanceof DocumentClientV2) {
-      return documentClient;
-    } else if (documentClient instanceof DocumentClientV3) {
-      return documentClient;
-    } else {
-      return new DocumentClientV2(documentClient as any);
-    }
   }
 }

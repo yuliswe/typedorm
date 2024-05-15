@@ -1,26 +1,6 @@
 import {
-  BatchGetItemInput,
-  BatchGetItemOutput,
-  BatchWriteItemInput,
-  BatchWriteItemOutput,
-  DeleteItemInput,
-  DeleteItemOutput,
-  DynamoDBClient,
-  GetItemInput,
-  GetItemOutput,
-  PutItemInput,
-  PutItemOutput,
-  QueryInput,
-  QueryOutput,
-  ScanInput,
-  ScanOutput,
-  TransactGetItemsInput,
-  TransactGetItemsOutput,
   TransactionCanceledException,
-  TransactWriteItemsInput,
-  TransactWriteItemsOutput,
-  UpdateItemInput,
-  UpdateItemOutput,
+  type DynamoDBClient,
 } from '@aws-sdk/client-dynamodb';
 import {
   BatchGetCommand,
@@ -35,16 +15,26 @@ import {
   TransactWriteCommand,
   TranslateConfig,
   UpdateCommand,
+  type BatchGetCommandInput,
+  type BatchWriteCommandInput,
+  type DeleteCommandInput,
+  type GetCommandInput,
+  type PutCommandInput,
+  type QueryCommandInput,
+  type ScanCommandInput,
+  type UpdateCommandInput,
 } from '@aws-sdk/lib-dynamodb';
 import { isEmptyObject } from '@typedorm/common';
+import type { DocumentClientTypes } from '@typedorm/document-client';
+import { DocumentClient } from 'packages/document-client/src/classes/base-document-client';
 import { DEFAULT_TRANSLATE_CONFIG_V3 } from 'packages/document-client/src/constants/translate-config';
 import { TransactionCancelledException } from 'packages/document-client/src/exceptions';
-import { DocumentClient } from 'packages/document-client/src/classes/base-document-client';
 
 export class DocumentClientV3<
   DynamoDBDocumentClientType extends
     DynamoDBDocumentClient = DynamoDBDocumentClient,
-> extends DocumentClient {
+> implements DocumentClient
+{
   readonly documentClient: DynamoDBDocumentClientType;
   readonly version = 3;
 
@@ -52,8 +42,6 @@ export class DocumentClientV3<
     dynamoDBClient: DynamoDBClient,
     customTranslateConfig?: TranslateConfig
   ) {
-    super();
-
     const translateConfig = {
       marshallOptions:
         (customTranslateConfig &&
@@ -77,43 +65,39 @@ export class DocumentClientV3<
     ) as DynamoDBDocumentClientType;
   }
 
-  async put(input: PutItemInput): Promise<PutItemOutput> {
+  async put(input: PutCommandInput) {
     return this.documentClient.send(new PutCommand(input));
   }
 
-  async get(input: GetItemInput): Promise<GetItemOutput> {
+  async get(input: GetCommandInput) {
     return this.documentClient.send(new GetCommand(input));
   }
 
-  async query(input: QueryInput): Promise<QueryOutput> {
+  async query(input: QueryCommandInput) {
     return this.documentClient.send(new QueryCommand(input));
   }
 
-  async update(input: UpdateItemInput): Promise<UpdateItemOutput> {
+  async update(input: UpdateCommandInput) {
     return this.documentClient.send(new UpdateCommand(input));
   }
 
-  async delete(input: DeleteItemInput): Promise<DeleteItemOutput> {
+  async delete(input: DeleteCommandInput) {
     return this.documentClient.send(new DeleteCommand(input));
   }
 
-  async batchWrite(input: BatchWriteItemInput): Promise<BatchWriteItemOutput> {
+  async batchWrite(input: BatchWriteCommandInput) {
     return this.documentClient.send(new BatchWriteCommand(input));
   }
 
-  async batchGet(input: BatchGetItemInput): Promise<BatchGetItemOutput> {
+  async batchGet(input: BatchGetCommandInput) {
     return this.documentClient.send(new BatchGetCommand(input));
   }
 
-  async transactGet(
-    input: TransactGetItemsInput
-  ): Promise<TransactGetItemsOutput> {
+  async transactGet(input: DocumentClientTypes.TransactGetItemInput) {
     return this.documentClient.send(new TransactGetCommand(input));
   }
 
-  async transactWrite(
-    input: TransactWriteItemsInput
-  ): Promise<TransactWriteItemsOutput> {
+  async transactWrite(input: DocumentClientTypes.TransactWriteItemInput) {
     try {
       const response = await this.documentClient.send(
         new TransactWriteCommand(input)
@@ -135,7 +119,7 @@ export class DocumentClientV3<
     }
   }
 
-  async scan(input: ScanInput): Promise<ScanOutput> {
+  async scan(input: ScanCommandInput) {
     return this.documentClient.send(new ScanCommand(input));
   }
 }

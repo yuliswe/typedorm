@@ -9,6 +9,7 @@ import {
   Photo,
   PhotoPrimaryKey,
 } from '@typedorm/core/__mocks__/photo';
+import { DocumentClientRequestTransformer } from '@typedorm/core/classes/transformer/document-client-request-transformer';
 import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import { Customer } from 'packages/core/__mocks__/inherited-customer';
 import { table } from 'packages/core/__mocks__/table';
@@ -17,18 +18,17 @@ import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
 } from 'packages/core/__mocks__/user-unique-email';
-import { DocumentClientRequestTransformer } from 'packages/core/src/classes/transformer/document-client-request-transformer';
 import { LazyTransactionWriteItemListLoader } from 'packages/core/src/classes/transformer/is-lazy-transaction-write-item-list-loader';
 // eslint-disable-next-line node/no-extraneous-import
 import moment from 'moment';
-jest.useFakeTimers().setSystemTime(1622530750000);
 
 let transformer: DocumentClientRequestTransformer;
-beforeEach(async () => {
+beforeEach(() => {
   const connection = createTestConnection({
     entities: [User, Customer, UserUniqueEmail, Photo],
   });
   transformer = new DocumentClientRequestTransformer(connection);
+  jest.useFakeTimers().setSystemTime(1622530750000);
 });
 
 afterEach(() => {
@@ -291,7 +291,7 @@ test('transforms put item request with unique attributes and condition options',
   ]);
 });
 
-test('transforms put item request with default values ', () => {
+test('transforms put item request with default values', () => {
   resetTestConnection();
 
   @Entity({
@@ -344,7 +344,7 @@ test('transforms put item request with default values ', () => {
   expect(overriddenPutItem.Item.status).toEqual('unavailable');
 });
 
-test('transforms put item request with dynamic default values ', () => {
+test('transforms put item request with dynamic default values', () => {
   resetTestConnection();
 
   @Entity({
@@ -1447,7 +1447,7 @@ test('errors when querying unknown index', () => {
         },
       }
     )
-  ).toThrowError(
+  ).toThrow(
     'Requested to query items from index "LSI1", but no such index exists on entity.'
   );
 });

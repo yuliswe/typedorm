@@ -7,26 +7,26 @@ import {
   isEmptyObject,
   isObject,
 } from '@typedorm/common';
-import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
-import { Filter } from 'packages/core/src/classes/expression/filter';
 import {
   BaseExpressionInput,
   MERGE_STRATEGY,
 } from 'packages/core/src/classes/expression/base-expression-input';
-import { isScalarType } from 'packages/core/src/helpers/is-scalar-type';
-import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
-import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
 import { Condition } from 'packages/core/src/classes/expression/condition';
-import { Projection } from 'packages/core/src/classes/expression/projection';
+import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
+import { Filter } from 'packages/core/src/classes/expression/filter';
+import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';
+import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';
 import { KeyConditionOptions } from 'packages/core/src/classes/expression/key-condition-options-type';
+import { Projection } from 'packages/core/src/classes/expression/projection';
 import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
 import {
-  isSetOperatorComplexValueType,
   UpdateBody,
+  isSetOperatorComplexValueType,
 } from 'packages/core/src/classes/expression/update-body-type';
-import { SetUpdate } from 'packages/core/src/classes/expression/update/set-update';
 import { AddUpdate } from 'packages/core/src/classes/expression/update/add-update';
+import { SetUpdate } from 'packages/core/src/classes/expression/update/set-update';
 import { Update } from 'packages/core/src/classes/expression/update/update';
+import { isScalarType } from 'packages/core/src/helpers/is-scalar-type';
 
 import { DeleteUpdate } from 'packages/core/src/classes/expression/update/delete-update';
 import { RemoveUpdate } from 'packages/core/src/classes/expression/update/remove-update';
@@ -36,7 +36,7 @@ import { nestedKeyAccessRegex } from 'packages/core/src/helpers/constants';
  * Parses expression input to expression instances
  */
 export class ExpressionInputParser {
-  parseToKeyCondition(key: string, options: KeyConditionOptions) {
+  parseToKeyCondition(key: string, options: KeyConditionOptions<any>) {
     return this.operatorToBaseExpression(key, options, new KeyCondition());
   }
 
@@ -125,7 +125,7 @@ export class ExpressionInputParser {
     options: any,
     ExpClass: new () => T
   ) {
-    return Object.entries(options).map(([operatorOrAttr, value]): T => {
+    return Object.entries<T>(options).map(([operatorOrAttr, value]): T => {
       // if top level key is one of the logical operators, rerun parse with it's values
       if (['AND', 'OR', 'NOT'].includes(operatorOrAttr)) {
         const parsedExpList = this.recursiveParseToBaseExpression<T>(
@@ -166,7 +166,7 @@ export class ExpressionInputParser {
         // when top level attribute is something other than actual logical operators, try to parse it to expression
         return this.operatorToBaseExpression(
           operatorOrAttr,
-          value,
+          value as KeyConditionOptions<any>,
           new ExpClass()
         );
       }
@@ -352,8 +352,8 @@ export class ExpressionInputParser {
    * @param exp expression to append operators to
    */
   private operatorToBaseExpression<T extends BaseExpressionInput>(
-    attribute: any,
-    value: any,
+    attribute: string,
+    value: KeyConditionOptions<any>,
     exp: T
   ) {
     switch (typeof value) {

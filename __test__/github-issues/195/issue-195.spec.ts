@@ -1,10 +1,8 @@
-import { Article, IArticlePrimaryKey } from './specific-event-entity';
 import 'reflect-metadata';
+import { Article, IArticlePrimaryKey } from './specific-event-entity';
 
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 import { EntityManager } from '@typedorm/core';
-
-jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
+import { createTestConnection, resetTestConnection } from '@typedorm/testing';
 
 let entityManager: EntityManager;
 
@@ -17,6 +15,7 @@ beforeEach(() => {
     documentClient: dcMock,
   });
   entityManager = new EntityManager(connection);
+  jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
 });
 
 afterEach(() => {
@@ -24,9 +23,7 @@ afterEach(() => {
 });
 
 test('allows updating article with primary key', async () => {
-  dcMock.update.mockReturnValue({
-    promise: () => ({}),
-  });
+  dcMock.update.mockReturnValue({});
 
   await entityManager.update<Article, IArticlePrimaryKey>(
     Article,

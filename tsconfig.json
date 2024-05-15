@@ -50,5 +50,5 @@
     "rootDirs": ["."]
   },
   "exclude": ["dist", "node_modules", "tools", "build"],
-  "include": ["packages/**/*"]
+  "include": ["packages/**/*", "jest.config.ts"]
 }
