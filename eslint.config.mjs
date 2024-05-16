@@ -1,6 +1,6 @@
 import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
-// import jest from 'eslint-plugin-jest';
+import jest from 'eslint-plugin-jest';
 import noRelativeImportPaths from 'eslint-plugin-no-relative-import-paths';
 import unusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
@@ -27,7 +27,7 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         project: './tsconfig.json',
-        tsconfigRootDir: import.meta.dirname,
+        // tsconfigRootDir: import.meta.url,
       },
     },
     plugins: {
@@ -123,17 +123,15 @@ export default tseslint.config(
   },
   {
     files: ['**/*.spec.ts'],
+    ...jest.configs['flat/recommended'],
+  },
+  {
+    files: ['**/*.spec.ts'],
     rules: {
       'no-restricted-syntax': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
       'testing-library/await-async-query': 'off',
       'testing-library/await-sync-query': 'off',
-    },
-  },
-  {
-    files: ['jest.config.ts'],
-    rules: {
-      'no-relative-import-paths/no-relative-import-paths': 'off',
     },
   }
 );
