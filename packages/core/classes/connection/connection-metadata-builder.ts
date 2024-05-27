@@ -1,0 +1,76 @@
+import fg from 'fast-glob';
+import {
+  DuplicateEntityPhysicalNameError,
+  EntityTarget,
+  MetadataManager,
+  MissingRequiredEntityPhysicalNameError,
+} from 'packages/common';
+import { Connection } from 'packages/core/classes/connection/connection';
+import { EntityMetadataBuilder } from 'packages/core/classes/connection/entity-metadata-builder';
+import { EntityMetadata } from 'packages/core/classes/metadata/entity-metadata';
+import path from 'path';
+
+export class ConnectionMetadataBuilder {
+  constructor(private connection: Connection) {}
+
+  buildEntityMetadatas(entities: EntityTarget<any>[] | string) {
+    let possibleEntitiesToBuild = [] as Function[];
+    if (typeof entities === 'string') {
+      possibleEntitiesToBuild = [...this.loadEntitiesFromDirs(entities)];
+    } else {
+      possibleEntitiesToBuild = [...entities];
+    }
+
+    // filter all entities that are not marked with `@Entity` decorator
+    const entitiesToBuild = possibleEntitiesToBuild.filter(entity =>
+      MetadataManager.metadataStorage.hasKnownEntity(entity)
+    );
+
+    const entityMetadatas = new EntityMetadataBuilder(this.connection).build(
+      entitiesToBuild
+    );
+    this.sanitizeDuplicates(entityMetadatas);
+
+    return entityMetadatas;
+  }
+
+  private loadEntitiesFromDirs(pathMatchPattern: string) {
+    const classesDirectory = path.normalize(pathMatchPattern);
+    const allFiles = fg
+      .sync(classesDirectory, {
+        dot: false,
+      })
+      .map(file => require(file));
+    return this.recursiveLoadModulesFromFiles(allFiles, []);
+  }
+
+  private recursiveLoadModulesFromFiles(exported: any, allLoaded: Function[]) {
+    if (typeof exported === 'function') {
+      allLoaded.push(exported);
+    } else if (Array.isArray(exported)) {
+      exported.forEach((file: any) =>
+        this.recursiveLoadModulesFromFiles(file, allLoaded)
+      );
+    } else if (typeof exported === 'object' && exported !== null) {
+      Object.keys(exported).forEach(key =>
+        this.recursiveLoadModulesFromFiles(exported[key], allLoaded)
+      );
+    }
+    return allLoaded;
+  }
+
+  private sanitizeDuplicates(metadata: EntityMetadata[]) {
+    const cache: string[] = [];
+    metadata.forEach(metadata => {
+      if (!metadata.name) {
+        throw new MissingRequiredEntityPhysicalNameError(metadata.target.name);
+      }
+
+      if (cache.includes(metadata.name)) {
+        throw new DuplicateEntityPhysicalNameError(metadata.name);
+      } else {
+        cache.push(metadata.name);
+      }
+    });
+  }
+}

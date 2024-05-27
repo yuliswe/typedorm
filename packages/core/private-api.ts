@@ -1,2 +1,2 @@
-export * from './src/classes/connection/connection-manager';
-export * from './src/classes/container';
+export * from 'packages/core/classes/connection/connection-manager';
+export * from 'packages/core/classes/container';

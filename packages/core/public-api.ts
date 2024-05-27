@@ -1,29 +1,29 @@
-import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
-import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
-import { Container } from 'packages/core/src/classes/container';
+import { ConnectionManager } from 'packages/core/classes/connection/connection-manager';
+import { ConnectionOptions } from 'packages/core/classes/connection/connection-options';
+import { Container } from 'packages/core/classes/container';
 
 // options
-export * from './src/classes/connection/connection-options';
+export * from 'packages/core/classes/connection/connection-options';
 
 // models
-export * from './src/classes/batch/read-batch';
-export * from './src/classes/batch/write-batch';
-export * from './src/classes/expression/condition';
-export * from './src/classes/expression/key-condition';
-export * from './src/classes/transaction/read-transaction';
-export * from './src/classes/transaction/write-transaction';
+export * from 'packages/core/classes/batch/read-batch';
+export * from 'packages/core/classes/batch/write-batch';
+export * from 'packages/core/classes/expression/condition';
+export * from 'packages/core/classes/expression/key-condition';
+export * from 'packages/core/classes/transaction/read-transaction';
+export * from 'packages/core/classes/transaction/write-transaction';
 
 // managers
-export * from './src/classes/manager/batch-manager';
-export * from './src/classes/manager/entity-manager';
-export * from './src/classes/manager/scan-manager';
-export * from './src/classes/manager/transaction-manager';
+export * from 'packages/core/classes/manager/batch-manager';
+export * from 'packages/core/classes/manager/entity-manager';
+export * from 'packages/core/classes/manager/scan-manager';
+export * from 'packages/core/classes/manager/transaction-manager';
 
 // classes
-export { Connection } from './src/classes/connection/connection';
+export { Connection } from 'packages/core/classes/connection/connection';
 
 // helpers
-export { AutoGenerateAttributeValue } from './src/helpers/auto-generate-attribute-value';
+export { AutoGenerateAttributeValue } from 'packages/core/helpers/auto-generate-attribute-value';
 
 // public method exports
 
