@@ -1,4 +1,4 @@
-import { DocumentClientV3 } from '@typedorm/document-client';
+import { DocumentClientV3 } from 'packages/document-client';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 
 test('correctly instantiates documentClient v3', () => {

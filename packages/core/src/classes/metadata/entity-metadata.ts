@@ -5,7 +5,7 @@ import {
   INDEX_TYPE,
   INTERNAL_ENTITY_ATTRIBUTE,
   Table,
-} from '@typedorm/common';
+} from 'packages/common';
 import { buildPrimaryKeySchema } from 'packages/core/src/helpers/build-primary-key-schema';
 import { getInterpolatedKeys } from 'packages/core/src/helpers/get-interpolated-keys';
 import { validateKey } from 'packages/core/src/helpers/validate-key';

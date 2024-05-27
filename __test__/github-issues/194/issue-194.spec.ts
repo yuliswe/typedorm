@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
-import { EntityManager } from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { Tenant } from './tenant-entity';
 
 let entityManager: EntityManager;

@@ -1,4 +1,4 @@
-import { EntityAliasOrString, SparseIndexParseError } from '@typedorm/common';
+import { EntityAliasOrString, SparseIndexParseError } from 'packages/common';
 import { isKeyOfTypeAliasSchema } from 'packages/core/src/helpers/is-key-of-type-alias-schema';
 
 const regexExp = {

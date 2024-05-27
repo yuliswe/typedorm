@@ -1,5 +1,5 @@
-import { EntityTarget } from '@typedorm/common';
-import { DocumentClientTypes } from '@typedorm/document-client';
+import { EntityTarget } from 'packages/common';
+import { DocumentClientTypes } from 'packages/document-client';
 
 export type LazyTransactionWriteItemListLoader = {
   lazyLoadTransactionWriteItems: (

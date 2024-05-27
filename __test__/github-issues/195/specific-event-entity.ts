@@ -5,7 +5,7 @@ import {
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
   INDEX_TYPE,
-} from '@typedorm/common';
+} from 'packages/common';
 
 enum ENTITY_STATE {
   ACTIVE = 1,

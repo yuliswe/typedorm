@@ -1,5 +1,5 @@
-import { ATTRIBUTE_TYPE } from '@typedorm/common';
-import { User, UserPrimaryKey } from '@typedorm/core/__mocks__/user';
+import { ATTRIBUTE_TYPE } from 'packages/common';
+import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
 import { Condition } from 'packages/core/src/classes/expression/condition';
 import { ExpressionInputParser } from 'packages/core/src/classes/expression/expression-input-parser';
 import { Filter } from 'packages/core/src/classes/expression/filter';

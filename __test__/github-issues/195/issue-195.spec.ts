@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { Article, IArticlePrimaryKey } from './specific-event-entity';
 
-import { EntityManager } from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 
 let entityManager: EntityManager;
 

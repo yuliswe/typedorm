@@ -5,7 +5,7 @@ import {
   isEmptyObject,
   SparseIndexParseError,
   Table,
-} from '@typedorm/common';
+} from 'packages/common';
 import { classToPlain } from 'class-transformer';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ExpressionInputParser } from 'packages/core/src/classes/expression/expression-input-parser';

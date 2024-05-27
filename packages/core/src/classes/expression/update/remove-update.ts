@@ -1,4 +1,4 @@
-import { UpdateType } from '@typedorm/common';
+import { UpdateType } from 'packages/common';
 import { Update } from 'packages/core/src/classes/expression/update/update';
 
 export class RemoveUpdate extends Update {

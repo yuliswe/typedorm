@@ -3,8 +3,8 @@ import {
   BATCH_WRITE_ITEMS_LIMIT,
   InvalidBatchWriteItemError,
   TRANSFORM_BATCH_TYPE,
-} from '@typedorm/common';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClientTypes } from 'packages/document-client';
 import {
   ReadBatch,
   ReadBatchItem,

@@ -2,7 +2,7 @@ import KSUID from 'ksuid';
 import {
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   UnknownAttributeValueGenerationStrategyError,
-} from '@typedorm/common';
+} from 'packages/common';
 import { v4 } from 'uuid';
 
 export class AutoGenerateAttributeValue {

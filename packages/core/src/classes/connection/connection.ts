@@ -7,8 +7,8 @@ import {
   NoSuchEntityExistsError,
   Replace,
   Table,
-} from '@typedorm/common';
-import { DocumentClient, DocumentClientV3 } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClient, DocumentClientV3 } from 'packages/document-client';
 import { ConnectionMetadataBuilder } from 'packages/core/src/classes/connection/connection-metadata-builder';
 import { ConnectionOptions } from 'packages/core/src/classes/connection/connection-options';
 import { BatchManager } from 'packages/core/src/classes/manager/batch-manager';

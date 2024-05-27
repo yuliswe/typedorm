@@ -3,7 +3,7 @@ import {
   PrimaryKey,
   IsCompositePrimaryKey,
   EntityAliasOrString,
-} from '@typedorm/common';
+} from 'packages/common';
 import { getInterpolatedKeys } from 'packages/core/src/helpers/get-interpolated-keys';
 import { validateKey } from 'packages/core/src/helpers/validate-key';
 

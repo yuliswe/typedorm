@@ -7,7 +7,7 @@ import {
   getTransactionManger,
   TransactionManager,
   ScanManager,
-} from '@typedorm/core';
+} from 'packages/core';
 import {
   createTestConnection,
   resetTestConnection,

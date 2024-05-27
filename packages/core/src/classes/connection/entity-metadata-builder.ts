@@ -2,7 +2,7 @@ import {
   MetadataManager,
   MissingRequiredTableConfig,
   Table,
-} from '@typedorm/common';
+} from 'packages/common';
 import {
   AttributeMetadataType,
   EntityMetadata,

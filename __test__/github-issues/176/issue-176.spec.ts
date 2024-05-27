@@ -4,8 +4,8 @@ import {
   AutoGenerateAttributeValue,
   BatchManager,
   WriteBatch,
-} from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+} from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { User } from './user-entity';
 
 jest.mock('uuid', () => {

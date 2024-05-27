@@ -1,4 +1,4 @@
-import { IsCompositePrimaryKey, PrimaryKey } from '@typedorm/common';
+import { IsCompositePrimaryKey, PrimaryKey } from 'packages/common';
 import { DynamoEntitySchemaPrimaryKey } from 'packages/core/src/classes/metadata/entity-metadata';
 import { getInterpolatedKeys } from 'packages/core/src/helpers/get-interpolated-keys';
 

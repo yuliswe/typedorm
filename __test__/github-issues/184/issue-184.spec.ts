@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 
-import { QUERY_ORDER } from '@typedorm/common';
-import { BatchManager, EntityManager, WriteBatch } from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { QUERY_ORDER } from 'packages/common';
+import { BatchManager, EntityManager, WriteBatch } from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { SpecificEvent } from './specific-event-entity';
 
 let entityManager: EntityManager;

@@ -1,7 +1,7 @@
 import {
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   EntityTarget,
-} from '@typedorm/common';
+} from 'packages/common';
 import { Table } from 'packages/common/src/table';
 import { AttributeOptionsUniqueType } from 'packages/common/src/decorators/attribute.decorator';
 import { ScalarType } from 'packages/common/src/helpers/scalar-type';

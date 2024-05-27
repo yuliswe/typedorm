@@ -8,7 +8,7 @@ import {
   ScalarType,
   SimplePrimaryKey,
   Table,
-} from '@typedorm/common';
+} from 'packages/common';
 import { buildPrimaryKeySchema } from 'packages/core/src/helpers/build-primary-key-schema';
 import { isScalarTypeProvider } from 'packages/core/src/helpers/is-scalar-type';
 import {

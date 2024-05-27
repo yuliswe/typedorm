@@ -2,7 +2,7 @@ import {
   EntityAliasOrString,
   InvalidAttributeAliasSchemaError,
   NoSuchAttributeExistsError,
-} from '@typedorm/common';
+} from 'packages/common';
 import { regexInterpolatedWord } from 'packages/core/src/helpers/constants';
 import { isKeyOfTypeAliasSchema } from 'packages/core/src/helpers/is-key-of-type-alias-schema';
 

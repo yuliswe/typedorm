@@ -1,4 +1,4 @@
-import { Attribute, Entity } from '@typedorm/common';
+import { Attribute, Entity } from 'packages/common';
 import { table } from 'packages/core/__mocks__/table';
 
 abstract class BaseUser {

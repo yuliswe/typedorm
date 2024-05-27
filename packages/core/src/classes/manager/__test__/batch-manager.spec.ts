@@ -1,8 +1,8 @@
 import { ReturnConsumedCapacity } from '@aws-sdk/client-dynamodb';
-import { Replace } from '@typedorm/common';
-import { User } from '@typedorm/core/__mocks__/user';
-import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Replace } from 'packages/common';
+import { User } from 'packages/core/__mocks__/user';
+import { UserUniqueEmail } from 'packages/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { ReadBatch } from 'packages/core/src/classes/batch/read-batch';
 import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
 import { Connection } from 'packages/core/src/classes/connection/connection';

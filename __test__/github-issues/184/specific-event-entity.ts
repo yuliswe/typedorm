@@ -1,4 +1,4 @@
-import { Attribute, Entity } from '@typedorm/common';
+import { Attribute, Entity } from 'packages/common';
 import { testTable } from '../../__mocks__/test-table';
 
 class BaseEvent {

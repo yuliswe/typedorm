@@ -24,8 +24,8 @@ import {
   type ScanCommandInput,
   type UpdateCommandInput,
 } from '@aws-sdk/lib-dynamodb';
-import { isEmptyObject } from '@typedorm/common';
-import type { DocumentClientTypes } from '@typedorm/document-client';
+import { isEmptyObject } from 'packages/common';
+import type { DocumentClientTypes } from 'packages/document-client';
 import { DocumentClient } from 'packages/document-client/src/classes/base-document-client';
 import { DEFAULT_TRANSLATE_CONFIG_V3 } from 'packages/document-client/src/constants/translate-config';
 import { TransactionCancelledException } from 'packages/document-client/src/exceptions';

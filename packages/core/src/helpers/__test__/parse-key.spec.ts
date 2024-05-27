@@ -1,5 +1,5 @@
 import { parseKey } from 'packages/core/src/helpers/parse-key';
-import { SparseIndexParseError } from '@typedorm/common';
+import { SparseIndexParseError } from 'packages/common';
 
 describe('parseKey()', () => {
   it('should parse key and replace interpolation values with actual value', () => {

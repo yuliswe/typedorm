@@ -1,4 +1,4 @@
-import { ATTRIBUTE_TYPE, ScalarType, SimpleOperator } from '@typedorm/common';
+import { ATTRIBUTE_TYPE, ScalarType, SimpleOperator } from 'packages/common';
 import { nestedKeyAccessRegex } from 'packages/core/src/helpers/constants';
 
 const lastCharSpaceMatcher = /\s$/;

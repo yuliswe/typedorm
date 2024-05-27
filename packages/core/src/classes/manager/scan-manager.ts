@@ -5,9 +5,9 @@ import {
   MANAGER_NAME,
   PARALLEL_SCAN_CONCURRENCY_LIMIT,
   STATS_TYPE,
-} from '@typedorm/common';
-import { DocumentClientScanTransformer } from '@typedorm/core/classes/transformer/document-client-scan-transformer';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClientScanTransformer } from 'packages/core/classes/transformer/document-client-scan-transformer';
+import { DocumentClientTypes } from 'packages/document-client';
 import pLimit from 'p-limit';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';

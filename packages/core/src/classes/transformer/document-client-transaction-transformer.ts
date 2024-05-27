@@ -2,8 +2,8 @@ import {
   InvalidTransactionReadItemError,
   InvalidTransactionWriteItemError,
   TRANSFORM_TRANSACTION_TYPE,
-} from '@typedorm/common';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClientTypes } from 'packages/document-client';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import {
   ReadTransaction,

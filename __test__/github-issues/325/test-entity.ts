@@ -1,4 +1,4 @@
-import { Attribute, Entity } from '@typedorm/common';
+import { Attribute, Entity } from 'packages/common';
 import { testTable } from './test-table';
 import { Expose } from 'class-transformer';
 

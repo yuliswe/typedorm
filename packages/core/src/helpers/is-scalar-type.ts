@@ -1,4 +1,4 @@
-import { ScalarType } from '@typedorm/common';
+import { ScalarType } from 'packages/common';
 
 export const isScalarType = (item: any): item is ScalarType =>
   typeof item === 'string' ||

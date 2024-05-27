@@ -1,4 +1,4 @@
-import { UpdateType } from '@typedorm/common';
+import { UpdateType } from 'packages/common';
 import { BaseExpressionInput } from 'packages/core/src/classes/expression/base-expression-input';
 
 export class Update extends BaseExpressionInput {

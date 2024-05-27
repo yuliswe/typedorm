@@ -5,9 +5,9 @@ import {
   TRANSACTION_READ_ITEMS_LIMIT,
   TRANSACTION_WRITE_ITEMS_LIMIT,
   WriteTransactionItemLimitExceededError,
-} from '@typedorm/common';
-import { DocumentClientTransactionTransformer } from '@typedorm/core/classes/transformer/document-client-transaction-transformer';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClientTransactionTransformer } from 'packages/core/classes/transformer/document-client-transaction-transformer';
+import { DocumentClientTypes } from 'packages/document-client';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ReadTransaction } from 'packages/core/src/classes/transaction/read-transaction';
 import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';

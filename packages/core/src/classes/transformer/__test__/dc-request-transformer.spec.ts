@@ -3,14 +3,14 @@ import {
   Entity,
   InvalidUniqueAttributeUpdateError,
   QUERY_ORDER,
-} from '@typedorm/common';
+} from 'packages/common';
 import {
   CATEGORY,
   Photo,
   PhotoPrimaryKey,
-} from '@typedorm/core/__mocks__/photo';
-import { DocumentClientRequestTransformer } from '@typedorm/core/classes/transformer/document-client-request-transformer';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+} from 'packages/core/__mocks__/photo';
+import { DocumentClientRequestTransformer } from 'packages/core/classes/transformer/document-client-request-transformer';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { Customer } from 'packages/core/__mocks__/inherited-customer';
 import { table } from 'packages/core/__mocks__/table';
 import { User, UserGSI1, UserPrimaryKey } from 'packages/core/__mocks__/user';

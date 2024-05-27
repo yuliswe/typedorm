@@ -1,4 +1,4 @@
-import { isEmptyObject } from '@typedorm/common';
+import { isEmptyObject } from 'packages/common';
 import {
   WriteBatchCreate,
   WriteBatchDelete,

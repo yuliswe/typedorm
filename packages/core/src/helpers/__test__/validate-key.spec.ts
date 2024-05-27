@@ -1,4 +1,4 @@
-import { NoSuchAttributeExistsError } from '@typedorm/common';
+import { NoSuchAttributeExistsError } from 'packages/common';
 import { validateKey } from 'packages/core/src/helpers/validate-key';
 
 describe('validateKey()', () => {

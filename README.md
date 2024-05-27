@@ -96,7 +96,7 @@ This guide shows how to setup single-table-design
 `my-table.ts`
 
 ```typescript
-import { Table, INDEX_TYPE } from '@typedorm/common';
+import { Table, INDEX_TYPE } from 'packages/common';
 
 // create table
 
@@ -130,8 +130,8 @@ const myGlobalTable = new Table({
 `organisation.entity.ts`
 
 ```typescript
-import { Attribute, Entity, AutoGenerateAttribute } from '@typedorm/common';
-import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from '@typedorm/common';
+import { Attribute, Entity, AutoGenerateAttribute } from 'packages/common';
+import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from 'packages/common';
 
 @Entity({
   name: 'organisation',
@@ -183,8 +183,8 @@ The connection initialization steps slightly defers when using AWS SDK V2 vs V3.
 ##### When using AWS SDK V2
 
 ```typescript
-import { createConnection } from '@typedorm/core';
-import { DocumentClientV2 } from '@typedorm/document-client';
+import { createConnection } from 'packages/core';
+import { DocumentClientV2 } from 'packages/document-client';
 import AWS from 'aws-sdk';
 
 const documentClient = new DocumentClientV2(new AWS.DynamoDB.DocumentClient());
@@ -207,8 +207,8 @@ createConnection({
 ##### When using AWS SDK V3
 
 ```typescript
-import { createConnection } from '@typedorm/core';
-import { DocumentClientV3 } from '@typedorm/document-client';
+import { createConnection } from 'packages/core';
+import { DocumentClientV3 } from 'packages/document-client';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 const documentClient = new DocumentClientV3(new DynamoDBClient({}));
@@ -231,7 +231,7 @@ createConnection({
 #### Working with entity manager
 
 ```typescript
-import { getEntityManager } from '@typedorm/core';
+import { getEntityManager } from 'packages/core';
 
 const org = new Organisation();
 org.name = 'My awesome org';

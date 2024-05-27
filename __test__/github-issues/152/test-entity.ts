@@ -1,4 +1,4 @@
-import { Attribute, Entity, INDEX_TYPE } from '@typedorm/common';
+import { Attribute, Entity, INDEX_TYPE } from 'packages/common';
 import { testTable } from '../../__mocks__/test-table';
 
 @Entity({

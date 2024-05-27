@@ -1,7 +1,7 @@
 import { User } from 'packages/core/__mocks__/user';
 import { UserSparseIndexes } from 'packages/core/__mocks__/user-sparse-indexes';
 import { EntityMetadataBuilder } from 'packages/core/src/classes/connection/entity-metadata-builder';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import {
   Attribute,
   AutoGenerateAttribute,
@@ -9,9 +9,9 @@ import {
   Entity,
   MissingRequiredTableConfig,
   Table,
-} from '@typedorm/common';
+} from 'packages/common';
 import { table } from 'packages/core/__mocks__/table';
-import { UserAttrAlias } from '@typedorm/core/__mocks__/user-with-attribute-alias';
+import { UserAttrAlias } from 'packages/core/__mocks__/user-with-attribute-alias';
 
 jest.mock('uuid', () => ({
   v4: jest.fn().mockReturnValue('12-3-1-23-12'),

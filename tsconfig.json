@@ -36,11 +36,9 @@
     "outDir": "./dist",
     "sourceRoot": "./packages",
     "paths": {
-      "@typedorm/common": ["packages/common"],
-      "@typedorm/common/*": ["packages/common/src/*", "packages/common/*"],
-      "@typedorm/core/*": ["packages/core/src/*", "packages/core/*"],
-      "@typedorm/testing/*": ["packages/testing/src/*"],
-      "@typedorm/*": ["packages/*"]
+      "packages/common/*": ["packages/common/src/*", "packages/common/*"],
+      "packages/core/*": ["packages/core/src/*", "packages/core/*"],
+      "packages/testing/*": ["packages/testing/src/*", "packages/testing/*"]
     },
     // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
     "plugins": [

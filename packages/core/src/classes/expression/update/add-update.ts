@@ -1,4 +1,4 @@
-import { ScalarType, UpdateType } from '@typedorm/common';
+import { ScalarType, UpdateType } from 'packages/common';
 import { Update } from 'packages/core/src/classes/expression/update/update';
 
 export class AddUpdate extends Update {

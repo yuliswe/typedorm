@@ -514,7 +514,7 @@ Let's look at an example of writing items over batch manager api
 ### Write items
 
 ```Typescript
-import {WriteBatch, BatchManager} from '@typedorm/core'
+import {WriteBatch, BatchManager} from 'packages/core'
 
 const user = new User();
 user.id = '1';
@@ -541,7 +541,7 @@ const batchResponse = await getBatchManager().write(batchToWrite, {
 If item was not processed even after x retries, it is returned back to user as `unprocessedItems`, if this was because low write throughput and you need to retry, you can do this very easily like this:
 
 ```Typescript
-import {WriteBatch, BatchManager} from '@typedorm/core'
+import {WriteBatch, BatchManager} from 'packages/core'
 
 // i.e suppose there were x items returned as unprocessed items from earlier batch write attempt
 
@@ -563,7 +563,7 @@ Let' look at how batch manger's read op works:
 ### Read items
 
 ```Typescript
-import {ReadBatch, BatchManager} from '@typedorm/core'
+import {ReadBatch, BatchManager} from 'packages/core'
 
 // first we create a read batch instance with all the keys that we would like to get items for
 const batchItemsToRead = new ReadBatch()
@@ -598,7 +598,7 @@ _Note: When reading items in batches, order of items returned is not guaranteed.
 Again similar to write items, read items can also be manually retried like this:
 
 ```Typescript
-import {ReadBatch, BatchManager} from '@typedorm/core'
+import {ReadBatch, BatchManager} from 'packages/core'
 
 // i.e suppose there were x items returned as unprocessed items from earlier batch read attempt
 

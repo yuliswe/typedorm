@@ -1,5 +1,5 @@
-import { DocumentClientTypes } from '@typedorm/document-client';
-import { DynamoEntity, EntityTarget, TRANSFORM_TYPE } from '@typedorm/common';
+import { DocumentClientTypes } from 'packages/document-client';
+import { DynamoEntity, EntityTarget, TRANSFORM_TYPE } from 'packages/common';
 import { plainToClassFromExist } from 'class-transformer';
 import { unParseKey } from 'packages/core/src/helpers/unparse-key';
 import { Connection } from 'packages/core/src/classes/connection/connection';

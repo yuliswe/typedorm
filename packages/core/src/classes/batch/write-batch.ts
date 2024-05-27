@@ -1,4 +1,4 @@
-import { EntityTarget } from '@typedorm/common';
+import { EntityTarget } from 'packages/common';
 import { Batch } from 'packages/core/src/classes/batch/batch';
 
 export interface WriteBatchCreate<Entity> {

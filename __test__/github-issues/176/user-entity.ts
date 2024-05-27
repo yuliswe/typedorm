@@ -3,7 +3,7 @@ import {
   AutoGenerateAttribute,
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
-} from '@typedorm/common';
+} from 'packages/common';
 import { testTable } from '../../__mocks__/test-table';
 
 @Entity({

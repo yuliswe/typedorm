@@ -1,4 +1,4 @@
-import { RequireOnlyOne, type KeyConditionType } from '@typedorm/common';
+import { RequireOnlyOne, type KeyConditionType } from 'packages/common';
 
 export type KeyConditionOptions<V> = RequireOnlyOne<
   {

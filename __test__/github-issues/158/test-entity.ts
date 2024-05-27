@@ -1,4 +1,4 @@
-import { Attribute, Entity, INDEX_TYPE } from '@typedorm/common';
+import { Attribute, Entity, INDEX_TYPE } from 'packages/common';
 const uuid4 = () => '12345678';
 
 @Entity({

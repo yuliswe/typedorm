@@ -4,7 +4,7 @@ import {
   NonKeyAttributesWithReturnType,
   RequireOnlyOne,
   ResolveScalarType,
-} from '@typedorm/common';
+} from 'packages/common';
 
 type AttributeFilterOptions<Entity, PrimaryKey> =
   // Require max 1 operator on non key attribute

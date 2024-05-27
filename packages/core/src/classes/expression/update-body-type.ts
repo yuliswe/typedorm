@@ -1,5 +1,5 @@
-import { UpdateType, RequireOnlyOne, InvalidType } from '@typedorm/common';
-import { isEmptyObject } from '@typedorm/common';
+import { UpdateType, RequireOnlyOne, InvalidType } from 'packages/common';
+import { isEmptyObject } from 'packages/common';
 
 /**
  * Type Guards

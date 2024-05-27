@@ -25,8 +25,8 @@ This packages can be installed by running the following command:
 Creating connection is simple and works the same way it did with AWS SDK version 2, with a slight change of how the document client instance is instantiated.
 
 ```typescript
-import { createConnection } from '@typedorm/core';
-import { DocumentClientV3 } from '@typedorm/document-client';
+import { createConnection } from 'packages/core';
+import { DocumentClientV3 } from 'packages/document-client';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 
 const documentClient = new DocumentClientV3(new DynamoDBClient({}));

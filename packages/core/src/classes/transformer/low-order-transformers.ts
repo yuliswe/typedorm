@@ -1,4 +1,4 @@
-import { DocumentClientRequestTransformer } from '@typedorm/core/classes/transformer/document-client-request-transformer';
+import { DocumentClientRequestTransformer } from 'packages/core/classes/transformer/document-client-request-transformer';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ExpressionBuilder } from 'packages/core/src/classes/expression/expression-builder';
 import { ExpressionInputParser } from 'packages/core/src/classes/expression/expression-input-parser';

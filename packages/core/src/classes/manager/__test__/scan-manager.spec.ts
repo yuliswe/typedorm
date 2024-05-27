@@ -1,9 +1,9 @@
-import { InvalidParallelScanLimitOptionError } from '@typedorm/common';
-import { table } from '@typedorm/core/__mocks__/table';
-import { User } from '@typedorm/core/__mocks__/user';
-import { UserAutoGenerateAttributes } from '@typedorm/core/__mocks__/user-auto-generate-attributes';
-import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { InvalidParallelScanLimitOptionError } from 'packages/common';
+import { table } from 'packages/core/__mocks__/table';
+import { User } from 'packages/core/__mocks__/user';
+import { UserAutoGenerateAttributes } from 'packages/core/__mocks__/user-auto-generate-attributes';
+import { UserUniqueEmail } from 'packages/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ScanManager } from 'packages/core/src/classes/manager/scan-manager';
 

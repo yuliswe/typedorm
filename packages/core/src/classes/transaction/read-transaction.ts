@@ -1,4 +1,4 @@
-import { EntityTarget } from '@typedorm/common';
+import { EntityTarget } from 'packages/common';
 import { ProjectionKeys } from 'packages/core/src/classes/expression/projection-keys-options-type';
 import { Transaction } from 'packages/core/src/classes/transaction/transaction';
 

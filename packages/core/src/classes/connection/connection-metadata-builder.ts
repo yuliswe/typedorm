@@ -4,10 +4,10 @@ import {
   DuplicateEntityPhysicalNameError,
   EntityTarget,
   MissingRequiredEntityPhysicalNameError,
-} from '@typedorm/common';
+} from 'packages/common';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { EntityMetadataBuilder } from 'packages/core/src/classes/connection/entity-metadata-builder';
-import { MetadataManager } from '@typedorm/common';
+import { MetadataManager } from 'packages/common';
 import { EntityMetadata } from 'packages/core/src/classes/metadata/entity-metadata';
 
 export class ConnectionMetadataBuilder {

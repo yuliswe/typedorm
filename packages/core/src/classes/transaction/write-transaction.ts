@@ -1,4 +1,4 @@
-import { EntityTarget } from '@typedorm/common';
+import { EntityTarget } from 'packages/common';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
 import { UpdateBody } from 'packages/core/src/classes/expression/update-body-type';

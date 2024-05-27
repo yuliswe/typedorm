@@ -1,5 +1,5 @@
-import { Attribute, Entity, INDEX_TYPE, Table } from '@typedorm/common';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Attribute, Entity, INDEX_TYPE, Table } from 'packages/common';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { AttributeMetadata } from 'packages/core/src/classes/metadata/attribute-metadata';
 import { EntityMetadata } from 'packages/core/src/classes/metadata/entity-metadata';

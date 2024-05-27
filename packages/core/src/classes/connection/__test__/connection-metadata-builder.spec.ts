@@ -2,14 +2,14 @@ import { UserUniqueEmail } from 'packages/core/__mocks__/user-unique-email';
 import { Organisation } from 'packages/core/__mocks__/organisation';
 import { User } from 'packages/core/__mocks__/user';
 import path from 'path';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { ConnectionMetadataBuilder } from 'packages/core/src/classes/connection/connection-metadata-builder';
 import {
   Attribute,
   DuplicateEntityPhysicalNameError,
   Entity,
-} from '@typedorm/common';
-import { table } from '@typedorm/core/__mocks__/table';
+} from 'packages/common';
+import { table } from 'packages/core/__mocks__/table';
 
 let metadataBuilder: ConnectionMetadataBuilder;
 beforeEach(() => {

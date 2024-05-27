@@ -1,4 +1,4 @@
-import { EntityAliasOrString } from '@typedorm/common';
+import { EntityAliasOrString } from 'packages/common';
 import { regexInterpolatedWord } from 'packages/core/src/helpers/constants';
 import { isKeyOfTypeAliasSchema } from 'packages/core/src/helpers/is-key-of-type-alias-schema';
 

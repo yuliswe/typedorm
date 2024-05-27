@@ -6,8 +6,8 @@ import {
   MANAGER_NAME,
   STATS_TYPE,
   isEmptyObject,
-} from '@typedorm/common';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClientTypes } from 'packages/document-client';
 import pLimit from 'p-limit';
 import { ReadBatch } from 'packages/core/src/classes/batch/read-batch';
 import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';

@@ -1,4 +1,4 @@
-import { Table, isEmptyObject } from '@typedorm/common';
+import { Table, isEmptyObject } from 'packages/common';
 import { MERGE_STRATEGY } from 'packages/core/src/classes/expression/base-expression-input';
 import { Condition } from 'packages/core/src/classes/expression/condition';
 import { Filter } from 'packages/core/src/classes/expression/filter';

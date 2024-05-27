@@ -1,5 +1,5 @@
-import { EntityManager } from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { TestEntity } from './test-entity';
 
 let entityManager: EntityManager;

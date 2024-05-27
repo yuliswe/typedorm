@@ -1,4 +1,4 @@
-import { KeyAliasSchema } from '@typedorm/common';
+import { KeyAliasSchema } from 'packages/common';
 
 export function isKeyOfTypeAliasSchema<Entity = any>(
   key: any

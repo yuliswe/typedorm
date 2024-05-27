@@ -1,9 +1,9 @@
-import { Organisation } from '@typedorm/core/__mocks__/organisation';
-import { table } from '@typedorm/core/__mocks__/table';
-import { User } from '@typedorm/core/__mocks__/user';
-import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
-import { DocumentClientTransactionTransformer } from '@typedorm/core/classes/transformer/document-client-transaction-transformer';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Organisation } from 'packages/core/__mocks__/organisation';
+import { table } from 'packages/core/__mocks__/table';
+import { User } from 'packages/core/__mocks__/user';
+import { UserUniqueEmail } from 'packages/core/__mocks__/user-unique-email';
+import { DocumentClientTransactionTransformer } from 'packages/core/classes/transformer/document-client-transaction-transformer';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ReadTransaction } from 'packages/core/src/classes/transaction/read-transaction';
 import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';

@@ -6,7 +6,7 @@ import {
   INDEX_TYPE,
   TransformFromDynamo,
   TransformToDynamo,
-} from '@typedorm/common';
+} from 'packages/common';
 import { table } from 'packages/core/__mocks__/table';
 
 // Moment is only being used here to display the usage of @transform utility

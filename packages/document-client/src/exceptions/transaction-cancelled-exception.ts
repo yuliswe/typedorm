@@ -1,4 +1,4 @@
-import { DocumentClientTypes } from '@typedorm/document-client';
+import { DocumentClientTypes } from 'packages/document-client';
 export class TransactionCancelledException extends Error {
   name = 'TransactionCancelledException';
   code: string;

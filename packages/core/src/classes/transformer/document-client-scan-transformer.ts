@@ -1,4 +1,4 @@
-import { DocumentClientTypes } from '@typedorm/document-client';
+import { DocumentClientTypes } from 'packages/document-client';
 import {
   EntityTarget,
   INTERNAL_ENTITY_ATTRIBUTE,
@@ -9,7 +9,7 @@ import {
   QUERY_SELECT_TYPE,
   TRANSFORM_SCAN_TYPE,
   isEmptyObject,
-} from '@typedorm/common';
+} from 'packages/common';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { MERGE_STRATEGY } from 'packages/core/src/classes/expression/base-expression-input';
 import { Filter } from 'packages/core/src/classes/expression/filter';

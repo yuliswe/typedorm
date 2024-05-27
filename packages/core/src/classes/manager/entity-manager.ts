@@ -8,9 +8,9 @@ import {
   QUERY_ORDER,
   STATS_TYPE,
   isEmptyObject,
-} from '@typedorm/common';
-import { DocumentClientRequestTransformer } from '@typedorm/core/classes/transformer/document-client-request-transformer';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import { DocumentClientRequestTransformer } from 'packages/core/classes/transformer/document-client-request-transformer';
+import { DocumentClientTypes } from 'packages/document-client';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ConditionOptions } from 'packages/core/src/classes/expression/condition-options-type';
 import { FilterOptions } from 'packages/core/src/classes/expression/filter-options-type';

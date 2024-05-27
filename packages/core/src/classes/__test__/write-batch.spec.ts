@@ -1,4 +1,4 @@
-import { User, UserPrimaryKey } from '@typedorm/core/__mocks__/user';
+import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
 import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
 
 test('creates a write batch', () => {

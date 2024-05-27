@@ -1,4 +1,4 @@
-import { User } from '@typedorm/core/__mocks__/user';
+import { User } from 'packages/core/__mocks__/user';
 import { WriteTransaction } from 'packages/core/src/classes/transaction/write-transaction';
 
 test('create a write transaction', () => {

@@ -4,7 +4,7 @@ import {
   AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
   INDEX_TYPE,
-} from '@typedorm/common';
+} from 'packages/common';
 import { table } from 'packages/core/__mocks__/table';
 
 export interface UserAutoGenerateAttributesPrimaryKey {

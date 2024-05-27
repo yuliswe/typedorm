@@ -4,7 +4,7 @@ import {
   ConditionType,
   ATTRIBUTE_TYPE,
   ResolveScalarType,
-} from '@typedorm/common';
+} from 'packages/common';
 
 type AttributeConditionOptions<Entity> =
   | {

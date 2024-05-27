@@ -1,4 +1,4 @@
-import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from '@typedorm/common';
+import { AUTO_GENERATE_ATTRIBUTE_STRATEGY } from 'packages/common';
 import { autoGenerateValue } from 'packages/core/src/helpers/auto-generate-attribute-value';
 import {
   BaseAttributeMetadata,

@@ -14,10 +14,10 @@ import {
   Table,
   TRANSFORM_TYPE,
   type Replace,
-} from '@typedorm/common';
-import type { DynamoEntitySchemaPrimaryKey } from '@typedorm/core/classes/metadata/entity-metadata';
-import type { LazyTransactionWriteItemListLoader } from '@typedorm/core/classes/transformer/is-lazy-transaction-write-item-list-loader';
-import { DocumentClientTypes } from '@typedorm/document-client';
+} from 'packages/common';
+import type { DynamoEntitySchemaPrimaryKey } from 'packages/core/classes/metadata/entity-metadata';
+import type { LazyTransactionWriteItemListLoader } from 'packages/core/classes/transformer/is-lazy-transaction-write-item-list-loader';
+import { DocumentClientTypes } from 'packages/document-client';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { ExpressionBuilder } from 'packages/core/src/classes/expression/expression-builder';
 import { KeyCondition } from 'packages/core/src/classes/expression/key-condition';

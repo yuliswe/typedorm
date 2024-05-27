@@ -1,9 +1,9 @@
-import { Attribute, Entity, Table } from '@typedorm/common';
-import { Organisation } from '@typedorm/core/__mocks__/organisation';
-import { table } from '@typedorm/core/__mocks__/table';
-import { User } from '@typedorm/core/__mocks__/user';
-import { UserUniqueEmail } from '@typedorm/core/__mocks__/user-unique-email';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Attribute, Entity, Table } from 'packages/common';
+import { Organisation } from 'packages/core/__mocks__/organisation';
+import { table } from 'packages/core/__mocks__/table';
+import { User } from 'packages/core/__mocks__/user';
+import { UserUniqueEmail } from 'packages/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { ReadBatch } from 'packages/core/src/classes/batch/read-batch';
 import { WriteBatch } from 'packages/core/src/classes/batch/write-batch';
 import { Connection } from 'packages/core/src/classes/connection/connection';

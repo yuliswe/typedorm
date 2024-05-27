@@ -1,4 +1,4 @@
-import { INDEX_TYPE, Table } from '@typedorm/common';
+import { INDEX_TYPE, Table } from 'packages/common';
 
 export const table = new Table({
   name: 'test-table',

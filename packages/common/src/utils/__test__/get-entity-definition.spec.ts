@@ -1,4 +1,4 @@
-import { Entity } from '@typedorm/common';
+import { Entity } from 'packages/common';
 import { Attribute } from 'packages/common/src/decorators/attribute.decorator';
 import { getEntityDefinition } from 'packages/common/src/utils/get-entity-definition';
 

@@ -1,6 +1,6 @@
-import { Attribute, Entity, Table } from '@typedorm/common';
-import { getConnection } from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { Attribute, Entity, Table } from 'packages/common';
+import { getConnection } from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { User } from 'packages/core/__mocks__/user';
 import { ConnectionManager } from 'packages/core/src/classes/connection/connection-manager';
 import path from 'path';

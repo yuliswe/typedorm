@@ -2,12 +2,12 @@ import { ReturnConsumedCapacity } from '@aws-sdk/client-dynamodb';
 import {
   EntityInstance,
   InvalidDynamicUpdateAttributeValueError,
-} from '@typedorm/common';
+} from 'packages/common';
 import {
   UserAttrAlias,
   UserAttrAliasPrimaryKey,
-} from '@typedorm/core/__mocks__/user-with-attribute-alias';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+} from 'packages/core/__mocks__/user-with-attribute-alias';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
 import {
   UserAutoGenerateAttributes,

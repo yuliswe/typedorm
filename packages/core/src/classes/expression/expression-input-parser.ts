@@ -6,7 +6,7 @@ import {
   UpdateType,
   isEmptyObject,
   isObject,
-} from '@typedorm/common';
+} from 'packages/common';
 import {
   BaseExpressionInput,
   MERGE_STRATEGY,

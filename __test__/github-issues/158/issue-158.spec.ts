@@ -1,8 +1,8 @@
 // assuming there is a EMAIL_INDEX loaded before anything else
 process.env.EMAIL_INDEX = 'email-index-v2';
 
-import { EntityManager } from '@typedorm/core';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+import { EntityManager } from 'packages/core';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import EntityData from './test-entity';
 import { testTable } from './test-table';
 let entityManager: EntityManager;

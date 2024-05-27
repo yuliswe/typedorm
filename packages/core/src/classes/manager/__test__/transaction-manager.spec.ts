@@ -1,10 +1,10 @@
 import { ReturnConsumedCapacity } from '@aws-sdk/client-dynamodb';
-import { Organisation } from '@typedorm/core/__mocks__/organisation';
+import { Organisation } from 'packages/core/__mocks__/organisation';
 import {
   UserUniqueEmail,
   UserUniqueEmailPrimaryKey,
-} from '@typedorm/core/__mocks__/user-unique-email';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+} from 'packages/core/__mocks__/user-unique-email';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { User, UserPrimaryKey } from 'packages/core/__mocks__/user';
 import { Connection } from 'packages/core/src/classes/connection/connection';
 import { TransactionManager } from 'packages/core/src/classes/manager/transaction-manager';

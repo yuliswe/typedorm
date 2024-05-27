@@ -4,7 +4,7 @@ import {
   AutoGenerateAttribute,
   Entity,
   Table,
-} from '@typedorm/common';
+} from 'packages/common';
 import { User } from 'packages/core/__mocks__/user';
 import { UserAutoGenerateAttributes } from 'packages/core/__mocks__/user-auto-generate-attributes';
 import { AttributesMetadataBuilder } from 'packages/core/src/classes/connection/attribute-metadata-builder';

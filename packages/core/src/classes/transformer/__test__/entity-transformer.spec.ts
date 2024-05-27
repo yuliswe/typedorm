@@ -5,11 +5,11 @@ import {
   Entity,
   INDEX_TYPE,
   Table,
-} from '@typedorm/common';
-import { CATEGORY, Photo } from '@typedorm/core/__mocks__/photo';
-import { table } from '@typedorm/core/__mocks__/table';
-import { UserAttrAlias } from '@typedorm/core/__mocks__/user-with-attribute-alias';
-import { createTestConnection, resetTestConnection } from '@typedorm/testing';
+} from 'packages/common';
+import { CATEGORY, Photo } from 'packages/core/__mocks__/photo';
+import { table } from 'packages/core/__mocks__/table';
+import { UserAttrAlias } from 'packages/core/__mocks__/user-with-attribute-alias';
+import { createTestConnection, resetTestConnection } from 'packages/testing';
 import { Organisation } from 'packages/core/__mocks__/organisation';
 import { User } from 'packages/core/__mocks__/user';
 import { UserAutoGenerateAttributes } from 'packages/core/__mocks__/user-auto-generate-attributes';
@@ -17,8 +17,8 @@ import { UserSparseIndexes } from 'packages/core/__mocks__/user-sparse-indexes';
 import { EntityTransformer } from 'packages/core/src/classes/transformer/entity-transformer';
 // Moment is only being used here to display the usage of @transform utility
 // eslint-disable-next-line node/no-extraneous-import
-import { UserCustomConstructor } from '@typedorm/core/__mocks__/user-custom-constructor';
-import { UserWithDefaultValues } from '@typedorm/core/__mocks__/user-default-value';
+import { UserCustomConstructor } from 'packages/core/__mocks__/user-custom-constructor';
+import { UserWithDefaultValues } from 'packages/core/__mocks__/user-default-value';
 import moment from 'moment';
 
 jest.mock('uuid', () => ({
