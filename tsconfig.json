@@ -35,8 +35,9 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "sourceRoot": "./src",
-    "paths": {},
-    // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
+    "paths": {
+      "*": ["*"]
+    },
     "plugins": [
       { "transform": "typescript-transform-paths" },
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
