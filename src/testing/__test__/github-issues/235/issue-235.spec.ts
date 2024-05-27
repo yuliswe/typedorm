@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { ProductEntity } from './specific-event-entity';
-import { testTable } from './test-table';
+import { ProductEntity } from 'src/testing/__test__/github-issues/235/specific-event-entity';
+import { testTable } from 'src/testing/__test__/github-issues/235/test-table';
 
 import { EntityManager } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';

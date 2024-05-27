@@ -1,5 +1,5 @@
 import { Attribute, Entity, INDEX_TYPE } from 'src/common';
-import { testTable } from '../../__mocks__/test-table';
+import { testTable } from 'src/testing/__test__/__mocks__/test-table';
 
 @Entity<TestEntity>({
   name: 'test-entity',

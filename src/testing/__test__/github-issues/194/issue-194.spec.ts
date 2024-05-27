@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import { EntityManager } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
-import { Tenant } from './tenant-entity';
+import { Tenant } from 'src/testing/__test__/github-issues/194/tenant-entity';
 
 let entityManager: EntityManager;
 

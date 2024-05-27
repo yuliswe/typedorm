@@ -3,8 +3,8 @@ process.env.EMAIL_INDEX = 'email-index-v2';
 
 import { EntityManager } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
-import EntityData from './test-entity';
-import { testTable } from './test-table';
+import EntityData from 'src/testing/__test__/github-issues/158/test-entity';
+import { testTable } from 'src/testing/__test__/github-issues/158/test-table';
 let entityManager: EntityManager;
 
 const dcMock = {

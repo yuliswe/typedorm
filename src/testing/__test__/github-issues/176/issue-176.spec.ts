@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import { AutoGenerateAttributeValue, BatchManager, WriteBatch } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
-import { User } from './user-entity';
+import { User } from 'src/testing/__test__/github-issues/176/user-entity';
 
 jest.mock('uuid', () => {
   const originalUUID = jest.requireActual('uuid');

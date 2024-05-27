@@ -1,6 +1,6 @@
 import { EntityManager } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
-import { TestEntity } from './test-entity';
+import { TestEntity } from 'src/testing/__test__/github-issues/324/test-entity';
 
 let entityManager: EntityManager;
 

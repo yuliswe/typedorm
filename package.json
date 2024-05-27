@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest --runInBand",
-    "build": "rm -r ./dist && tsc",
+    "build": "rm -r ./dist && tsc && mv ./dist/src/* ./dist && rm -r ./dist/src",
     "prepare": "npx ts-patch install -s",
     "watch": "tsc -w"
   },

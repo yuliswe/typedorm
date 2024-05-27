@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import { EntityManager } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
-import { TestEntity } from './test-entity';
+import { TestEntity } from 'src/testing/__test__/github-issues/325/test-entity';
 
 let entityManager: EntityManager;
 

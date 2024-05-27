@@ -1,8 +1,8 @@
 import { EntityManager } from 'src/core';
 import { createTestConnection } from 'src/testing';
-import { TestEntity } from './test-entity';
+import { TestEntity } from 'src/testing/__test__/github-issues/313/test-entity';
 
-it('validates entity and creates successful connection', async () => {
+it('validates entity and creates successful connection', () => {
   const connection = createTestConnection({
     entities: [TestEntity],
     documentClient: {},

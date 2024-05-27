@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { QUERY_ORDER } from 'src/common';
 import { BatchManager, EntityManager, WriteBatch } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
-import { SpecificEvent } from './specific-event-entity';
+import { SpecificEvent } from 'src/testing/__test__/github-issues/184/specific-event-entity';
 
 let entityManager: EntityManager;
 let batchManager: BatchManager;

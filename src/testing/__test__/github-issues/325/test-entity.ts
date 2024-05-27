@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 import { Attribute, Entity } from 'src/common';
-import { testTable } from './test-table';
+import { testTable } from 'src/testing/__test__/github-issues/325/test-table';
 
 @Entity({
   table: testTable,

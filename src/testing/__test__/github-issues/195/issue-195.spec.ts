@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Article, IArticlePrimaryKey } from './specific-event-entity';
+import { Article, IArticlePrimaryKey } from 'src/testing/__test__/github-issues/195/specific-event-entity';
 
 import { EntityManager } from 'src/core';
 import { createTestConnection, resetTestConnection } from 'src/testing';
