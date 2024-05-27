@@ -1,11 +1,11 @@
 // Classes
-export * from './src/classes/document-client-v3';
+export * from 'packages/document-client/classes/document-client-v3';
 
 // Interfaces
-export * from './src/classes/base-document-client';
+export * from 'packages/document-client/classes/base-document-client';
 
 // Types
-export * from './src/types/document-client-types';
+export * from 'packages/document-client/types/document-client-types';
 
 // Exceptions
-export * from './src/exceptions';
+export * from 'packages/document-client/exceptions';
