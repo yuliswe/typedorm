@@ -1,4 +1,4 @@
-import { Table, INDEX_TYPE } from 'packages/common';
+import { INDEX_TYPE, Table } from 'src/common';
 
 export const testTable = new Table({
   name: 'user-v2',

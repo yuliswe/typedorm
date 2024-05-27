@@ -1,9 +1,9 @@
 import {
+  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Attribute,
   AutoGenerateAttribute,
-  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
-} from 'packages/common';
+} from 'src/common';
 import { testTable } from '../../__mocks__/test-table';
 
 @Entity({

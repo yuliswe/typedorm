@@ -1,11 +1,11 @@
-import { testTable } from './test-table';
 import {
+  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Attribute,
   AutoGenerateAttribute,
-  AUTO_GENERATE_ATTRIBUTE_STRATEGY,
   Entity,
   INDEX_TYPE,
-} from 'packages/common';
+} from 'src/common';
+import { testTable } from './test-table';
 
 enum ENTITY_STATE {
   ACTIVE = 1,

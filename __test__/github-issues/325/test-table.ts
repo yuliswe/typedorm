@@ -1,4 +1,4 @@
-import { Table } from 'packages/common';
+import { Table } from 'src/common';
 
 export const testTable = new Table({
   name: 'test-table',

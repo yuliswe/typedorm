@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { Article, IArticlePrimaryKey } from './specific-event-entity';
 
-import { EntityManager } from 'packages/core';
-import { createTestConnection, resetTestConnection } from 'packages/testing';
+import { EntityManager } from 'src/core';
+import { createTestConnection, resetTestConnection } from 'src/testing';
 
 let entityManager: EntityManager;
 

@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import { ProductEntity } from './specific-event-entity';
 import { testTable } from './test-table';
 
-import { EntityManager } from 'packages/core';
-import { createTestConnection, resetTestConnection } from 'packages/testing';
+import { EntityManager } from 'src/core';
+import { createTestConnection, resetTestConnection } from 'src/testing';
 
 jest.useFakeTimers().setSystemTime(new Date('2020-10-10'));
 

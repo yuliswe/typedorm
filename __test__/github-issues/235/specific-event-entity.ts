@@ -1,4 +1,4 @@
-import { Attribute, Entity, INDEX_TYPE } from 'packages/common';
+import { Attribute, Entity, INDEX_TYPE } from 'src/common';
 
 export const ProductPrefix = 'PRD';
 export const EventPrefix = 'EVT';

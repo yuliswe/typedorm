@@ -1,4 +1,4 @@
-import { Attribute, Entity } from 'packages/common';
+import { Attribute, Entity } from 'src/common';
 import { testTable } from '../../__mocks__/test-table';
 
 class BaseEvent {

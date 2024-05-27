@@ -1,5 +1,5 @@
-import { createTestConnection } from 'packages/testing';
-import { EntityManager } from 'packages/core';
+import { EntityManager } from 'src/core';
+import { createTestConnection } from 'src/testing';
 import { TestEntity } from './test-entity';
 
 it('validates entity and creates successful connection', async () => {

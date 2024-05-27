@@ -1,5 +1,5 @@
-import { EntityManager } from 'packages/core';
-import { createTestConnection, resetTestConnection } from 'packages/testing';
+import { EntityManager } from 'src/core';
+import { createTestConnection, resetTestConnection } from 'src/testing';
 import { TestEntity } from './test-entity';
 
 let entityManager: EntityManager;

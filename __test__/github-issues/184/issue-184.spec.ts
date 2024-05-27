@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 
-import { QUERY_ORDER } from 'packages/common';
-import { BatchManager, EntityManager, WriteBatch } from 'packages/core';
-import { createTestConnection, resetTestConnection } from 'packages/testing';
+import { QUERY_ORDER } from 'src/common';
+import { BatchManager, EntityManager, WriteBatch } from 'src/core';
+import { createTestConnection, resetTestConnection } from 'src/testing';
 import { SpecificEvent } from './specific-event-entity';
 
 let entityManager: EntityManager;

@@ -101,7 +101,7 @@ Now, TypeDORM knows about all indexes, keys and how it needs to be structured, b
 To add attributes to entity, use `@Attribute` or other higher level annotations like `@AutoGenerateAttribute`.
 
 ```Typescript
-import {Table} from 'packages/common';
+import {Table} from 'src/common';
 
 @Entity({
   name: 'user', // name of the entity that will be added to each item as an attribute
@@ -144,8 +144,8 @@ This will tell TypeDORM that entity `User` has `id`, `name`, `email`, `status` a
 When working with databases, there is usually a need of creating some sort of unique identifiers, TypeDORM can do that for you. All you need to do is to annotate property with `@AutoGenerateAttribute` then specify strategy and other options.
 
 ```Typescript
-import {Attribute, Entity, AutoGenerateAttribute} from 'packages/common';
-import {AUTO_GENERATE_ATTRIBUTE_STRATEGY} from 'packages/common';
+import {Attribute, Entity, AutoGenerateAttribute} from 'src/common';
+import {AUTO_GENERATE_ATTRIBUTE_STRATEGY} from 'src/common';
 
 @Entity({
   name: 'user', // name of the entity that will be added to each item as an attribute
@@ -197,7 +197,7 @@ Now we have entity and it's attributes created, it's time to register them in an
 
 ```Typescript
 import 'reflect-metadata';
-import {createConnection} from 'packages/core';
+import {createConnection} from 'src/core';
 import {User} from './entities/user.entity'
 
 createConnection({
@@ -266,7 +266,7 @@ const anotherTransactionManager = getTransactionManager('other-connection')
 This is all the minimum configuration we need, now let's create a user record.
 
 ```Typescript
-import {getEntityManager} from 'packages/core';
+import {getEntityManager} from 'src/core';
 import {User} from './entities/user.entity'
 
 const user = new User();
@@ -296,7 +296,7 @@ Once item is created using TypeDORM, it can be retrieved/fetched using continent
 To query our earlier created user item
 
 ```Typescript
-import {getEntityManager} from 'packages/core';
+import {getEntityManager} from 'src/core';
 import {User} from './entities/user.entity'
 
 // since primary key is only single attribute `id`, we only need to pass that when reading item back
@@ -317,7 +317,7 @@ const user = await getEntityManager().findOne(User, {id: 'some-auto-generated-uu
 Items can be updated using simple update functions on entity manager and can be written like this
 
 ```Typescript
-import {getEntityManager} from 'packages/core';
+import {getEntityManager} from 'src/core';
 import {User} from './entities/user.entity'
 
 // since primary key is only single attribute `id`, we only need to pass that when reading item back
@@ -342,8 +342,8 @@ To get more insight on how how update works with TypeDORM, have a look at [this]
 Going ahead with earlier example of `User` entity, let's each of our user can have many orders, and our order entity looks like this
 
 ```Typescript
-import {Attribute, Entity, AutoGenerateAttribute} from 'packages/common';
-import {AUTO_GENERATE_ATTRIBUTE_STRATEGY} from 'packages/common';
+import {Attribute, Entity, AutoGenerateAttribute} from 'src/common';
+import {AUTO_GENERATE_ATTRIBUTE_STRATEGY} from 'src/common';
 
 @Entity({
   name: 'order',
@@ -388,7 +388,7 @@ Now, let's have a look at what it would look like querying below two patterns
 - get all the `cancelled` orders for user x
 
 ```Typescript
-import {getEntityManager} from 'packages/core';
+import {getEntityManager} from 'src/core';
 import {User} from './entities/user.entity'
 
 
@@ -423,7 +423,7 @@ const cancelledOrders = await getEntityManager().find(Order,
 - get recent 5 orders that `pending`.
 
 ```Typescript
-import {getEntityManager} from 'packages/core';
+import {getEntityManager} from 'src/core';
 import {User} from './entities/user.entity'
 
 
@@ -464,7 +464,7 @@ To understand more on how the query input looks like when it is passed to Docume
 Items can be updated using simple update functions on entity manager and can be written like this
 
 ```Typescript
-import {getEntityManager} from 'packages/core';
+import {getEntityManager} from 'src/core';
 import {User} from './entities/user.entity'
 
 // since primary key is only single attribute `id`, we only need to pass that when reading item back

@@ -1,11 +1,7 @@
 import 'reflect-metadata';
 
-import {
-  AutoGenerateAttributeValue,
-  BatchManager,
-  WriteBatch,
-} from 'packages/core';
-import { createTestConnection, resetTestConnection } from 'packages/testing';
+import { AutoGenerateAttributeValue, BatchManager, WriteBatch } from 'src/core';
+import { createTestConnection, resetTestConnection } from 'src/testing';
 import { User } from './user-entity';
 
 jest.mock('uuid', () => {

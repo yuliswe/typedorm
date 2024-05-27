@@ -32,14 +32,10 @@
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
     "allowJs": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "./dist",
-    "sourceRoot": "./packages",
-    "paths": {
-      "packages/common/*": ["packages/common/src/*", "packages/common/*"],
-      "packages/core/*": ["packages/core/src/*", "packages/core/*"],
-      "packages/testing/*": ["packages/testing/src/*", "packages/testing/*"]
-    },
+    "sourceRoot": "./src",
+    "paths": {},
     // Note: To transform paths for both the output .js and .d.ts files, you need both of the below entries
     "plugins": [
       { "transform": "typescript-transform-paths" },
@@ -48,5 +44,5 @@
     "rootDirs": ["."]
   },
   "exclude": ["dist", "node_modules", "tools", "build"],
-  "include": ["packages/**/*", "jest.config.ts"]
+  "include": ["src/**/*", "jest.config.ts"]
 }
