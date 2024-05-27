@@ -1,31 +1,31 @@
 // decorators
-export * from './src/decorators/attribute.decorator';
-export * from './src/decorators/auto-generate-attribute.decorator';
-export * from './src/decorators/entity.decorator';
-export * from './src/decorators/transform-from-dynamo.decorator';
-export * from './src/decorators/transform-to-dynamo.decorator';
+export * from 'packages/common/decorators/attribute.decorator';
+export * from 'packages/common/decorators/auto-generate-attribute.decorator';
+export * from 'packages/common/decorators/entity.decorator';
+export * from 'packages/common/decorators/transform-from-dynamo.decorator';
+export * from 'packages/common/decorators/transform-to-dynamo.decorator';
 
 // utils
-export * from './src/helpers/common-types';
-export * from './src/constants';
-export * from './src/helpers/dynamo-entity-type';
-export * from './src/enums';
-export * from './src/operator-types';
+export * from 'packages/common/constants';
+export * from 'packages/common/enums';
+export * from 'packages/common/helpers/common-types';
+export * from 'packages/common/helpers/dynamo-entity-type';
+export * from 'packages/common/operator-types';
 
 // Helpers
-export * from './src/helpers/non-key-attributes-type';
-export * from './src/helpers/non-key-attribute-with-return-type';
-export * from './src/helpers/object-type';
-export * from './src/helpers/require-at-least-one-type';
-export * from './src/helpers/require-at-least-two-type';
-export * from './src/helpers/require-only-one-type';
-export * from './src/helpers/scalar-type';
-export * from './src/helpers/replace-type';
-export * from './src/helpers/is-primary-key';
-export * from './src/helpers/nested-attributes-type';
-export * from './src/utils/get-entity-definition';
-export * from './src/helpers/invalid-type';
-export * from './src/helpers/resolve-scalar-type';
+export * from 'packages/common/helpers/invalid-type';
+export * from 'packages/common/helpers/is-primary-key';
+export * from 'packages/common/helpers/nested-attributes-type';
+export * from 'packages/common/helpers/non-key-attribute-with-return-type';
+export * from 'packages/common/helpers/non-key-attributes-type';
+export * from 'packages/common/helpers/object-type';
+export * from 'packages/common/helpers/replace-type';
+export * from 'packages/common/helpers/require-at-least-one-type';
+export * from 'packages/common/helpers/require-at-least-two-type';
+export * from 'packages/common/helpers/require-only-one-type';
+export * from 'packages/common/helpers/resolve-scalar-type';
+export * from 'packages/common/helpers/scalar-type';
+export * from 'packages/common/utils/get-entity-definition';
 
 // classes
-export * from './src/table';
+export * from 'packages/common/table';
